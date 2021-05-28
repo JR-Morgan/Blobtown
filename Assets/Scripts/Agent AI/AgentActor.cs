@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent
+public class AgentActor
 {
 
     private IList<AgentBehaviour> behaviours;
 
-    public Agent(IList<AgentBehaviour> behaviours)
+    public AgentActor(IList<AgentBehaviour> behaviours)
     {
         this.behaviours = behaviours;
     }

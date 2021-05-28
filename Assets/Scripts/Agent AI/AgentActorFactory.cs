@@ -4,12 +4,12 @@ using UnityEngine;
 
 public delegate BehaviourState AgentBehaviour(BehaviourState state);
 
-public class AgentFactory 
+public static class AgentActorFactory 
 {
     
-    public static Agent CreateAgent()
+    public static AgentActor CreateActor()
     {
-        return new Agent(CreateBehaviours());
+        return new AgentActor(CreateBehaviours());
     }
 
     public static List<AgentBehaviour> CreateBehaviours()
@@ -23,7 +23,7 @@ public class AgentFactory
 
 
     #region Agent Types
-    private static AgentBehaviour[] BasicAgent(Agent agent)
+    private static AgentBehaviour[] BasicAgent(AgentActor agent)
     {
         return new AgentBehaviour[]
         {
