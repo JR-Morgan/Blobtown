@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f57939f1895a84697ca03e9e14c8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileLayer: 6
   tilePrefab: {fileID: 0}
   gridSize: {x: 10, y: 10}
   tileSize: {x: 10, y: 10}

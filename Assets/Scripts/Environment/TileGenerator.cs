@@ -9,6 +9,9 @@ using UnityEngine;
 public class TileGenerator : MonoBehaviour
 {
     [SerializeField]
+    private int tileLayer;
+
+    [SerializeField]
     private GameObject tilePrefab;
 
     [SerializeField]
@@ -24,14 +27,14 @@ public class TileGenerator : MonoBehaviour
 
     public void Generate()
     {
-        Tile[,] tiles = GenerateLevel(gridSize.x, gridSize.y, tileSize, this.transform, tilePrefab);
         TileGrid grid = GetComponent<TileGrid>();
+        Tile[,] tiles = GenerateLevel(grid, gridSize.x, gridSize.y, tileSize, tileLayer, this.transform, tilePrefab);
 
         grid.InitialiseGrid(tiles, tileSize);
     }
 
 
-    public static Tile[,] GenerateLevel(int width, int height, Vector2 tileSize, Transform parent = null, GameObject tilePrefab = null)
+    public static Tile[,] GenerateLevel(TileGrid grid, int width, int height, Vector2 tileSize, int layer, Transform parent = null, GameObject tilePrefab = null)
     {
         Tile[,] tiles = new Tile[width, height];
 
@@ -45,9 +48,11 @@ public class TileGenerator : MonoBehaviour
 
                 //Setup Tile here
                 go.name = $"Tile {x},{y}";
+                go.layer = layer;
                 go.transform.parent = parent;
-                go.transform.position = new Vector3(x * tileSize.x, y * tileSize.y);
+                go.transform.position = new Vector3(x * tileSize.x, 0f, y * tileSize.y);
 
+                t.Grid = grid;
 
                 tiles[x, y] = t;
             }
