@@ -21,6 +21,38 @@ public class AgentFactory
         return behaviours;
     }
 
+
+    #region Agent Types
+    private static AgentBehaviour[] BasicAgent(Agent agent)
+    {
+        return new AgentBehaviour[]
+        {
+            Wait()
+        };
+    }
+
+    #endregion
+
+    #region Helper Methods
+
+    #endregion
+
+    #region Behaviours
+    private static AgentBehaviour Wait()
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            b.shouldTerminate = true;
+            return b;
+        }
+        
+       
+    }
+
+    #endregion
+
 }
 
 public class BehaviourState
