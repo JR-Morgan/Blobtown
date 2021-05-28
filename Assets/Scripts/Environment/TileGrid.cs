@@ -4,10 +4,9 @@ using UnityEngine;
 [AddComponentMenu("Simulation/Grid")]
 public class TileGrid : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private Vector2 tileSize;
 
-    [SerializeField]
     private Tile[,] _tiles;
     public Tile[,] Tiles { get => _tiles; set => _tiles = value; }
 
@@ -23,14 +22,12 @@ public class TileGrid : MonoBehaviour
     #endregion
 
     #region Initialise
-    private void InitialiseGrid(Tile[,] Tiles, Vector2 tileSize)
+    public void InitialiseGrid(Tile[,] Tiles, Vector2 tileSize)
     {
         _tiles = Tiles;
         this.tileSize = tileSize;
     }
 
-    public void InitialiseGrid(int gridWidth, int gridHeight, int tileWidth, int tileHeight) => InitialiseGrid(gridWidth, gridHeight, new Vector2(tileWidth, tileHeight));
-    public void InitialiseGrid(int gridWidth, int gridHeight, Vector2 tileSize) => InitialiseGrid(TileGenerator.GenerateLevel(gridWidth, gridHeight), tileSize);
     #endregion
 
     #region Transforms
