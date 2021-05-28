@@ -23,11 +23,12 @@ public static class AgentActorFactory
 
 
     #region Agent Types
-    private static AgentBehaviour[] BasicAgent(AgentActor agent)
+    private static AgentBehaviour[] BasicAgent(AgentAI agent)
     {
         return new AgentBehaviour[]
         {
-            Wait()
+            GoHome(agent),
+            Wait(agent)
         };
     }
 
@@ -38,7 +39,7 @@ public static class AgentActorFactory
     #endregion
 
     #region Behaviours
-    private static AgentBehaviour Wait()
+    private static AgentBehaviour Wait(AgentAI agent)
     {
         return Action;
 
@@ -49,6 +50,18 @@ public static class AgentActorFactory
         }
         
        
+    }
+
+    private static AgentBehaviour GoHome(AgentAI agent)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            b.shouldTerminate = true;
+            agent.SetDestination(agent.home.transform.position);
+            return b;
+        }
     }
 
     #endregion

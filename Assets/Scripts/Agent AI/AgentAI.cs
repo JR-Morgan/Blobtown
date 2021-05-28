@@ -6,7 +6,7 @@ public class AgentAI : MonoBehaviour
 {
 
     private AgentActor agentActor;
-    
+    public GameObject home;
 
     private void Start()
     {
@@ -20,6 +20,14 @@ public class AgentAI : MonoBehaviour
         agentActor = AgentActorFactory.CreateActor();
     }
 
+    private void Update()
+    {
+        agentActor.Act();
+    }
 
+    public void SetDestination(Vector3 destinationObject)
+    {
+        TileGrid.Instance.TileAtWorldPosition(destinationObject);
+    }
 
 }
