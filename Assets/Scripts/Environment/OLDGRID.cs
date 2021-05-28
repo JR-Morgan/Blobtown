@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Grid
+public class OLDGRID
 {
     private int width;
     private int height;
@@ -12,7 +12,7 @@ public class Grid
     private Vector3 originPosition;
     private TextMesh[,] debugTextArray;
 
-    public Grid(int width, int height, float cellSize, Vector3 originPosition, bool textBool)
+    public OLDGRID(int width, int height, float cellSize, Vector3 originPosition, bool textBool)
     {
         this.width = width;
         this.height = height;

@@ -7,7 +7,7 @@ public class Agent
 
     private IList<AgentBehaviour> behaviours;
 
-    public Agent(IList<AgentBehaviour> behanviours)
+    public Agent(IList<AgentBehaviour> behaviours)
     {
         this.behaviours = behaviours;
     }
@@ -17,7 +17,7 @@ public class Agent
         var state = new BehaviourState();
         for (int i = 0; i <  behaviours.Count; i++)
         {
-            if (behaviours[i].invoke(state).shouldTerminate) break;
+            if (behaviours[i].Invoke(state).shouldTerminate) break;
         }
     }
 
