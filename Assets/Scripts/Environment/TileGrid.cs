@@ -89,7 +89,3 @@ public class TileGrid : Singleton<TileGrid>
     #endregion
 }
 
-public class Tile : MonoBehaviour
-{
-    public TileGrid Grid { get; internal set; }
-}
