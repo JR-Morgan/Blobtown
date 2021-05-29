@@ -18,7 +18,7 @@ public class TileGrid : Singleton<TileGrid>
     public Vector2Int Dimensions => new Vector2Int(Width, Height);
     public Vector2 TileSize => tileSize;
 
-    public bool IsInBounds(int x, int y) => x > 0 && y > 0 && x < Width && y < Height;
+    public bool IsInBounds(int x, int y) => x >= 0 && y >= 0 && x < Width && y < Height;
 
     #endregion
 
@@ -58,7 +58,7 @@ public class TileGrid : Singleton<TileGrid>
 
     private (int x, int y) TileIndexAtLocalPosition(Vector3 localPosition)
     {
-        return (Mathf.FloorToInt(localPosition.x / tileSize.x), Mathf.FloorToInt(localPosition.z / tileSize.y));
+        return (Mathf.RoundToInt(localPosition.x / tileSize.x), Mathf.RoundToInt(localPosition.z / tileSize.y));
     }
 
     /// <param name="worldPosition"></param>

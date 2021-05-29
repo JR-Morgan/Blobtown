@@ -12,22 +12,12 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = new Ray(Camera.main.transform.position,Vector3.down);
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit)) 
-            { 
-                Vector3 hitPosition = hit.point;
-                Debug.Log(hitPosition);
-                Tile tile = TileGrid.Instance.TileAtWorldPosition(hitPosition);
-                Debug.Log(tile);
+            Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (tile != null)
+            {
                 Instantiate(agentPrefab, tile.transform.position, Quaternion.identity);
             }
-            else
-            {
-                Debug.Log("no hit");
-            }
-            
+
         }
     }
 }
