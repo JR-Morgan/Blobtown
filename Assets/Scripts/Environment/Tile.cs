@@ -22,7 +22,9 @@ public class Tile : MonoBehaviour
             if(_tileType != value)
             {
                 _tileType = value;
-                Initialise(_tileType);
+#if !UNITY_EDITOR
+               Initialise(_tileType);
+#endif
             }
         }
     }
@@ -31,6 +33,11 @@ public class Tile : MonoBehaviour
     private void Awake()
     {
          this.RequireComponentInChildren(out _renderer);
+    }
+
+    private void Start()
+    {
+        Initialise(_tileType);
     }
 
     private void Initialise(TileType type)
