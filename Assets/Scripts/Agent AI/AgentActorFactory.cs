@@ -92,7 +92,8 @@ public static class AgentActorFactory
             if (agent.Carried != 0)
             {
                 b.shouldTerminate = true;
-                agent.SetDestination(agent.home.transform.position);
+                
+                agent.SetDestination(TileGrid.Instance.TileAtWorldPosition(agent.home.transform.position));
             }
 
             return b;
