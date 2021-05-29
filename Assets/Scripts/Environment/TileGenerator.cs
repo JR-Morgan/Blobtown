@@ -30,6 +30,7 @@ public class TileGenerator : MonoBehaviour
     private float ResourceThreshold;
 
 
+
     public void Generate()
     {
         transform.DestroyChildren();
@@ -98,16 +99,16 @@ public class TileGenerator : MonoBehaviour
 
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                float x = (float)i / tiles.GetLength(0) * noiseScale + offSetX;
-                float y = (float)j / tiles.GetLength(1) * noiseScale + offSetY;
+                float x = (float)i  * noiseScale + offSetX;
+                float y = (float)j  * noiseScale + offSetY;
                 float noiseSample = Mathf.PerlinNoise(x, y);
                 if(noiseSample < ResourceThreshold)
                 {
                     tiles[i, j].TileType = TileType.Ore;
                 }
 
-                x = (float)i / tiles.GetLength(0) * noiseScale + offSetY;
-                y = (float)j / tiles.GetLength(1) * noiseScale + offSetX;
+                x = (float)i   * noiseScale + offSetY;
+                y = (float)j  * noiseScale + offSetX;
                 noiseSample = Mathf.PerlinNoise(x, y);
                 if(noiseSample < ResourceThreshold)
                 {
