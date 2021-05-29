@@ -150,7 +150,7 @@ public static class AgentActorFactory
             {
                 //TODO: find location to place house
                 TileGrid.Instance.TryGetTileAtWorldPosition(agent.transform.position, out Tile tile);
-                agent.home = HomeManager.Instance.buildHome(tile);
+                agent.home = HomeManager.Instance.BuildHome(tile);
                 b.shouldTerminate = true;
             }
 

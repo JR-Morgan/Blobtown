@@ -28,11 +28,11 @@ public class HomeManager : Singleton<HomeManager>
         
     }
 
-    public GameObject buildHome(Tile tile)
+    public Building BuildHome(Tile tile)
     {
         GameObject newHome = Instantiate(homePrefab, tile.transform.position, Quaternion.identity, this.transform);
         
         homes.Add(newHome.GetComponent<Building>());
-        return newHome;
+        return newHome.GetComponent<Building>();
     }
 }
