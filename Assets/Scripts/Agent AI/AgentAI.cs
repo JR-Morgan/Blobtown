@@ -28,7 +28,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     void IPathFollower.GoalCompleteHandler(Tile completedGoal)
     {
-        throw new System.NotImplementedException();
+        Goal = null;
     }
 
     #endregion
@@ -59,10 +59,11 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     private void Update()
     {
-
-
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(HasGoal)
+        {
+            transform.position += PathFollowHelper.CalculateDesiredVelocity(this);
+        }
+        else
         {
             agentActor.Act();
         }
@@ -79,6 +80,6 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
 
 
-    //public bool HasDestination => !Vector3.Equals(navAgent.destination, transform.position);
+    public bool HasGoal => Goal != null;
 
 }
