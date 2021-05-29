@@ -27,7 +27,8 @@ public class TileGenerator : MonoBehaviour
     private float noiseScale;
 
     [SerializeField]
-    private float oreThreshold;
+    private float ResourceThreshold;
+
 
     public void Generate()
     {
@@ -89,17 +90,28 @@ public class TileGenerator : MonoBehaviour
 
     private void GenerateResources(Tile[,] tiles)
     {
+        float offSetX = Random.Range(0, 9999);
+        float offSetY = Random.Range(0, 9999);
+
         for (int i = 0; i < tiles.GetLength(0); i++)
         {
 
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                float x = (float)i / tiles.GetLength(0) * noiseScale;
-                float y = (float)j / tiles.GetLength(1) * noiseScale;
+                float x = (float)i / tiles.GetLength(0) * noiseScale + offSetX;
+                float y = (float)j / tiles.GetLength(1) * noiseScale + offSetY;
                 float noiseSample = Mathf.PerlinNoise(x, y);
-                if(noiseSample < oreThreshold)
+                if(noiseSample < ResourceThreshold)
                 {
                     tiles[i, j].TileType = TileType.Ore;
+                }
+
+                x = (float)i / tiles.GetLength(0) * noiseScale + offSetY;
+                y = (float)j / tiles.GetLength(1) * noiseScale + offSetX;
+                noiseSample = Mathf.PerlinNoise(x, y);
+                if(noiseSample < ResourceThreshold)
+                {
+                    tiles[i, j].TileType = TileType.Forest;
                 }
             }
 

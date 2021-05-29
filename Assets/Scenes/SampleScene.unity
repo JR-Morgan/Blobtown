@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 7}
+  _tileType: 0
 --- !u!1 &31244139 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 6}
+  _tileType: 0
 --- !u!1001 &39769017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,6 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 9}
+  _tileType: 0
 --- !u!1001 &83261617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 6}
+  _tileType: 0
 --- !u!1 &90244373
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +619,7 @@ MonoBehaviour:
   tileSize: {x: 1, y: 1}
   noiseScale: 15
   oreThreshold: 0.3
+  forestThreshold: 0.2
 --- !u!114 &90244376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,6 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 8}
+  _tileType: 0
 --- !u!1001 &106614464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -812,6 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 2}
+  _tileType: 0
 --- !u!1 &119565513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -836,6 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 5}
+  _tileType: 0
 --- !u!1 &126665510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -860,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 0}
+  _tileType: 0
 --- !u!1001 &132209437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1006,6 +1015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 7}
+  _tileType: 0
 --- !u!1 &159687983 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -1030,6 +1040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 7}
+  _tileType: 0
 --- !u!1001 &178819487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1176,6 +1187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 2}
+  _tileType: 0
 --- !u!1 &191024248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -1200,6 +1212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 6}
+  _tileType: 0
 --- !u!1 &205460516 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -1224,6 +1237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 4}
+  _tileType: 0
 --- !u!1001 &205498997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1309,6 +1323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 5}
+  _tileType: 0
 --- !u!1 &208938439 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -1333,6 +1348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 4}
+  _tileType: 0
 --- !u!1 &220659819 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -1357,6 +1373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 8}
+  _tileType: 0
 --- !u!1001 &250094975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1564,6 +1581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 6}
+  _tileType: 0
 --- !u!1001 &291667610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1832,6 +1850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 2}
+  _tileType: 0
 --- !u!1001 &351252795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1978,6 +1997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 1}
+  _tileType: 0
 --- !u!1001 &403589072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2063,6 +2083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 9}
+  _tileType: 0
 --- !u!1001 &431692852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2331,6 +2352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 3}
+  _tileType: 0
 --- !u!1001 &526089088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2416,6 +2438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 2}
+  _tileType: 0
 --- !u!1001 &533721068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2623,6 +2646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 6}
+  _tileType: 0
 --- !u!1001 &562207625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2708,6 +2732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 5}
+  _tileType: 0
 --- !u!1001 &578200207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2793,6 +2818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 6}
+  _tileType: 0
 --- !u!1001 &593492107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2878,6 +2904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 2}
+  _tileType: 0
 --- !u!1 &614926675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -2902,6 +2929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 8}
+  _tileType: 0
 --- !u!1 &615111099 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -2926,6 +2954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 2}
+  _tileType: 0
 --- !u!1001 &618267963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3072,6 +3101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 1}
+  _tileType: 0
 --- !u!1001 &642280441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3157,6 +3187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 7}
+  _tileType: 0
 --- !u!1 &674842111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -3181,6 +3212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 0}
+  _tileType: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,6 +3391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 4}
+  _tileType: 0
 --- !u!1 &714735778 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -3383,6 +3416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 8}
+  _tileType: 0
 --- !u!1 &729387882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3451,6 +3485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 6}
+  _tileType: 0
 --- !u!1 &737444255 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -3475,6 +3510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 3}
+  _tileType: 0
 --- !u!1001 &747125874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3621,6 +3657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 8}
+  _tileType: 0
 --- !u!1001 &764562854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3706,6 +3743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 3}
+  _tileType: 0
 --- !u!1001 &775840480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3852,6 +3890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 5}
+  _tileType: 0
 --- !u!1001 &799874268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4090,6 +4129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 7}
+  _tileType: 0
 --- !u!1001 &839738886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4236,6 +4276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 0}
+  _tileType: 0
 --- !u!1 &850219071 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -4260,6 +4301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 5}
+  _tileType: 0
 --- !u!1001 &852327943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4528,6 +4570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 4}
+  _tileType: 0
 --- !u!1 &927783182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -4552,6 +4595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 3}
+  _tileType: 0
 --- !u!1001 &935291333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4820,6 +4864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 0}
+  _tileType: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -5035,6 +5080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 1}
+  _tileType: 0
 --- !u!1001 &1004555776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5181,6 +5227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 2}
+  _tileType: 0
 --- !u!1001 &1017359626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5297,6 +5344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 9}
+  _tileType: 0
 --- !u!1001 &1046023690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5443,6 +5491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 8}
+  _tileType: 0
 --- !u!1001 &1065612339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5528,6 +5577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 1}
+  _tileType: 0
 --- !u!1001 &1095006245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5674,6 +5724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 5}
+  _tileType: 0
 --- !u!1 &1151316978 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -5698,6 +5749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 5}
+  _tileType: 0
 --- !u!1001 &1162588056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5905,6 +5957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 2}
+  _tileType: 0
 --- !u!1 &1195123556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -5929,6 +5982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 4}
+  _tileType: 0
 --- !u!1 &1213930645 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -5953,6 +6007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 8}
+  _tileType: 0
 --- !u!1 &1223778974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -5977,6 +6032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 0}
+  _tileType: 0
 --- !u!1 &1226798008 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6001,6 +6057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 3}
+  _tileType: 0
 --- !u!1 &1231571105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6025,6 +6082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 6}
+  _tileType: 0
 --- !u!1001 &1236099769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6171,6 +6229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 3}
+  _tileType: 0
 --- !u!1001 &1276079504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6256,6 +6315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 0}
+  _tileType: 0
 --- !u!1 &1290264506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6280,6 +6340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 0}
+  _tileType: 0
 --- !u!1001 &1291713333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6365,6 +6426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 0}
+  _tileType: 0
 --- !u!1001 &1321912965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6555,6 +6617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 9}
+  _tileType: 0
 --- !u!1 &1358343845 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6579,6 +6642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 9}
+  _tileType: 0
 --- !u!1 &1362138597 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6603,6 +6667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 2}
+  _tileType: 0
 --- !u!1 &1364117101 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6627,6 +6692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 1}
+  _tileType: 0
 --- !u!1 &1396283062 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6651,6 +6717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 6}
+  _tileType: 0
 --- !u!1001 &1408395916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6736,6 +6803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 3}
+  _tileType: 0
 --- !u!1001 &1448019359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6943,6 +7011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 8}
+  _tileType: 0
 --- !u!1 &1474103007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6967,6 +7036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 7}
+  _tileType: 0
 --- !u!1 &1480190755 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -6991,6 +7061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 0}
+  _tileType: 0
 --- !u!1 &1495387263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7015,6 +7086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 7}
+  _tileType: 0
 --- !u!1 &1501208426 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7039,6 +7111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 3}
+  _tileType: 0
 --- !u!1 &1515112221 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7063,6 +7136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 4}
+  _tileType: 0
 --- !u!1001 &1528946175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7209,6 +7283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 3}
+  _tileType: 0
 --- !u!1001 &1574429256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7294,6 +7369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 0}
+  _tileType: 0
 --- !u!1 &1584613284 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7318,6 +7394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 7}
+  _tileType: 0
 --- !u!1001 &1602625233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7403,6 +7480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 4}
+  _tileType: 0
 --- !u!1001 &1642860347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7549,6 +7627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 1}
+  _tileType: 0
 --- !u!1 &1695754535 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7573,6 +7652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 8}
+  _tileType: 0
 --- !u!1001 &1698835219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7780,6 +7860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 1}
+  _tileType: 0
 --- !u!1 &1755084217 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7804,6 +7885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 6}
+  _tileType: 0
 --- !u!1001 &1765367973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7889,6 +7971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 5}
+  _tileType: 0
 --- !u!1 &1801497859 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7913,6 +7996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 5}
+  _tileType: 0
 --- !u!1 &1811607764 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -7937,6 +8021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 4}
+  _tileType: 0
 --- !u!1001 &1825354901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8083,6 +8168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 8}
+  _tileType: 0
 --- !u!1001 &1839519958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8290,6 +8376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 8, y: 3}
+  _tileType: 0
 --- !u!1 &1875411173 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8314,6 +8401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 5}
+  _tileType: 0
 --- !u!1 &1887320322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8338,6 +8426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 9}
+  _tileType: 0
 --- !u!1 &1890104997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8362,6 +8451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 1}
+  _tileType: 0
 --- !u!1001 &1943751412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8447,6 +8537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 4}
+  _tileType: 0
 --- !u!1 &1959459474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8471,6 +8562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 5, y: 9}
+  _tileType: 0
 --- !u!1001 &2014757796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8556,6 +8648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 1, y: 9}
+  _tileType: 0
 --- !u!1 &2021814381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8580,6 +8673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 3, y: 7}
+  _tileType: 0
 --- !u!1 &2022697100 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8604,6 +8698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 2, y: 9}
+  _tileType: 0
 --- !u!1001 &2042022459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8872,6 +8967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 9, y: 2}
+  _tileType: 0
 --- !u!1001 &2083730481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8957,6 +9053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 9}
+  _tileType: 0
 --- !u!1 &2101627715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -8981,6 +9078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 0, y: 4}
+  _tileType: 0
 --- !u!1001 &2117420355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9127,6 +9225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 6, y: 1}
+  _tileType: 0
 --- !u!1 &2136362992 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -9151,6 +9250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 7, y: 1}
+  _tileType: 0
 --- !u!1 &2143959309 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
@@ -9175,3 +9275,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grid: {fileID: 90244376}
   _gridIndex: {x: 4, y: 7}
+  _tileType: 0
