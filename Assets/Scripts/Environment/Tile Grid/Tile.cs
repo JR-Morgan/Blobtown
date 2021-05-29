@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
-public class Tile : MonoBehaviour
+public partial class Tile : MonoBehaviour
 {
     #region Grid References
     [SerializeField, HideInInspector]
@@ -13,6 +13,8 @@ public class Tile : MonoBehaviour
     [SerializeField]
     private Vector2Int _gridIndex;
     public Vector2Int GridIndex { get => _gridIndex; internal set => _gridIndex = value; }
+
+    public List<Tile> GetAdjacentTiles() => Grid.GetAdjacentTiles(this);
     #endregion
 
     private TileType _tileType;
@@ -28,6 +30,9 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+    public bool HasBuilding { get; internal set; }
+
     Renderer _renderer;
 
     private void Awake()
