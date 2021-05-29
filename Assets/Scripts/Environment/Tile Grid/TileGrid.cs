@@ -98,6 +98,7 @@ public class TileGrid : Singleton<TileGrid>
         { 
             for (int y = tileY - 1; y <= tileY + 1; y++)
             {
+                if (x == t.GridIndex.x && y == t.GridIndex.y) continue;
                 if (IsInBounds(x, y))
                 {
                     tiles.Add(Tiles[x,y]);

@@ -89,7 +89,7 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            if (agent.Carried != 0)
+            if(!agent.inventory.IsEmpty)
             {
                 b.shouldTerminate = true;
                 
@@ -128,9 +128,10 @@ public static class AgentActorFactory
             {
                 if (t.TileType == TileType.Ore)
                 {
+                    agent.inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
+
                     t.TileType = TileType.Default;
-                    //add ore to agent
-                    agent.Carried++;
+
                     b.shouldTerminate = true;
                     break;
                 }

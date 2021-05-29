@@ -19,6 +19,14 @@ public partial class Tile : MonoBehaviour
 
     [SerializeField]
     private TileType _tileType;
+    private TileData t;
+    public TileData TileData
+    {
+        get
+        {
+            return t != null ? t : t = TileManager.Instance.GetResourceData(_tileType);
+        }
+    }
 
     [SerializeField, HideInInspector]
     private GameObject resource;
@@ -27,11 +35,8 @@ public partial class Tile : MonoBehaviour
     public TileType TileType { get => _tileType;
         set
         {
-            if(_tileType != value)
-            {
-                _tileType = value;
-               Initialise(_tileType);
-            }
+            _tileType = value;
+            Initialise(_tileType);
         }
     }
     public Building Building { get; set; }
@@ -60,11 +65,11 @@ public partial class Tile : MonoBehaviour
 
         if (TileManager.IsSingletonInitialised)
         {
-            ResourceData r = TileManager.Instance.GetResourceData(tileType);
+            t = TileManager.Instance.GetResourceData(tileType);
 
-            if (r != null && r.resourcePrefab != null)
+            if (TileData != null && TileData.resourcePrefab != null)
             {
-                resource = Instantiate(r.resourcePrefab, transform);
+                resource = Instantiate(TileData.resourcePrefab, transform);
             }
         }
     }

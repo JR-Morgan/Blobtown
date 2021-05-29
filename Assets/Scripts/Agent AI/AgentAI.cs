@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 [SelectionBase, DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Agent")]
-//[RequireComponent(typeof(NavMeshAgent))]
 public class AgentAI : MonoBehaviour, IPathFollower
 {
 
@@ -28,7 +27,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     void IPathFollower.GoalCompleteHandler(Tile completedGoal)
     {
         Goal = null;
-        Carried = 0;
+        inventory.Contents.Clear(); //TODO for now, just clear their inventory
     }
 
     #endregion
@@ -37,11 +36,13 @@ public class AgentAI : MonoBehaviour, IPathFollower
     //private NavMeshAgent navAgent;
 
     public Building home;
-    public int Carried{ get; set; }
+
+    public Inventory inventory;
 
 
     private void Awake()
     {
+        inventory = new Inventory();
         //navAgent = GetComponent<NavMeshAgent>();
     }
 
