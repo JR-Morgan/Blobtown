@@ -29,7 +29,7 @@ public class AgentAI : MonoBehaviour
 
     private void Initialise()
     {
-        agentActor = AgentActorFactory.CreateActor();
+        agentActor = AgentActorFactory.CreateActor(this);
     }
 
     private void Update()

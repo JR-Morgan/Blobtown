@@ -7,16 +7,17 @@ public delegate BehaviourState AgentBehaviour(BehaviourState state);
 public static class AgentActorFactory 
 {
     
-    public static AgentActor CreateActor()
+    public static AgentActor CreateActor(AgentAI agent)
     {
-        return new AgentActor(CreateBehaviours());
+        return new AgentActor(CreateBehaviours(agent));
     }
 
-    public static List<AgentBehaviour> CreateBehaviours()
+    public static List<AgentBehaviour> CreateBehaviours(AgentAI agent)
     {
         var behaviours = new List<AgentBehaviour>();
 
         //add behaviours depending on agent type?
+        behaviours.AddRange(MinerAgent(agent));
 
         return behaviours;
     }
