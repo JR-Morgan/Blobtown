@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(TileGrid))]
@@ -71,6 +72,47 @@ public class TileGenerator : MonoBehaviour
             }
         }
 
+        Cluster(tiles);
+
         return tiles;
     }
+
+
+    private void Cluster(Tile[,] tiles)
+    {
+        List<(int, int)> resources = new List<(int, int)>();
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                if (tiles[i, j].TileType != TileType.Default)
+                {
+                    resources.Add((i, j));
+                }
+            }
+
+        }
+
+        foreach ((int, int) t in resources)
+        {
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    int a = t.Item1 + i;
+                    int b = t.Item2 + j;
+                    if (a >= 0 && b >= 0 && a <= tiles.GetLength(0)-1 && b <= tiles.GetLength(1)-1)
+                    {
+                        tiles[a, b].TileType = tiles[t.Item1, t.Item2].TileType;
+                    }
+                }
+            }
+
+
+        }
+    }
+        
+
+
 }
