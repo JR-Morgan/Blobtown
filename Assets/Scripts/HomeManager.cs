@@ -7,9 +7,9 @@ public class HomeManager : Singleton<HomeManager>
 
     //maybe should be home factory?
 
-    public GameObject homePrefab;
+    public Building homePrefab;
     private List<Building> homes;
-
+    private Building townCentre;
 
 
     // Start is called before the first frame update
@@ -30,9 +30,49 @@ public class HomeManager : Singleton<HomeManager>
 
     public Building BuildHome(Tile tile)
     {
-        GameObject newHome = Instantiate(homePrefab, tile.transform.position, Quaternion.identity, this.transform);
-        
+        GameObject newHome = Instantiate(homePrefab.gameObject, tile.transform.position, Quaternion.identity, this.transform);
+        if (townCentre == null)
+        {
+            townCentre = newHome.GetComponent<Building>();
+        }
         homes.Add(newHome.GetComponent<Building>());
         return newHome.GetComponent<Building>();
+    }
+
+    public Tile NextHomeTile()
+    {
+        if (townCentre == null)
+        {
+            return null;
+        }
+        else 
+        {
+            List<Tile> shuffle = townCentre.GetAdjacentTiles();
+            shuffle.Shuffle();
+
+            foreach (Tile tile in shuffle)
+            {
+                if (isBuildingSpaceFree(tile))
+                {
+                    return tile;
+                }
+            }
+            return null;
+        }
+    }
+
+    private bool isBuildingSpaceFree(Tile tile)
+    {
+        for (int x = 0; x < homePrefab.size.x; x++)
+        {
+            for (int y = 0; y < homePrefab.size.y; y++)
+            {
+                if (TileGrid.Instance.Tiles[x, y].HasBuilding)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
