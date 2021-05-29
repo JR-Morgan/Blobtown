@@ -64,7 +64,7 @@ public class HomeManager : Singleton<HomeManager>
     private bool IsBuildingSpaceFree(Tile originTile)
     {
         
-        List<Tile> buildingSpace = BuildingSpace(originTile);
+        List<Tile> buildingSpace = TileGrid.Instance.TilesInBounds(originTile, homePrefab.size);
         foreach (Tile tile in buildingSpace)
         {
             if (tile.HasBuilding)
@@ -75,16 +75,4 @@ public class HomeManager : Singleton<HomeManager>
         return true;
     }
 
-    private List<Tile> BuildingSpace(Tile tile)
-    {
-        List<Tile> tilesUsed = new List<Tile>();
-        for (int x = 0; x < homePrefab.size.x; x++)
-        {
-            for (int y = 0; y < homePrefab.size.y; y++)
-            {
-                tilesUsed.Add(TileGrid.Instance.Tiles[x, y]);
-            }
-        }
-        return tilesUsed;
-    }
 }

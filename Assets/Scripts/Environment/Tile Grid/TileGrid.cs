@@ -109,6 +109,19 @@ public class TileGrid : Singleton<TileGrid>
         return tiles;
     }
 
+    public List<Tile> TilesInBounds(Tile tile, Vector2 size)
+    {
+        List<Tile> tilesUsed = new List<Tile>();
+        for (int x = 0; x < size.x; x++)
+        {
+            for (int y = 0; y < size.y; y++)
+            {
+                tilesUsed.Add(Tiles[x, y]);
+            }
+        }
+        return tilesUsed;
+    }
+
     #region Casts
     public static explicit operator Tile[,](TileGrid g) => g.Tiles;
     #endregion
