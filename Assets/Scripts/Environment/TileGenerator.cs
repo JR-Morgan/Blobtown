@@ -60,10 +60,12 @@ public class TileGenerator : MonoBehaviour
                 go.transform.parent = this.transform;
                 go.transform.position = new Vector3(x * tileSize.x, 0f, y * tileSize.y);
 
+                /*
                 if (Random.value < oreProabality)
                 {
                     t.TileType = TileType.Ore;
                 }
+                */
 
                 t.Grid = grid;
                 t.GridIndex = new Vector2Int(x,y);
@@ -72,12 +74,33 @@ public class TileGenerator : MonoBehaviour
             }
         }
 
-        Cluster(tiles);
+        GenerateResources(tiles);
+        
 
         return tiles;
     }
 
 
+    private void GenerateResources(Tile[,] tiles)
+    {
+        for (int i = 0; i < tiles.GetLength(0); i++)
+        {
+
+            for (int j = 0; j < tiles.GetLength(1); j++)
+            {
+                float x = (float)i / tiles.GetLength(0) * 15;
+                float y = (float)j / tiles.GetLength(1) * 15;
+                float noiseSample = Mathf.PerlinNoise(x, y);
+                if(noiseSample < 0.3)
+                {
+                    tiles[i, j].TileType = TileType.Ore;
+                }
+            }
+
+        }
+    }
+
+    /*
     private void Cluster(Tile[,] tiles)
     {
         List<(int, int)> resources = new List<(int, int)>();
@@ -112,7 +135,7 @@ public class TileGenerator : MonoBehaviour
 
         }
     }
-        
+    */
 
 
 }
