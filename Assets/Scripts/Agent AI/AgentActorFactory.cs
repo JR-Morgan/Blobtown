@@ -40,6 +40,7 @@ public static class AgentActorFactory
         {
             //DestinationCheck(agent),
             MineTarget(agent),
+            BuildHome(agent),
             GoHome(agent),
             MoveRandomly(agent),
             
@@ -137,6 +138,26 @@ public static class AgentActorFactory
 
             return b;
         }
+    }
+
+    private static AgentBehaviour BuildHome(AgentAI agent)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            if (agent.home == null)
+            {
+                //TODO: find location to place house
+                TileGrid.Instance.TryGetTileAtWorldPosition(agent.transform.position, out Tile tile);
+                agent.home = HomeManager.Instance.buildHome(tile);
+                b.shouldTerminate = true;
+            }
+
+            return b;
+        }
+
+        
     }
 
     #endregion

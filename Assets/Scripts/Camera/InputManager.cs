@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
             Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if (tile != null)
             {
-                homeManager.placeHome(tile);
+                homeManager.buildHome(tile);
             }
         }
     }

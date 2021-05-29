@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeManager : MonoBehaviour
+public class HomeManager : Singleton<HomeManager>
 {
 
     //maybe should be home factory?
 
     public GameObject homePrefab;
     private List<GameObject> homes;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +28,10 @@ public class HomeManager : MonoBehaviour
         
     }
 
-    public void placeHome(Tile tile)
+    public GameObject buildHome(Tile tile)
     {
         GameObject newHome = Instantiate(homePrefab, tile.transform.position, Quaternion.identity, this.transform);
         homes.Add(newHome);
+        return newHome;
     }
 }
