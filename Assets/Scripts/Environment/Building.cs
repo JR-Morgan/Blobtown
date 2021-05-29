@@ -6,42 +6,18 @@ public class Building : MonoBehaviour
 {
 
     [SerializeField]
-    AgentActor[] occupents;
+    private int[,] size;
 
-    [SerializeField]
-    List<AgentActor> currentOccupents;
 
-    [SerializeField]
-    float breedValue;
-
-    /*
-    public void BreedingCheck()
+    // Start is called before the first frame update
+    void Start()
     {
-        if(currentOccupents.Count > 1)
-        {
-            if(Random.Range(0,1) > breedValue)
-            {
-                Breed();
-            }
-        }
+        
     }
-    */
 
-    /*
-    public void Breed()
+    // Update is called once per frame
+    void Update()
     {
-        List<AgentActor> pool = new List<AgentActor>(currentOccupents);
-        int index = Random.Range(0, pool.Count);
-        AgentActor parentA = pool[index];
-        pool.RemoveAt(index);
-        index = Random.Range(0, pool.Count);
-        AgentActor parentB = pool[index];
-
-        GeneticAlgorithm.Instance.CrossOver(parentA, parentB);
-
+        
     }
-    */
-
-
-
 }

@@ -12,7 +12,7 @@ public class AgentAI : MonoBehaviour
     private AgentActor agentActor;
     //private NavMeshAgent navAgent;
 
-    public GameObject home;
+    public Building home;
     public int Carried{ get; set; }
     
     private void Awake()

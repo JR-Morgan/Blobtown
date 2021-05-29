@@ -8,17 +8,17 @@ public class HomeManager : Singleton<HomeManager>
     //maybe should be home factory?
 
     public GameObject homePrefab;
-    private List<GameObject> homes;
+    private List<Building> homes;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        homes = new List<GameObject>();
+        homes = new List<Building>();
         foreach (Transform child in transform) 
         {
-            homes.Add(child.gameObject);
+            homes.Add(child.gameObject.GetComponent<Building>());
         }
     }
 
@@ -31,7 +31,8 @@ public class HomeManager : Singleton<HomeManager>
     public GameObject buildHome(Tile tile)
     {
         GameObject newHome = Instantiate(homePrefab, tile.transform.position, Quaternion.identity, this.transform);
-        homes.Add(newHome);
+        
+        homes.Add(newHome.GetComponent<Building>());
         return newHome;
     }
 }
