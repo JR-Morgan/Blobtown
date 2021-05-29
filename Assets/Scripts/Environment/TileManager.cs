@@ -10,11 +10,11 @@ public class TileManager : Singleton<TileManager>
     private int offset = 1; 
 
     [SerializeField, Tooltip("Mapping of Tiletype (by index) to a resource data")]
-    private ResourceData[] tileToResourceMapping;
+    private TileData[] tileToResourceMapping;
 
 
-    /// <returns>The <see cref="ResourceData"/> associated with the <paramref name="tileType"/>. <c>null</c> if <see cref="TileType"/> has no resource</returns>
-    public ResourceData GetResourceData(TileType tileType)
+    /// <returns>The <see cref="TileData"/> associated with the <paramref name="tileType"/>. <c>null</c> if <see cref="TileType"/> has no resource</returns>
+    public TileData GetResourceData(TileType tileType)
     {
         int i = (int)tileType - offset;
         if (i >= 0 && i < tileToResourceMapping.Length)
