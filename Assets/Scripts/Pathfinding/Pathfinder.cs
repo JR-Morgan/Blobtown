@@ -16,9 +16,18 @@ public static class Pathfinder
         TileGrid t = TileGrid.Instance;
         Tile startT = t.TileAtWorldPosition(start);
         Tile goalT = t.TileAtWorldPosition(goal);
+
         return Find(startT, goalT, ignoreBuildings);
+    }
 
+    public static List<Tile> Find(Vector3 start, Tile goal, bool ignoreBuildings = DEFAULT_IGNORE_BUILDINGS)
+    {
+        if (!TileGrid.IsSingletonInitialised) return null;
 
+        TileGrid t = TileGrid.Instance;
+        Tile startT = t.TileAtWorldPosition(start);
+
+        return Find(startT, goal, ignoreBuildings);
     }
 
     public static List<Tile> Find(Tile start, Tile goal, bool ignoreBuildings = DEFAULT_IGNORE_BUILDINGS)

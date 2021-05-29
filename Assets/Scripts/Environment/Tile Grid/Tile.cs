@@ -29,8 +29,8 @@ public partial class Tile : MonoBehaviour
             }
         }
     }
-
-    public bool HasBuilding { get; internal set; }
+    public Building Building { get; set; }
+    public bool HasBuilding => Building != null;
 
     Renderer _renderer;
 

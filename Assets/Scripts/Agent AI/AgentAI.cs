@@ -6,15 +6,40 @@ using UnityEngine.AI;
 [SelectionBase, DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Agent")]
 //[RequireComponent(typeof(NavMeshAgent))]
-public class AgentAI : MonoBehaviour
+public class AgentAI : MonoBehaviour, IPathFollower
 {
+
+    #region IPathFollower
+    [SerializeField]
+    private Tile _goal;
+    public Tile Goal { get => _goal;
+        set
+        {
+            _goal = value;
+
+        }
+    }
+
+    [SerializeField]
+    private float _speed;
+    public float Speed { get => _speed; set =>_speed = value; }
+
+    List<Tile> IPathFollower.Path { get; set; }
+
+    void IPathFollower.GoalCompleteHandler(Tile completedGoal)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    #endregion
 
     private AgentActor agentActor;
     //private NavMeshAgent navAgent;
 
     public Building home;
     public int Carried{ get; set; }
-    
+
+
     private void Awake()
     {
         //navAgent = GetComponent<NavMeshAgent>();
@@ -34,6 +59,9 @@ public class AgentAI : MonoBehaviour
 
     private void Update()
     {
+
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             agentActor.Act();
@@ -43,18 +71,13 @@ public class AgentAI : MonoBehaviour
 
 
 
-    public void SetDestination(Tile tile)
-    {
-
-
-        //navAgent.SetDestination(tile.transform.position);
-    }
-
     public void MoveAgent(Tile tile)
     {
         Vector3 currentTilePos = transform.position;
         transform.position = Vector3.Lerp(currentTilePos, tile.transform.position, 1);
     }
+
+
 
     //public bool HasDestination => !Vector3.Equals(navAgent.destination, transform.position);
 

@@ -93,7 +93,7 @@ public static class AgentActorFactory
             {
                 b.shouldTerminate = true;
                 
-                agent.SetDestination(TileGrid.Instance.TileAtWorldPosition(agent.home.transform.position));
+                agent.Goal = (TileGrid.Instance.TileAtWorldPosition(agent.home.transform.position));
             }
 
             return b;
