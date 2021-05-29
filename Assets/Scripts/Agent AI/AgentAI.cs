@@ -13,6 +13,7 @@ public class AgentAI : MonoBehaviour
     private NavMeshAgent navAgent;
 
     public GameObject home;
+    public int Carried{ get; set; }
     
     private void Awake()
     {
@@ -42,5 +43,7 @@ public class AgentAI : MonoBehaviour
 
         navAgent.SetDestination(tile.transform.position);
     }
+
+    public bool HasDestination => !Vector3.Equals(navAgent.destination, transform.position);
 
 }
