@@ -58,7 +58,7 @@ public class TileGrid : Singleton<TileGrid>
 
     private (int x, int y) TileIndexAtLocalPosition(Vector3 localPosition)
     {
-        return (Mathf.FloorToInt(localPosition.x / tileSize.x), Mathf.FloorToInt(localPosition.y / tileSize.y));
+        return (Mathf.FloorToInt(localPosition.x / tileSize.x), Mathf.FloorToInt(localPosition.z / tileSize.y));
     }
 
     /// <param name="worldPosition"></param>

@@ -12,7 +12,7 @@ public class TileGenerator : MonoBehaviour
 
     [Range(0,1)]
     [SerializeField]
-    private int oreProabality;
+    private float oreProabality;
 
     [SerializeField]
     private GameObject tilePrefab;
