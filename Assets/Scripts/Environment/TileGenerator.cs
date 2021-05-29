@@ -6,8 +6,13 @@ using UnityEngine;
 [AddComponentMenu("Simulation/Grid Generator")]
 public class TileGenerator : MonoBehaviour
 {
+
     [SerializeField]
     private int tileLayer;
+
+    [Range(0,1)]
+    [SerializeField]
+    private int oreProabality;
 
     [SerializeField]
     private GameObject tilePrefab;
@@ -22,19 +27,21 @@ public class TileGenerator : MonoBehaviour
         transform.DestroyChildren();
 
         TileGrid grid = GetComponent<TileGrid>();
-        Tile[,] tiles = GenerateLevel(grid, gridSize.x, gridSize.y, tileSize, tileLayer, this.transform, tilePrefab);
+
+        Tile[,] tiles = GenerateTiles(grid);
 
         grid.InitialiseGrid(tiles, tileSize);
     }
 
 
-    public static Tile[,] GenerateLevel(TileGrid grid, int width, int height, Vector2 tileSize, int layer, Transform parent = null, GameObject tilePrefab = null)
+    public Tile[,] GenerateTiles(TileGrid grid)
     {
+        int width = gridSize.x, height = gridSize.y;
         Tile[,] tiles = new Tile[width, height];
 
         for(int x = 0; x < width; x++)
         {
-            for (int y = 0; y < width; y++)
+            for (int y = 0; y < height; y++)
             {
                 GameObject go = tilePrefab == null
                     ? new GameObject()
@@ -48,11 +55,17 @@ public class TileGenerator : MonoBehaviour
 
                 //Setup Tile here
                 go.name = $"Tile {x},{y}";
-                go.layer = layer;
-                go.transform.parent = parent;
+                go.layer = tileLayer;
+                go.transform.parent = this.transform;
                 go.transform.position = new Vector3(x * tileSize.x, 0f, y * tileSize.y);
 
+                if (Random.value < oreProabality)
+                {
+                    t.TileType = TileType.Ore;
+                }
+
                 t.Grid = grid;
+                t.GridIndex = new Vector2Int(x,y);
 
                 tiles[x, y] = t;
             }

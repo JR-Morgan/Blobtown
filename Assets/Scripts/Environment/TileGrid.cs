@@ -11,8 +11,10 @@ public class TileGrid : Singleton<TileGrid>
 
 
     #region Helper Members
-    public int Width => Tiles.GetLength(0);
-    public int Height => Tiles.GetLength(1);
+    [SerializeField, HideInInspector]
+    private int _width, _height;
+    public int Width { get => _width; private set => _width = value; } 
+    public int Height { get => _height; private set => _height = value; }
     public Vector2Int Dimensions => new Vector2Int(Width, Height);
     public Vector2 TileSize => tileSize;
 
@@ -20,11 +22,34 @@ public class TileGrid : Singleton<TileGrid>
 
     #endregion
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        //Finds tiles in children and reconstructs Tiles array since it is not serialied
+        if(Tiles == null)
+        {
+            Tiles = new Tile[Width, Height];
+            Tile[] children = GetComponentsInChildren<Tile>();
+
+            Debug.Assert(children.Length == Width * Height, $"{typeof(TileGrid)} failed to reconstruct {typeof(Tile)} array after scene reload", this);
+
+            foreach (Tile t in children)
+            {
+                Vector2Int foo = t.GridIndex;
+                Tiles[foo.x, foo.y] = t;
+            }
+        }
+    }
+
     #region Initialise
     public void InitialiseGrid(Tile[,] tiles, Vector2 tileSize)
     {
         this.Tiles = tiles;
         this.tileSize = tileSize;
+        Width = Tiles.GetLength(0);
+        Height = Tiles.GetLength(1);
     }
 
     #endregion
@@ -65,9 +90,8 @@ public class TileGrid : Singleton<TileGrid>
 
     public List<Tile> GetAdjacentTiles(Tile t)
     {
-        Vector3 localPosition = this.transform.InverseTransformPoint(t.transform.position);
-
-        (int tileX, int tileY) = TileIndexAtLocalPosition(localPosition);
+        int tileX = t.GridIndex.x;
+        int tileY = t.GridIndex.y;
 
         var tiles = new List<Tile>();
         for (int x = tileX - 1; x <= tileX + 1; x++)

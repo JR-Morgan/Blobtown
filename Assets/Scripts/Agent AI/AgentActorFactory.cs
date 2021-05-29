@@ -123,9 +123,9 @@ public static class AgentActorFactory
             List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
             foreach (Tile t in adjTiles)
             {
-                if (t.tileType == TileType.Ore)
+                if (t.TileType == TileType.Ore)
                 {
-                    t.tileType = TileType.Default;
+                    t.TileType = TileType.Default;
                     //add ore to agent
                     agent.Carried++;
                     b.shouldTerminate = true;
