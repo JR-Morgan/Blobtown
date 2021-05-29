@@ -17,6 +17,7 @@ public partial class Tile : MonoBehaviour
     public List<Tile> GetAdjacentTiles() => Grid.GetAdjacentTiles(this);
     #endregion
 
+    [SerializeField]
     private TileType _tileType;
     public TileType TileType { get => _tileType;
         set
@@ -24,9 +25,7 @@ public partial class Tile : MonoBehaviour
             if(_tileType != value)
             {
                 _tileType = value;
-#if !UNITY_EDITOR
                Initialise(_tileType);
-#endif
             }
         }
     }
@@ -45,17 +44,23 @@ public partial class Tile : MonoBehaviour
         Initialise(_tileType);
     }
 
+    private void OnValidate()
+    {
+        Initialise(_tileType);
+    }
     private void Initialise(TileType type)
     {
-        //Temporary for now
-
         Color c = type switch
         {
             TileType.Ore => Color.grey,
+            TileType.Forest => Color.green,
             _ => Color.white,
         };
 
-        _renderer.material.SetColor("_Color", c);
+        if(_renderer != null)
+        {
+            _renderer.material.SetColor("_Color", c);
+        }
     }
 
 }

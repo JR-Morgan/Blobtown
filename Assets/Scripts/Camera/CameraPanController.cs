@@ -11,7 +11,8 @@ public class CameraPanController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _camera = Camera.main;
+            Application.targetFrameRate = 200;
+           _camera = Camera.main;
     }
 
     // Update is called once per frame
