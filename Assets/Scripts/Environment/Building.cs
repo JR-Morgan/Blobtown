@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-
+    public BuildingType BuildingType { get; set; }
     public Vector2Int size;
 
 
