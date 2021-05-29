@@ -19,12 +19,12 @@ public partial class Tile : MonoBehaviour
 
     [SerializeField]
     private TileType _tileType;
-    private TileData t;
+    private TileData _tileData;
     public TileData TileData
     {
         get
         {
-            return t != null ? t : t = TileManager.Instance.GetResourceData(_tileType);
+            return _tileData != null ? _tileData : _tileData = TileManager.Instance.GetResourceData(_tileType);
         }
     }
 
@@ -65,7 +65,7 @@ public partial class Tile : MonoBehaviour
 
         if (TileManager.IsSingletonInitialised)
         {
-            t = TileManager.Instance.GetResourceData(tileType);
+            _tileData = TileManager.Instance.GetResourceData(tileType);
 
             if (TileData != null && TileData.resourcePrefab != null)
             {
