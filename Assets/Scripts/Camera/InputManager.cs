@@ -6,6 +6,8 @@ public class InputManager : MonoBehaviour
 {
 
     public GameObject agentPrefab;
+    public HomeManager homeManager;
+    public AgentManager agentManager;
 
 
     void Update()
@@ -15,9 +17,18 @@ public class InputManager : MonoBehaviour
             Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if (tile != null)
             {
-                Instantiate(agentPrefab, tile.transform.position, Quaternion.identity);
+                agentManager.placeAgent(tile);
             }
 
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (tile != null)
+            {
+                homeManager.placeHome(tile);
+            }
         }
     }
 }
