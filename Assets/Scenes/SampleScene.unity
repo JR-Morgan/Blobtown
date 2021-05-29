@@ -617,9 +617,8 @@ MonoBehaviour:
   tilePrefab: {fileID: 7070539416496337510, guid: b29adc219f47644468e50141f82347fb, type: 3}
   gridSize: {x: 10, y: 10}
   tileSize: {x: 1, y: 1}
-  noiseScale: 15
-  oreThreshold: 0.3
-  forestThreshold: 0.2
+  noiseScale: 0.1
+  ResourceThreshold: 0.3
 --- !u!114 &90244376
 MonoBehaviour:
   m_ObjectHideFlags: 0
