@@ -40,9 +40,12 @@ public class AgentAI : MonoBehaviour
         }
     }
 
-    public void SetDestination(Vector3 destinationObject)
+
+
+
+    public void SetDestination(Tile tile)
     {
-        Tile tile = TileGrid.Instance.TileAtWorldPosition(destinationObject);
+
 
         //navAgent.SetDestination(tile.transform.position);
     }
