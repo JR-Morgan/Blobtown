@@ -18,6 +18,11 @@ public class BuildingFactory : Singleton<BuildingFactory>
 
         GameObject newBuilding = Instantiate(buildingData.buildingPrefab, position.transform.position, Quaternion.identity, this.transform);
 
+        foreach (Tile tile in TileGrid.Instance.TilesInBounds(position, newBuilding.GetComponent<Building>().size))
+        {
+            tile.Building = newBuilding.GetComponent<Building>();
+        }
+
         Buildings.Add(buildingType, newBuilding.GetComponent<Building>());
         return newBuilding.GetComponent<Building>();
     }
