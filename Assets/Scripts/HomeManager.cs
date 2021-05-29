@@ -52,7 +52,7 @@ public class HomeManager : Singleton<HomeManager>
 
             foreach (Tile tile in shuffle)
             {
-                if (isBuildingSpaceFree(tile))
+                if (IsBuildingSpaceFree(tile))
                 {
                     return tile;
                 }
@@ -61,18 +61,30 @@ public class HomeManager : Singleton<HomeManager>
         }
     }
 
-    private bool isBuildingSpaceFree(Tile tile)
+    private bool IsBuildingSpaceFree(Tile originTile)
     {
+        
+        List<Tile> buildingSpace = BuildingSpace(originTile);
+        foreach (Tile tile in buildingSpace)
+        {
+            if (tile.HasBuilding)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private List<Tile> BuildingSpace(Tile tile)
+    {
+        List<Tile> tilesUsed = new List<Tile>();
         for (int x = 0; x < homePrefab.size.x; x++)
         {
             for (int y = 0; y < homePrefab.size.y; y++)
             {
-                if (TileGrid.Instance.Tiles[x, y].HasBuilding)
-                {
-                    return false;
-                }
+                tilesUsed.Add(TileGrid.Instance.Tiles[x, y]);
             }
         }
-        return true;
+        return tilesUsed;
     }
 }
