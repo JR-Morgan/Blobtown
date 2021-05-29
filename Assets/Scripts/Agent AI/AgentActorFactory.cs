@@ -107,7 +107,8 @@ public static class AgentActorFactory
             
             //currently moves randomly
             List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
-            agent.SetDestination(adjTiles[Random.Range(0, adjTiles.Count - 1)].transform.position);
+            //agent.SetDestination(adjTiles[Random.Range(0, adjTiles.Count - 1)].transform.position);
+            agent.MoveAgent(adjTiles[Random.Range(0, adjTiles.Count - 1)]);
             b.shouldTerminate = true;
             
             return b;

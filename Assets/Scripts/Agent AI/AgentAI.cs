@@ -34,7 +34,10 @@ public class AgentAI : MonoBehaviour
 
     private void Update()
     {
-        agentActor.Act();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            agentActor.Act();
+        }
     }
 
     public void SetDestination(Vector3 destinationObject)
@@ -42,6 +45,12 @@ public class AgentAI : MonoBehaviour
         Tile tile = TileGrid.Instance.TileAtWorldPosition(destinationObject);
 
         //navAgent.SetDestination(tile.transform.position);
+    }
+
+    public void MoveAgent(Tile tile)
+    {
+        Vector3 currentTilePos = transform.position;
+        transform.position = Vector3.Lerp(currentTilePos, tile.transform.position, 1);
     }
 
     //public bool HasDestination => !Vector3.Equals(navAgent.destination, transform.position);
