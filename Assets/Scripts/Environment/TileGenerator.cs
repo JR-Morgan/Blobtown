@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 [RequireComponent(typeof(TileGrid))]
 [AddComponentMenu("Simulation/Grid Generator")]
 public class TileGenerator : MonoBehaviour
@@ -19,14 +17,10 @@ public class TileGenerator : MonoBehaviour
     [SerializeField]
     private Vector2 tileSize;
 
-    public void Awake()
-    {
-        Generate();
-    }
-
-
     public void Generate()
     {
+        transform.DestroyChildren();
+
         TileGrid grid = GetComponent<TileGrid>();
         Tile[,] tiles = GenerateLevel(grid, gridSize.x, gridSize.y, tileSize, tileLayer, this.transform, tilePrefab);
 
@@ -42,9 +36,15 @@ public class TileGenerator : MonoBehaviour
         {
             for (int y = 0; y < width; y++)
             {
-                GameObject go = tilePrefab == null ? new GameObject() : Instantiate(tilePrefab);
+                GameObject go = tilePrefab == null
+                    ? new GameObject()
+#if UNITY_EDITOR
+                    : (GameObject)PrefabUtility.InstantiatePrefab(tilePrefab);
+#else
+                    : Instantiate(tilePrefab);
+#endif
 
-                if(!go.TryGetComponent(out Tile t)) t = go.AddComponent<Tile>();
+                if (!go.TryGetComponent(out Tile t)) t = go.AddComponent<Tile>();
 
                 //Setup Tile here
                 go.name = $"Tile {x},{y}";
