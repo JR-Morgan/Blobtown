@@ -19,6 +19,11 @@ public partial class Tile : MonoBehaviour
 
     [SerializeField]
     private TileType _tileType;
+
+    [SerializeField, HideInInspector]
+    private GameObject resource;
+
+
     public TileType TileType { get => _tileType;
         set
         {
@@ -48,18 +53,19 @@ public partial class Tile : MonoBehaviour
     {
         Initialise(_tileType);
     }
-    private void Initialise(TileType type)
-    {
-        Color c = type switch
-        {
-            TileType.Ore => Color.grey,
-            TileType.Forest => Color.green,
-            _ => Color.white,
-        };
 
-        if(_renderer != null)
+    private void Initialise(TileType tileType)
+    {
+        if (resource != null) Destroy(resource);
+
+        if (TileManager.IsSingletonInitialised)
         {
-            _renderer.material.SetColor("_Color", c);
+            ResourceData r = TileManager.Instance.GetResourceData(tileType);
+
+            if (r != null && r.resourcePrefab != null)
+            {
+                resource = Instantiate(r.resourcePrefab, transform);
+            }
         }
     }
 

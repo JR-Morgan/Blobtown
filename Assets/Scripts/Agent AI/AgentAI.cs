@@ -16,7 +16,6 @@ public class AgentAI : MonoBehaviour, IPathFollower
         set
         {
             _goal = value;
-
         }
     }
 
@@ -29,6 +28,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     void IPathFollower.GoalCompleteHandler(Tile completedGoal)
     {
         Goal = null;
+        Carried = 0;
     }
 
     #endregion

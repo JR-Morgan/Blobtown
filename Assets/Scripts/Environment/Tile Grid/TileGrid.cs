@@ -32,8 +32,8 @@ public class TileGrid : Singleton<TileGrid>
         {
             Tiles = new Tile[Width, Height];
             Tile[] children = GetComponentsInChildren<Tile>();
-
-            Debug.Assert(children.Length == Width * Height, $"{typeof(TileGrid)} failed to reconstruct {typeof(Tile)} array after scene reload", this);
+            int expectedSize = Width * Height;
+            Debug.Assert(children.Length == expectedSize, $"{typeof(TileGrid)} failed to reconstruct {typeof(Tile)} array after scene reload.\nExpected {expectedSize} {typeof(Tile)} children but there was {children.Length}.", this);
 
             foreach (Tile t in children)
             {
