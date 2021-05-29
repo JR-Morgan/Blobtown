@@ -23,6 +23,12 @@ public class TileGenerator : MonoBehaviour
     [SerializeField]
     private Vector2 tileSize;
 
+    [SerializeField]
+    private float noiseScale;
+
+    [SerializeField]
+    private float oreThreshold;
+
     public void Generate()
     {
         transform.DestroyChildren();
@@ -88,10 +94,10 @@ public class TileGenerator : MonoBehaviour
 
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                float x = (float)i / tiles.GetLength(0) * 15;
-                float y = (float)j / tiles.GetLength(1) * 15;
+                float x = (float)i / tiles.GetLength(0) * noiseScale;
+                float y = (float)j / tiles.GetLength(1) * noiseScale;
                 float noiseSample = Mathf.PerlinNoise(x, y);
-                if(noiseSample < 0.3)
+                if(noiseSample < oreThreshold)
                 {
                     tiles[i, j].TileType = TileType.Ore;
                 }
