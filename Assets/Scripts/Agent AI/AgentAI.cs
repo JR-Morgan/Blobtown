@@ -5,19 +5,19 @@ using UnityEngine.AI;
 
 [SelectionBase, DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Agent")]
-[RequireComponent(typeof(NavMeshAgent))]
+//[RequireComponent(typeof(NavMeshAgent))]
 public class AgentAI : MonoBehaviour
 {
 
     private AgentActor agentActor;
-    private NavMeshAgent navAgent;
+    //private NavMeshAgent navAgent;
 
     public GameObject home;
     public int Carried{ get; set; }
     
     private void Awake()
     {
-        navAgent = GetComponent<NavMeshAgent>();
+        //navAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
@@ -41,9 +41,9 @@ public class AgentAI : MonoBehaviour
     {
         Tile tile = TileGrid.Instance.TileAtWorldPosition(destinationObject);
 
-        navAgent.SetDestination(tile.transform.position);
+        //navAgent.SetDestination(tile.transform.position);
     }
 
-    public bool HasDestination => !Vector3.Equals(navAgent.destination, transform.position);
+    //public bool HasDestination => !Vector3.Equals(navAgent.destination, transform.position);
 
 }

@@ -38,7 +38,7 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
-            DestinationCheck(agent),
+            //DestinationCheck(agent),
             MineTarget(agent),
             GoHome(agent),
             MoveRandomly(agent),
@@ -54,19 +54,19 @@ public static class AgentActorFactory
 
     #region Behaviours
 
-    private static AgentBehaviour DestinationCheck(AgentAI agent)
-    {
-        return Action;
+    //private static AgentBehaviour DestinationCheck(AgentAI agent)
+    //{
+    //    return Action;
 
-        BehaviourState Action(BehaviourState b)
-        {
-            if (agent.HasDestination)
-            {
-                b.shouldTerminate = true;
-            }
-            return b;
-        }
-    }
+    //    BehaviourState Action(BehaviourState b)
+    //    {
+    //        if (agent.HasDestination)
+    //        {
+    //            b.shouldTerminate = true;
+    //        }
+    //        return b;
+    //    }
+    //}
 
 
     private static AgentBehaviour Wait(AgentAI agent)

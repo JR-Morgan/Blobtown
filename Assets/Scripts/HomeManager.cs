@@ -13,6 +13,7 @@ public class HomeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        homes = new List<GameObject>();
         foreach (Transform child in transform) 
         {
             homes.Add(child.gameObject);
