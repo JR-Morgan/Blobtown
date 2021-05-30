@@ -122,6 +122,11 @@ public class TileGrid : Singleton<TileGrid>
         return tilesUsed;
     }
 
+    public List<Tile> TilesInCircle(Tile t, float radius)
+    {
+        return null;
+    } 
+
     #region Casts
     public static explicit operator Tile[,](TileGrid g) => g.Tiles;
     #endregion
