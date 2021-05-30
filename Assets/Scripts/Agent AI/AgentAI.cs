@@ -27,7 +27,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     void IPathFollower.GoalCompleteHandler(Tile completedGoal)
     {
         Goal = null;
-        inventory.Contents.Clear(); //TODO for now, just clear their inventory
+        //inventory.Contents.Clear(); //TODO for now, just clear their inventory
     }
 
     #endregion

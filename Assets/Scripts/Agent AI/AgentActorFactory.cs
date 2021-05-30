@@ -94,24 +94,29 @@ public static class AgentActorFactory
 
             if(!agent.inventory.IsEmpty)
             {
+                //Debug.Log("going home");
+
                 List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
                 Tile neighbourHome = null;
                 foreach (Tile t in adjTiles)
                 { 
                     if (t.Building == agent.home)
                     {
+                        Debug.Log("found home");
                         neighbourHome = t;
                     }
                 }
 
-                if (neighbourHome != null)
+
+
+                if (agent.transform.position == agent.home.transform.position)
                 {
                     foreach (KeyValuePair<ResourceType, int> entry in agent.inventory.Contents)
                     {
-                        
-                        agent.home.inventory.AddResource(entry.Key, entry.Value);
-                        Debug.Log(agent.home.inventory.Contents);
-                        agent.inventory.SubtractResource(entry.Key, entry.Value);
+
+                        Debug.Log("add " + agent.home.inventory.AddResource(entry.Key, entry.Value));
+                        //Debug.Log(agent.home.inventory.Contents);
+                        Debug.Log("subtracts " + agent.inventory.SubtractResource(entry.Key, entry.Value));
 
 
                     }

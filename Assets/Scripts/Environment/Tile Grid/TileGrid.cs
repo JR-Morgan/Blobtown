@@ -116,7 +116,7 @@ public class TileGrid : Singleton<TileGrid>
         {
             for (int y = 0; y < size.y; y++)
             {
-                tilesUsed.Add(Tiles[x, y]);
+                tilesUsed.Add(Tiles[x + tile.GridIndex.x, y + tile.GridIndex.y]);
             }
         }
         return tilesUsed;

@@ -36,6 +36,12 @@ public class HomeManager : Singleton<HomeManager>
             townCentre = newHome.GetComponent<Building>();
         }
         homes.Add(newHome.GetComponent<Building>());
+
+        foreach (Tile t in TileGrid.Instance.TilesInBounds(tile, homePrefab.size))
+        {
+            t.Building = newHome.GetComponent<Building>();
+        }
+
         return newHome.GetComponent<Building>();
     }
 
