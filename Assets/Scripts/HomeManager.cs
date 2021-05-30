@@ -37,7 +37,7 @@ public class HomeManager : Singleton<HomeManager>
         }
         homes.Add(newHome.GetComponent<Building>());
 
-        foreach (Tile t in TileGrid.Instance.TilesInBounds(tile, homePrefab.size))
+        foreach (Tile t in TileGrid.Instance.TilesInBounds(tile, homePrefab.Size))
         {
             t.Building = newHome.GetComponent<Building>();
         }
@@ -70,7 +70,7 @@ public class HomeManager : Singleton<HomeManager>
     private bool IsBuildingSpaceFree(Tile originTile)
     {
         
-        List<Tile> buildingSpace = TileGrid.Instance.TilesInBounds(originTile, homePrefab.size);
+        List<Tile> buildingSpace = TileGrid.Instance.TilesInBounds(originTile, homePrefab.Size);
         foreach (Tile tile in buildingSpace)
         {
             if (tile.HasBuilding)
