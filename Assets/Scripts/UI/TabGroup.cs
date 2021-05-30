@@ -64,4 +64,17 @@ public class TabGroup : MonoBehaviour
             button.background.sprite = tabIdle;
         }
     }
+
+    public void ResetSelectedTab()
+    {
+        if (selectedTab != null)
+        {
+            selectedTab.background.sprite = tabIdle;
+        }
+
+        for (int i = 0; i < objectsToSwap.Count; i++)
+        {
+            objectsToSwap[i].SetActive(false);
+        }
+    }
 }
