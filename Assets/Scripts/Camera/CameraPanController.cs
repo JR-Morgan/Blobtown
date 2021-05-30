@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraPanController : MonoBehaviour
 {
+
+    private bool temp = false;
+
     private Camera _camera;
     private Vector3 initialVector;
 
@@ -20,11 +23,12 @@ public class CameraPanController : MonoBehaviour
     private float rotateSpeed = 20;
 
     //[SerializeField]
-    private float angleMax = 30f;
+    private float angleMax = 0f;
 
-    private float angleMin = 10f;
+    private float angleMin = -90f;
 
-
+    [SerializeField]
+    private Transform dummyTransform;
 
 
     // Start is called before the first frame update
@@ -32,66 +36,37 @@ public class CameraPanController : MonoBehaviour
     {
         Application.targetFrameRate = 200;
         _camera = Camera.main;
-        //cameraOffset = _camera.transform.position - targetTransform.position;
         initialVector = transform.position - targetTransform.position;
-        initialVector.y = 0;
+        _camera.transform.LookAt(targetTransform);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        _camera.transform.LookAt(targetTransform);
+        float rotateDegrees = rotateSpeed * -Input.GetAxis("RotateVertical") * Time.deltaTime;
+        if(rotateDegrees != 0)
+        {
+            var angle = Vector3.Angle(Vector3.up, targetTransform.up);
+            if (Vector3.Cross(Vector3.up, transform.up).z < 0) angle = -angle;
+            var newAngle = Mathf.Clamp(angle + rotateDegrees, angleMin, angleMax);
+            rotateDegrees = newAngle - angle;
+        }
 
-        Vector3 forward = new Vector3(_camera.transform.forward.x, 0, _camera.transform.forward.z);
-        Vector3 rightMovement = _camera.transform.right * Input.GetAxis("Horizontal");
-        Vector3 upMovement = forward * Input.GetAxis("Vertical");
+        targetTransform.Rotate(0, 0, rotateDegrees, relativeTo:Space.Self);
 
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
+        rotateDegrees = rotateSpeed * Input.GetAxis("RotateHorizontal") * Time.deltaTime;
+        targetTransform.Rotate(0, rotateDegrees, 0, relativeTo: Space.World);
 
-        //transform.forward = heading;
+
+
+        Vector3 forward = _camera.transform.forward;
+        forward.y = 0;
+        forward = Vector3.Normalize(forward);
 
         Vector3 move = forward * Input.GetAxis("Vertical") + _camera.transform.right * Input.GetAxis("Horizontal");
 
-        targetTransform.Translate(cameraMoveSpeedModifier * Time.deltaTime * move);
-
-
-        transform.RotateAround(targetTransform.position, Vector3.up, rotateSpeed * Time.deltaTime * Input.GetAxis("RotateHorizontal"));
-
-
-
-        if(Input.GetAxis("RotateVertical") != 0)
-        {
-            float rotateDegrees = rotateSpeed * -Input.GetAxis("RotateVertical");
-            Vector3 direction = targetTransform.position - transform.position; // Vector from camera to player
-            Vector3 directionRight = Vector3.Cross(direction, Vector3.up); // right vector of the vector above
-
-
-            float angle = Vector3.Angle(Vector3.up, direction);
-
-            if (Vector3.Cross(Vector3.up, direction).z < 0) angle = -angle;
-            float newAngle = Mathf.Clamp(angle + rotateDegrees, angleMin, angleMax);
-
-            rotateDegrees = newAngle - rotateDegrees;
-
-            transform.RotateAround(targetTransform.position, directionRight, rotateDegrees);
-        }
-        
-
-
-
-
-
-        //float rotateInputX;;
-        //rotateInputX = Input.GetAxis("RotateHorizontal") * cameraMoveSpeedModifier * Time.deltaTime * _camera.transform.right;
-        //moveInputX = Input.GetAxis("Horizontal") * cameraMoveSpeedModifier * Time.deltaTime * targetTransform.position.x;
-        //float rotateInputY;
-        //rotateInputY = Input.GetAxis("RotateVertical") * cameraMoveSpeedModifier * Time.deltaTime * _camera.orthographicSize;
-        //moveInputY = Input.GetAxis("Vertical") * cameraMoveSpeedModifier * Time.deltaTime * targetTransform.position.y;
-        //_camera.transform.Translate(new Vector3(rotateInputX, rotateInputY));
-
-
-
+        targetTransform.Translate(cameraMoveSpeedModifier * Time.deltaTime * move, relativeTo:Space.World);
 
     }
 }
