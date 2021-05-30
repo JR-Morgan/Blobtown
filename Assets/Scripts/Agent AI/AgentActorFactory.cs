@@ -89,11 +89,39 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
+            //Someone needs to fix this insanity
+
             if(!agent.inventory.IsEmpty)
             {
-                b.shouldTerminate = true;
-                
-                agent.Goal = (TileGrid.Instance.TileAtWorldPosition(agent.home.transform.position));
+                List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
+                Tile neighbourHome = null;
+                foreach (Tile t in adjTiles)
+                { 
+                    if (t.Building == agent.home)
+                    {
+                        neighbourHome = t;
+                    }
+                }
+
+                if (neighbourHome != null)
+                {
+                    foreach (KeyValuePair<ResourceType, int> entry in agent.inventory.Contents)
+                    {
+                        
+                        agent.home.Inventory.AddResource(entry.Key, entry.Value);
+                        agent.inventory.SubtractResource(entry.Key, entry.Value);
+
+
+                    }
+
+                }
+                else
+                {
+                    b.shouldTerminate = true;
+
+                    agent.Goal = (TileGrid.Instance.TileAtWorldPosition(agent.home.transform.position));
+                }
+
             }
 
             return b;

@@ -6,6 +6,7 @@ public class Building : MonoBehaviour
 {
     public BuildingType BuildingType { get; set; }
     public Vector2Int size;
+    public Inventory Inventory;
 
 
     // Start is called before the first frame update
@@ -82,8 +83,6 @@ public class Building : MonoBehaviour
             }
 
         }
-
-        Debug.Log(adjTiles.Count);
 
         return adjTiles;
     }
