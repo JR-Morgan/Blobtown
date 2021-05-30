@@ -17,14 +17,6 @@ public partial class Tile : MonoBehaviour
     public List<Tile> GetAdjacentTiles() => Grid.GetAdjacentTiles(this);
     #endregion
 
-    #region Breadcrumbs
-    [SerializeField]
-    private float _breadCrumbs;
-    public float BreadCrumbs {
-        get => _breadCrumbs;
-        set => _breadCrumbs = Mathf.Max(value, 0);
-    }
-    #endregion
 
     [SerializeField]
     private TileType _tileType;

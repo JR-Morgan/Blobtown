@@ -39,7 +39,6 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
-            DropBreadcrumbs(agent, 2f),
             //DestinationCheck(agent),
             MineTarget(agent),
             ChopTarget(agent),
@@ -216,58 +215,7 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour DropBreadcrumbs(AgentAI agent, float breadcrumbToAdd)
-    {
-        return Action;
 
-        BehaviourState Action(BehaviourState b)
-        {
-            if (!agent.Inventory.IsEmpty)
-            {
-                agent.Tile.BreadCrumbs += breadcrumbToAdd;
-
-                    
-            }
-
-            return b;
-        }
-    }
-
-    private static AgentBehaviour PickUpCrumb(AgentAI agent, float breadcrumbToSubtract)
-    {
-        return Action;
-
-        BehaviourState Action(BehaviourState b)
-        {
-            if (agent.Tile.BreadCrumbs > 0)
-            {
-                agent.Tile.BreadCrumbs -= breadcrumbToSubtract;
-
-
-                // travel down gradient
-                float lowestSignalStrength = float.PositiveInfinity;
-                Tile lowestSignal = null;
-
-                foreach (Tile adjacent in b.NeighbourTiles)
-				{
-                    float signal = Vector3.Distance(adjacent.transform.position, agent.Home.transform.position);
-
-                    if (lowestSignal == null || signal < lowestSignalStrength)
-                    {
-                        lowestSignalStrength = signal;
-                        lowestSignal = adjacent;
-                    }
-                }
-
-                if (lowestSignal != null)
-                {
-                    agent.Goal = lowestSignal;
-                    b.shouldTerminate = true;
-                }   
-            }
-            return b;
-        }
-    }
 
     #endregion
 
