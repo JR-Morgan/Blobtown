@@ -4,25 +4,46 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class BuildingRules
+public class BuildingRules : Singleton<BuildingRules>
 {
 
-    public static Func<Tile, float> foo(BuildingType buildingType)
+    public Func<Tile, float> GetFunctionForBuildingType(BuildingType buildingType)
     {
         return buildingType switch
         {
             BuildingType.Home => Home(),
-            _ => throw new NotImplementedException()
+            BuildingType.Farm => Test(),
+            _ => Home()
         };
     }
+    #region Farm
+    [SerializeField, Header("Farm")]
+    float isOre;
+    [SerializeField]
+    float isForest;
+    private Func<Tile, float> Test()
+    {
+        return Sum(FunctionOfTile(isOre, IsOfTypes(TileType.Ore)),
+            FunctionOfTile(isForest, IsOfTypes(TileType.Forest)));
+    }
+    #endregion
 
     #region Home
-    private static Func<Tile, float> Home()
+
+    [SerializeField, Header("Home")]
+    float neighbourResource = -1f;
+    [SerializeField]
+    float neighbourTownCenter = 5f, neighbourHome = 4f;
+
+    private Func<Tile, float> Home()
     {
         return Sum(
+            Offset(3f),
             ForNeighbours(Sum(
-                FunctionOfTile(2f, HasBuildingOfTypes(BuildingType.Home)),
-                FunctionOfTile(-1f, IsOfTypes(TileType.Forest, TileType.Ore))
+                //FunctionOfTile(2f, HasBuildingOfTypes(BuildingType.Home)),
+                FunctionOfTile(neighbourResource, IsOfTypes(TileType.Forest, TileType.Ore)),
+                FunctionOfBuilding(neighbourTownCenter, IsTownCenter()),
+                FunctionOfBuilding(neighbourHome, IsOfTypes(BuildingType.Home))
                 )
             
             ));
@@ -75,8 +96,15 @@ public static class BuildingRules
                 result += rule(n);
             }
 
-            return result / neighbours.Count;
+            return result;
         }
+    }
+
+    private static Func<Tile,float> Offset(float amount)
+    {
+        return Rule;
+
+        float Rule(Tile t) => amount;
     }
 
     private static Func<Tile, float> ProximityToBuildingType(float ruleImportance, BuildingType b)
@@ -116,7 +144,7 @@ public static class BuildingRules
         }
     }
 
-    private static Func<Building, bool> IsTownHall()
+    private static Func<Building, bool> IsTownCenter()
     {
         return Function;
 
@@ -154,6 +182,7 @@ public static class BuildingRules
         }
     }
 
+    [System.Obsolete]
     private static Func<Tile, bool> HasBuildingOfTypes(params BuildingType[] types)
     {
         return Function;

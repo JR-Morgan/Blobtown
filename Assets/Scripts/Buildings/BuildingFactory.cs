@@ -42,4 +42,5 @@ public class BuildingFactory : Singleton<BuildingFactory>
 public enum BuildingType
 {
     Home,
+    Farm,
 }
