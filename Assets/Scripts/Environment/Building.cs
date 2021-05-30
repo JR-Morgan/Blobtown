@@ -6,13 +6,19 @@ public class Building : MonoBehaviour
 {
     public BuildingType BuildingType { get; set; }
     public Vector2Int size;
-    public Inventory Inventory;
+    public Inventory inventory;
 
+
+    private void Awake()
+    {
+        inventory = new Inventory();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         GetAdjacentTiles();
+
     }
 
     // Update is called once per frame

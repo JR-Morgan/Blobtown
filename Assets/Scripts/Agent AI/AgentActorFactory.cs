@@ -40,6 +40,7 @@ public static class AgentActorFactory
         {
             //DestinationCheck(agent),
             MineTarget(agent),
+            ChopTarget(agent),
             BuildHome(agent),
             GoHome(agent),
             MoveRandomly(agent),
@@ -108,7 +109,8 @@ public static class AgentActorFactory
                     foreach (KeyValuePair<ResourceType, int> entry in agent.inventory.Contents)
                     {
                         
-                        agent.home.Inventory.AddResource(entry.Key, entry.Value);
+                        agent.home.inventory.AddResource(entry.Key, entry.Value);
+                        Debug.Log(agent.home.inventory.Contents);
                         agent.inventory.SubtractResource(entry.Key, entry.Value);
 
 
@@ -170,13 +172,41 @@ public static class AgentActorFactory
         }
     }
 
+    private static AgentBehaviour ChopTarget(AgentAI agent)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
+            foreach (Tile t in adjTiles)
+            {
+                if (t.TileType == TileType.Forest)
+                {
+                    agent.inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
+
+                    t.TileType = TileType.Default;
+
+                    b.shouldTerminate = true;
+                    break;
+                }
+            }
+
+
+            return b;
+        }
+    }
+
     private static AgentBehaviour BuildHome(AgentAI agent)
     {
         return Action;
 
         BehaviourState Action(BehaviourState b)
         {
-            if (agent.home == null)
+
+            //Debug.Log(agent.home.inventory);
+
+            if (agent.home == null || (agent.home != null && (agent.home.inventory.HasResource(ResourceType.Ore, 5) || agent.home.inventory.HasResource(ResourceType.Wood, 5))))
             {
                 //TODO: find location to place house
                 Tile tile = HomeManager.Instance.NextHomeTile();
