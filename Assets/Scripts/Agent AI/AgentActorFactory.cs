@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public delegate BehaviourState AgentBehaviour(BehaviourState state);
@@ -91,37 +92,28 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            //Someone needs to fix this insanity
 
             if(!agent.inventory.IsEmpty)
             {
-                //Debug.Log("going home");
+                Tile agentsTile = TileGrid.Instance.TileAtWorldPosition(agent.transform.position);
+                
 
-                List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
-                Tile neighbourHome = null;
-                foreach (Tile t in adjTiles)
-                { 
-                    if (t.Building == agent.home)
-                    {
-                        Debug.Log("found home");
-                        neighbourHome = t;
-                    }
+                Tile homeTile = null;
+
+                if (agentsTile.Building == agent.home)
+                {
+                    homeTile = agentsTile;
+                }
+                else
+                {
+                    homeTile = TileGrid.Instance.GetAdjacentTiles(agentsTile).Find(t => t.Building == agent.home);
                 }
 
 
-
-                if (agent.transform.position == agent.home.transform.position)
+                if (homeTile != null)
                 {
-                    foreach (KeyValuePair<ResourceType, int> entry in agent.inventory.Contents)
-                    {
-
-                        Debug.Log("add " + agent.home.inventory.AddResource(entry.Key, entry.Value));
-                        //Debug.Log(agent.home.inventory.Contents);
-                        Debug.Log("subtracts " + agent.inventory.SubtractResource(entry.Key, entry.Value));
-
-
-                    }
-
+                    agent.home.inventory.AddResources(agent.inventory.Contents);
+                    agent.inventory.Clear();
                 }
                 else
                 {
