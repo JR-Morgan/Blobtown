@@ -94,7 +94,6 @@ public static class AgentActorFactory
 
             if(!agent.Inventory.IsEmpty)
             {
-               
                 Tile homeTile = null;
 
                 if (agent.Tile.Building == agent.Home)
