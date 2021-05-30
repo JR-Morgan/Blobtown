@@ -1,8 +1,13 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
+[Serializable]
 public class Inventory
 {
-    public Dictionary<ResourceType, int> Contents { get; private set; }
+    [SerializeField]
+    private SerializableDictionary<ResourceType, int> _contents;
+    public SerializableDictionary<ResourceType, int> Contents { get => _contents; private set => _contents = value; }
 
     public bool IsEmpty => Contents.Count == 0;
 
@@ -72,12 +77,12 @@ public class Inventory
         return Contents.ContainsKey(resourceType) && Contents[resourceType] >= amount;
     }
 
-    public Inventory(Dictionary<ResourceType, int> contents)
+    public Inventory(SerializableDictionary<ResourceType, int> contents)
     {
         this.Contents = contents;
     }
 
-    public Inventory() : this(new Dictionary<ResourceType, int>())
+    public Inventory() : this(new SerializableDictionary<ResourceType, int>())
     { }
 
     public int this[ResourceType r] => Contents[r];

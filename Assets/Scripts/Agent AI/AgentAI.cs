@@ -37,7 +37,11 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     public Building Home { get; set; }
 
-    public Inventory Inventory { get; private set; }
+    #region Inventory
+    [SerializeField]
+    private Inventory _inventory;
+    public Inventory Inventory { get => _inventory; private set => _inventory = value; }
+    #endregion
     public Tile Tile { get; private set; }
 
     private void Awake()
