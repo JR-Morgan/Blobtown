@@ -33,20 +33,17 @@ public class BuildingRules : Singleton<BuildingRules>
     [SerializeField, Header("Home")]
     float neighbourResource = -1f;
     [SerializeField]
-    float neighbourTownCenter = 5f, neighbourHome = 4f, radius = 3f;
+    float isDefaultTile = 2f, neighbourTownCenter = 5f, neighbourHome = -1f, radius = 3f;
 
     private Func<Tile, float> Home()
     {
         return Sum(
-            //Offset(3f),
-            //ForDirectNeighbours(Sum(
-            //    //FunctionOfTile(2f, HasBuildingOfTypes(BuildingType.Home)),
-            //    FunctionOfTile(neighbourResource, IsOfTypes(TileType.Forest, TileType.Ore)),
-            //    FunctionOfBuilding(neighbourTownCenter, IsTownCenter()),
-            //    FunctionOfBuilding(neighbourHome, IsOfTypes(BuildingType.Home))
-            //    ),
+            FunctionOfTile(isDefaultTile, IsOfTypes(TileType.Default)),
+            ForDirectNeighbours(Sum(
+                FunctionOfTile(neighbourResource, IsOfTypes(TileType.Forest, TileType.Ore)),
+                FunctionOfBuilding(neighbourHome, IsOfTypes(BuildingType.Home))
+                )),
             ForTilesInRadius(radius, FunctionOfBuilding(neighbourHome, IsOfTypes(BuildingType.Home)))
-            
             );
     }
     #endregion
