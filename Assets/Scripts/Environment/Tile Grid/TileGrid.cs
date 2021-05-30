@@ -136,7 +136,7 @@ public class TileGrid : Singleton<TileGrid>
     }
 
     public IEnumerable<Tile> TilesInCircle(Tile t, float radius) => TilesInIndeces(IndeciesInCircle(t, radius));
-    public IEnumerable<Tile> TilesInCircle(Vector2Int center, float radius) => TilesInIndeces(IndeciesInCircle(center, radius));
+    public IEnumerable<Tile> TilesInCircle(Vector2Int center, int radius) => TilesInIndeces(IndeciesInCircle(center, radius));
 
     public List<Vector2Int> IndeciesInCircle(Tile t, float radius) => IndeciesInCircle(t.GridIndex, radius);
     public List<Vector2Int> IndeciesInCircle(Vector2Int center, float radius)

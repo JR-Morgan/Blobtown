@@ -5,7 +5,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Building Weight Visualiser")]
-public class BuildingWeightVisualiser : MonoBehaviour
+public class BuildingWeightVisualiser : Singleton<BuildingWeightVisualiser>
 {
     [SerializeField]
     private BuildingType TypeToVisualise;
@@ -22,7 +22,18 @@ public class BuildingWeightVisualiser : MonoBehaviour
 
     private void Start()
     {
+        UpdateCostFunction();
+    }
+
+    private void UpdateCostFunction()
+    {
         costFunction = BuildingRules.Instance.GetFunctionForBuildingType(TypeToVisualise);
+    }
+
+    [ContextMenu("Update Cost Function")]
+    public void UpdateCostFunctionOfInstance()
+    {
+        if (IsSingletonInitialised) Instance.UpdateCostFunction();
     }
 
     private void OnValidate()
