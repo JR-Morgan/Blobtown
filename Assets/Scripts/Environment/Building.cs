@@ -10,7 +10,11 @@ public class Building : MonoBehaviour
     private Vector2Int _size; 
     public Vector2Int Size { get => _size; set => _size = value; }
 
-    public Inventory Inventory { get; private set; }
+    #region Inventory
+    [SerializeField]
+    private Inventory _inventory;
+    public Inventory Inventory { get => _inventory; private set => _inventory = value; }
+    #endregion
 
 
     private void Awake()
