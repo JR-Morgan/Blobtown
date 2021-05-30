@@ -4,6 +4,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Grid")]
+[ExecuteAlways]
 public class TileGrid : Singleton<TileGrid>
 {
     [SerializeField, HideInInspector]

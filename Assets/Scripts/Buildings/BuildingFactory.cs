@@ -77,7 +77,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
 
         IEnumerable<Tile> buildingSpace = TileGrid.Instance.TilesInRect(originTile, buildingData.buildingPrefab.GetComponent<Building>().Size);
 
-        return buildingSpace.Where(t => t.HasBuilding).Any();
+        return buildingSpace.All(t => !t.HasBuilding);
     }
 
     public Tile FindAGoodSpotForBuilding(BuildingType buildingType)

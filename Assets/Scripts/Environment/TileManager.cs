@@ -4,6 +4,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Managers/Tile Manager")]
+[ExecuteAlways]
 public class TileManager : Singleton<TileManager>
 {
     [SerializeField, Tooltip("Offset for non-resource tiles")]

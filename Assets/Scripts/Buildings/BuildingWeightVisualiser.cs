@@ -45,7 +45,7 @@ public class BuildingWeightVisualiser : Singleton<BuildingWeightVisualiser>
     int x;
     private void Update()
     {
-        for(int y = 0; y < TileGrid.Instance.Height; y++)
+        for (int y = 0; y < TileGrid.Instance.Height; y++)
         {
             UpdateTile(TileGrid.Instance[x, y]);
         }
