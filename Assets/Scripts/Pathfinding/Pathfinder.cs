@@ -102,11 +102,11 @@ public static class Pathfinder
         return null;
     }
 
-    private static Dictionary<Tile, TileCost> GetAdjacentTiles(Tile current, Tile goal, TileCost currentTotalCost, bool canPassOverObstacles)
+    private static Dictionary<Tile, TileCost> GetAdjacentTiles(Tile current, Tile goal, TileCost currentTotalCost, bool ignoreBuildings)
     {
         Dictionary<Tile, TileCost> tileList = new Dictionary<Tile, TileCost>();
 
-        foreach (Tile t in current.GetAdjacentTiles().Where(t => !t.HasBuilding))
+        foreach (Tile t in current.GetAdjacentTiles().Where(t => !t.HasBuilding || ignoreBuildings))
         {
             float costValue = currentTotalCost.FromStart + CalculateDistance(current, t);
             TileCost cost = new TileCost(costValue, CalculateDistance(t, goal))

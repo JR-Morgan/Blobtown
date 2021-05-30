@@ -17,6 +17,10 @@ public partial class Tile : MonoBehaviour
     public List<Tile> GetAdjacentTiles() => Grid.GetAdjacentTiles(this);
     #endregion
 
+    #region Breadcrumbs
+    public float BreadCrumbs { get; set; }
+    #endregion
+
     [SerializeField]
     private TileType _tileType;
     private TileData _tileData;

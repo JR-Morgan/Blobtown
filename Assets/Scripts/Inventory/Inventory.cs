@@ -22,11 +22,11 @@ public class Inventory
         {
             if (Contents.ContainsKey(resourceType))
             {
-                Contents[resourceType] = desiredAmount;
+                Contents[resourceType] = amount;
             }
             else
             {
-                Contents.Add(resourceType, desiredAmount);
+                Contents.Add(resourceType, amount);
             }
         }
         else if(desiredAmount == 0)
@@ -40,6 +40,23 @@ public class Inventory
 
         return true;
     }
+
+    public void AddResources(IEnumerable<KeyValuePair<ResourceType, int>> resources)
+    {
+        foreach (var r in resources)
+        {
+            if (Contents.ContainsKey(r.Key))
+            {
+                Contents[r.Key] += r.Value;
+            }
+            else
+            {
+                Contents.Add(r.Key, r.Value);
+            }
+        }
+    }
+
+    public void Clear() => Contents.Clear();
 
     /// <summary>
     /// Attempts to subtract <paramref name="amount"/> of specified <paramref name="resourceType"/> to the <see cref="Inventory"/><br/>

@@ -38,6 +38,7 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            DropBreadcrumbs(agent, 2f),
             //DestinationCheck(agent),
             MineTarget(agent),
             ChopTarget(agent),
@@ -225,8 +226,24 @@ public static class AgentActorFactory
 
             return b;
         }
+    }
 
-        
+    private static AgentBehaviour DropBreadcrumbs(AgentAI agent, float breadcrumbToAdd)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            if (!agent.inventory.IsEmpty)
+            {
+                if (TileGrid.Instance.TryGetTileAtWorldPosition(agent.transform.position, out Tile t))
+                {
+                    t.BreadCrumbs += breadcrumbToAdd;
+                }
+            }
+
+            return b;
+        }
     }
 
     #endregion
