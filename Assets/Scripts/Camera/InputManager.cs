@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class InputManager : MonoBehaviour
     private GameObject agentPrefab;
 
     public AgentManager agentManager;
+    public TabGroup tabGroup;
     private BuildingFactory buildingFactory;
 
     private void Start()
@@ -19,12 +21,15 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (tile != null)
-            {
-                agentManager.PlaceAgent(tile);
-            }
 
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                if (tile != null)
+                {
+                    agentManager.PlaceAgent(tile);
+                }
+            }
         }
 
         if (Input.GetMouseButtonDown(1))
