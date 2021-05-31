@@ -19,9 +19,6 @@ public class InputManager : MonoBehaviour
 
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                tabGroup.ResetSelectedTab();
-
-
                 Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 if (tile != null)
                 {

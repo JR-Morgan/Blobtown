@@ -12,6 +12,7 @@ public class TabGroup : MonoBehaviour
     public Sprite tabActive;
     public TabButton selectedTab;
     public List<GameObject> objectsToSwap;
+    public GameObject pageArea;
 
     public void Subcribe(TabButton button)
     {
@@ -41,6 +42,7 @@ public class TabGroup : MonoBehaviour
     {
         selectedTab = button;
         ResetTabs();
+        pageArea.SetActive(true);
         button.background.sprite = tabActive;
         int index = button.transform.GetSiblingIndex();
         for(int i = 0; i < objectsToSwap.Count; i++)
@@ -75,6 +77,11 @@ public class TabGroup : MonoBehaviour
         for (int i = 0; i < objectsToSwap.Count; i++)
         {
             objectsToSwap[i].SetActive(false);
+        }
+
+        if (pageArea != null)
+        {
+            pageArea.SetActive(false);
         }
     }
 }
