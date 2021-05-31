@@ -34,7 +34,6 @@ public class CameraPanController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 200;
         _camera = Camera.main;
         initialVector = transform.position - targetTransform.position;
         _camera.transform.LookAt(targetTransform);

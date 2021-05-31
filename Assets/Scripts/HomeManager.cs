@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class HomeManager : Singleton<HomeManager>
 {
 
@@ -36,6 +38,12 @@ public class HomeManager : Singleton<HomeManager>
             townCentre = newHome.GetComponent<Building>();
         }
         homes.Add(newHome.GetComponent<Building>());
+
+        foreach (Tile t in TileGrid.Instance.TilesInRect(tile, homePrefab.Size))
+        {
+            t.Building = newHome.GetComponent<Building>();
+        }
+
         return newHome.GetComponent<Building>();
     }
 
@@ -64,7 +72,7 @@ public class HomeManager : Singleton<HomeManager>
     private bool IsBuildingSpaceFree(Tile originTile)
     {
         
-        List<Tile> buildingSpace = TileGrid.Instance.TilesInBounds(originTile, homePrefab.size);
+        IEnumerable<Tile> buildingSpace = TileGrid.Instance.TilesInRect(originTile, homePrefab.Size);
         foreach (Tile tile in buildingSpace)
         {
             if (tile.HasBuilding)

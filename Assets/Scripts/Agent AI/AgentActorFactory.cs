@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public delegate BehaviourState AgentBehaviour(BehaviourState state);
@@ -40,6 +41,7 @@ public static class AgentActorFactory
         {
             //DestinationCheck(agent),
             MineTarget(agent),
+            ChopTarget(agent),
             BuildHome(agent),
             GoHome(agent),
             MoveRandomly(agent),
@@ -89,11 +91,33 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            if(!agent.inventory.IsEmpty)
+
+            if(!agent.Inventory.IsEmpty)
             {
-                b.shouldTerminate = true;
-                
-                agent.Goal = (TileGrid.Instance.TileAtWorldPosition(agent.home.transform.position));
+                Tile homeTile = null;
+
+                if (agent.Tile.Building == agent.Home)
+                {
+                    homeTile = agent.Tile;
+                }
+                else
+                {
+                    homeTile = b.NeighbourTiles.Find(t => t.Building == agent.Home);
+                }
+
+
+                if (homeTile != null)
+                {
+                    agent.Home.Inventory.AddResources(agent.Inventory.Contents);
+                    agent.Inventory.Clear();
+                }
+                else
+                {
+                    b.shouldTerminate = true;
+
+                    agent.Goal = TileGrid.Instance.TileAtWorldPosition(agent.Home.transform.position);
+                }
+
             }
 
             return b;
@@ -108,7 +132,7 @@ public static class AgentActorFactory
         {
             
             //currently moves randomly
-            List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
+            List<Tile> adjTiles = b.NeighbourTiles;
             //agent.SetDestination(adjTiles[Random.Range(0, adjTiles.Count - 1)].transform.position);
             agent.Goal = adjTiles[Random.Range(0, adjTiles.Count - 1)];
             b.shouldTerminate = true;
@@ -123,12 +147,37 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            List<Tile> adjTiles = TileGrid.Instance.GetAdjacentTiles(TileGrid.Instance.TileAtWorldPosition(agent.transform.position));
+            List<Tile> adjTiles = b.NeighbourTiles;
             foreach (Tile t in adjTiles)
             {
                 if (t.TileType == TileType.Ore)
                 {
-                    agent.inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
+                    agent.Inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
+
+                    t.TileType = TileType.Default;
+
+                    b.shouldTerminate = true;
+                    break;
+                }
+            }
+
+
+            return b;
+        }
+    }
+
+    private static AgentBehaviour ChopTarget(AgentAI agent)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            List<Tile> adjTiles = b.NeighbourTiles;
+            foreach (Tile t in adjTiles)
+            {
+                if (t.TileType == TileType.Forest)
+                {
+                    agent.Inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
 
                     t.TileType = TileType.Default;
 
@@ -148,23 +197,33 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            if (agent.home == null)
+            if (agent.Home == null)
             {
-                //TODO: find location to place house
-                Tile tile = HomeManager.Instance.NextHomeTile();
-                if (tile == null)
+                if (BuildingFactory.Instance.TownCenter == null)
                 {
-                    TileGrid.Instance.TryGetTileAtWorldPosition(agent.transform.position, out tile);
+                    agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.Tile);
                 }
-                agent.home = HomeManager.Instance.BuildHome(tile);
+                else
+                {
+                    agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home);
+                }
+            }
+
+            if (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, 5) || agent.Home.Inventory.HasResource(ResourceType.Wood, 5)))
+            {
+                agent.Inventory.SubtractResource(ResourceType.Ore, 5);
+                agent.Inventory.SubtractResource(ResourceType.Wood, 5);
+
+                agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home);
+
                 b.shouldTerminate = true;
             }
 
             return b;
         }
-
-        
     }
+
+
 
     #endregion
 
@@ -173,4 +232,10 @@ public static class AgentActorFactory
 public class BehaviourState
 {
     public bool shouldTerminate = false;
+    public List<Tile> NeighbourTiles { get; set; }
+
+    public BehaviourState(List<Tile> neighbourTiles)
+    {
+        NeighbourTiles = neighbourTiles;
+    }
 }

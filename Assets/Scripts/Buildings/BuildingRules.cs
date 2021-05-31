@@ -33,20 +33,18 @@ public class BuildingRules : Singleton<BuildingRules>
     [SerializeField, Header("Home")]
     float neighbourResource = -1f;
     [SerializeField]
-    float neighbourTownCenter = 5f, neighbourHome = 4f;
+    float isDefaultTile = 2f, neighbourTownCenter = 5f, neighbourHome = -1f, radius = 3f;
 
     private Func<Tile, float> Home()
     {
         return Sum(
-            Offset(3f),
-            ForNeighbours(Sum(
-                //FunctionOfTile(2f, HasBuildingOfTypes(BuildingType.Home)),
+            FunctionOfTile(isDefaultTile, IsOfTypes(TileType.Default)),
+            ForDirectNeighbours(Sum(
                 FunctionOfTile(neighbourResource, IsOfTypes(TileType.Forest, TileType.Ore)),
-                FunctionOfBuilding(neighbourTownCenter, IsTownCenter()),
                 FunctionOfBuilding(neighbourHome, IsOfTypes(BuildingType.Home))
-                )
-            
-            ));
+                )),
+            ForTilesInRadius(radius, FunctionOfBuilding(neighbourHome, IsOfTypes(BuildingType.Home)))
+            );
     }
     #endregion
 
@@ -82,7 +80,7 @@ public class BuildingRules : Singleton<BuildingRules>
         }
     }
 
-    private static Func<Tile, float> ForNeighbours(Func<Tile, float> rule)
+    private static Func<Tile, float> ForDirectNeighbours(Func<Tile, float> rule)
     {
         return Rule;
 
@@ -107,14 +105,21 @@ public class BuildingRules : Singleton<BuildingRules>
         float Rule(Tile t) => amount;
     }
 
-    private static Func<Tile, float> ProximityToBuildingType(float ruleImportance, BuildingType b)
+    private static Func<Tile, float> ForTilesInRadius(float radius, Func<Tile, float> rule)
     {
         return Rule;
 
         float Rule(Tile t)
         {
-            float distance = 0f; //TODO
-            return distance * ruleImportance;
+            IEnumerable<Tile> neighbours = t.Grid.TilesInCircle(t, radius);
+            float result = 0;
+
+            foreach (Tile n in neighbours)
+            {
+                result += rule(n);
+            }
+
+            return result;
         }
     }
 

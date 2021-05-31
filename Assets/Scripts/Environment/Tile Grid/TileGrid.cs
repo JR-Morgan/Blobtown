@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 [AddComponentMenu("Simulation/Grid")]
+[ExecuteAlways]
 public class TileGrid : Singleton<TileGrid>
 {
     [SerializeField, HideInInspector]
@@ -18,6 +20,7 @@ public class TileGrid : Singleton<TileGrid>
     public Vector2Int Dimensions => new Vector2Int(Width, Height);
     public Vector2 TileSize => tileSize;
 
+    public bool IsInBounds(Vector2Int xy) => IsInBounds(xy.x, xy.y);
     public bool IsInBounds(int x, int y) => x >= 0 && y >= 0 && x < Width && y < Height;
 
     #endregion
@@ -109,18 +112,64 @@ public class TileGrid : Singleton<TileGrid>
         return tiles;
     }
 
-    public List<Tile> TilesInBounds(Tile tile, Vector2 size)
+    #region In rectangle/circle
+
+    public IEnumerable<Tile> TilesInRect(Tile tile, Vector2Int size) => TilesInIndeces(IndeciesInRect(tile, size));
+    public IEnumerable<Tile> TilesInRect(Vector2Int position, Vector2Int size) => TilesInIndeces(IndeciesInRect(position, size));
+
+    public List<Vector2Int> IndeciesInRect(Tile tile, Vector2Int size) => IndeciesInRect(tile.GridIndex, size);
+    public List<Vector2Int> IndeciesInRect(Vector2Int position, Vector2Int size)
     {
-        List<Tile> tilesUsed = new List<Tile>();
+        List<Vector2Int> indecies = new List<Vector2Int>();
         for (int x = 0; x < size.x; x++)
         {
             for (int y = 0; y < size.y; y++)
             {
-                tilesUsed.Add(Tiles[x, y]);
+                indecies.Add(new Vector2Int(x + position.x, y + position.y));
             }
         }
-        return tilesUsed;
+        return indecies;
     }
+
+    public IEnumerable<Tile> TilesInIndeces(IEnumerable<Vector2Int> indecies)
+    {
+        return indecies.Where(i => IsInBounds(i)).Select(i => this[i.x, i.y]);
+    }
+
+    public IEnumerable<Tile> TilesInCircle(Tile t, float radius) => TilesInIndeces(IndeciesInCircle(t, radius));
+    public IEnumerable<Tile> TilesInCircle(Vector2Int center, int radius) => TilesInIndeces(IndeciesInCircle(center, radius));
+
+    public List<Vector2Int> IndeciesInCircle(Tile t, float radius) => IndeciesInCircle(t.GridIndex, radius);
+    public List<Vector2Int> IndeciesInCircle(Vector2Int center, float radius)
+    {
+        List<Vector2Int> tmpList = new List<Vector2Int>();
+        List<Vector2Int> list = new List<Vector2Int>();
+        double rSquared = radius * radius; // using sqared reduces execution time (no square root needed)
+        for (int x = 1; x <= radius; x++)
+            for (int y = 0; y <= radius; y++)
+            {
+                Vector2Int v = new Vector2Int(x, y);
+                if (v.sqrMagnitude <= rSquared)
+                    tmpList.Add(v);
+                else
+                    break;
+            }
+
+        list.Add(center);
+
+        foreach (Vector2Int v in tmpList)
+        {
+            Vector2Int vMirr = new Vector2Int(v.x, -1 * v.y);
+            list.Add(center + v);
+            list.Add(center - v);
+            list.Add(center + vMirr);
+            list.Add(center - vMirr);
+        }
+
+
+        return list;
+    }
+    #endregion
 
     #region Casts
     public static explicit operator Tile[,](TileGrid g) => g.Tiles;

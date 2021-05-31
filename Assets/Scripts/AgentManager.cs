@@ -21,7 +21,7 @@ public class AgentManager : MonoBehaviour
 
     }
 
-    public void placeAgent(Tile tile)
+    public void PlaceAgent(Tile tile)
     {
         Instantiate(agentPrefab, tile.transform.position, Quaternion.identity, this.transform);
     }

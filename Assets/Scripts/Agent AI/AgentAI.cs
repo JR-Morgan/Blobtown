@@ -27,7 +27,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     void IPathFollower.GoalCompleteHandler(Tile completedGoal)
     {
         Goal = null;
-        inventory.Contents.Clear(); //TODO for now, just clear their inventory
+        //inventory.Contents.Clear(); //TODO for now, just clear their inventory
     }
 
     #endregion
@@ -35,21 +35,26 @@ public class AgentAI : MonoBehaviour, IPathFollower
     private AgentActor agentActor;
     //private NavMeshAgent navAgent;
 
-    public Building home;
+    public Building Home { get; set; }
+    public Tile Tile { get; private set; }
 
-    public Inventory inventory;
-
+    #region Inventory
+    [SerializeField]
+    private Inventory _inventory;
+    public Inventory Inventory { get => _inventory; private set => _inventory = value; }
+    #endregion
 
     private void Awake()
     {
-        inventory = new Inventory();
+        Inventory = new Inventory();
         //navAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
         Initialise();
-        
+        Tile = TileGrid.Instance.TileAtWorldPosition(this.transform.position);
+        Debug.Assert(Tile != null, $"{typeof(AgentAI)} is starting on an invalid tile!");
     }
 
 
@@ -60,13 +65,15 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     private void Update()
     {
-        if(HasGoal)
+        Tile = Tile.Grid.TileAtWorldPosition(transform.position);
+
+        if (HasGoal)
         {
             transform.position += PathFollowHelper.CalculateDesiredVelocity(this);
         }
         else
         {
-            agentActor.Act();
+            agentActor.Act(Tile);
         }
     }
 
