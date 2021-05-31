@@ -5,10 +5,7 @@ using UnityEngine;
 public class CameraPanController : MonoBehaviour
 {
 
-    private bool temp = false;
-
     private Camera _camera;
-    private Vector3 initialVector;
 
     [SerializeField]
     private Transform targetTransform;
@@ -19,23 +16,20 @@ public class CameraPanController : MonoBehaviour
     [SerializeField]
     float smoothFactor = 0.5f;
 
-    //[SerializeField]
+    [SerializeField]
     private float rotateSpeed = 20;
 
-    //[SerializeField]
+    [SerializeField, Range(0, 90)]
     private float angleMax = 0f;
 
+    [SerializeField, Range(-90, 0)]
     private float angleMin = -90f;
-
-    [SerializeField]
-    private Transform dummyTransform;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _camera = Camera.main;
-        initialVector = transform.position - targetTransform.position;
         _camera.transform.LookAt(targetTransform);
     }
 

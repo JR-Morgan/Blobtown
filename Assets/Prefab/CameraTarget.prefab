@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7988803601461880555}
   - component: {fileID: 7988803601461880554}
   - component: {fileID: 7988803601461880557}
-  - component: {fileID: 7988803601461880559}
-  - component: {fileID: 7988803601461880558}
+  - component: {fileID: 3289372994845950442}
+  - component: {fileID: 382969332114205274}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -99,9 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4779554158458137504, guid: 21a1d2cba4ac00a45adbb34098e5ff3d, type: 3}
-  homeManager: {fileID: 0}
   agentManager: {fileID: 0}
---- !u!114 &7988803601461880559
+--- !u!114 &3289372994845950442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,14 +109,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7988803601461880553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a9f837b1c4bbe847837302ff143260c, type: 3}
+  m_Script: {fileID: 11500000, guid: e1ca2e6f02ce9cb4eb12505dee6905ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   zoomFactor: 3
   zoomLerpSpeed: 10
   minZoom: 1
   maxZoom: 100
---- !u!114 &7988803601461880558
+--- !u!114 &382969332114205274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,13 +125,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7988803601461880553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd690a5b01531745b2fbce522f4e9a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cf9174b6320b3b49b648d011992e7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 7988803602706500088}
-  cameraMoveSpeedModifier: 2
+  cameraMoveSpeedModifier: 0.2
   smoothFactor: 0.5
-  dummyTransform: {fileID: 0}
+  rotateSpeed: 20
+  angleMax: 0
+  angleMin: -90
 --- !u!1 &7988803602706500039
 GameObject:
   m_ObjectHideFlags: 0

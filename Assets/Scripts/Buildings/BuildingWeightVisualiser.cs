@@ -45,13 +45,20 @@ public class BuildingWeightVisualiser : Singleton<BuildingWeightVisualiser>
     int x;
     private void Update()
     {
+        for (int y = 0; y < TileGrid.Instance.Height; y++)
         {
+            UpdateTile(TileGrid.Instance[x, y]);
+        }
+        x = (x + 1) % TileGrid.Instance.Width;
+    }
+
+    private void UpdateTile(Tile t)
+    {
+        if (t.TryGetComponentInChildren(out Renderer r))
         {
             float weight = costFunction.Invoke(t) * intensity + offset;
             r.material.SetColor("_Color", Color.Lerp(zero, one, weight));
 
         }
     }
-    }
-
 }
