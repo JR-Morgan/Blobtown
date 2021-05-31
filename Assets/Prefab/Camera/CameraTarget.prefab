@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7988803601461880555}
   - component: {fileID: 7988803601461880554}
   - component: {fileID: 7988803601461880557}
-  - component: {fileID: 382969332114205274}
+  - component: {fileID: 7700132087462756164}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -99,7 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4779554158458137504, guid: 21a1d2cba4ac00a45adbb34098e5ff3d, type: 3}
   agentManager: {fileID: 0}
---- !u!114 &382969332114205274
+  tabGroup: {fileID: 0}
+--- !u!114 &7700132087462756164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7988803601461880553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cf9174b6320b3b49b648d011992e7a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 82b9c82cd9c3a7945912a643997981ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 7988803602706500088}
