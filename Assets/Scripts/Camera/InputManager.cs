@@ -5,12 +5,17 @@ using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject agentPrefab;
 
-    public GameObject agentPrefab;
-    public HomeManager homeManager;
     public AgentManager agentManager;
     public TabGroup tabGroup;
+    private BuildingFactory buildingFactory;
 
+    private void Start()
+    {
+        buildingFactory = BuildingFactory.Instance;
+    }
 
     void Update()
     {
@@ -22,7 +27,7 @@ public class InputManager : MonoBehaviour
                 Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 if (tile != null)
                 {
-                    agentManager.placeAgent(tile);
+                    agentManager.PlaceAgent(tile);
                 }
             }
         }
@@ -32,7 +37,15 @@ public class InputManager : MonoBehaviour
             Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if (tile != null)
             {
-                homeManager.BuildHome(tile);
+                BuildingType b = BuildingType.Home;
+                if (buildingFactory.TownCenter == null)
+                {
+                    buildingFactory.CreateBuilding(b, tile);
+                }
+                else
+                {
+                    buildingFactory.CreateBuilding(b);
+                }
             }
         }
     }

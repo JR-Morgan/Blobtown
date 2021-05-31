@@ -197,16 +197,25 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-
-            if (agent.Home == null || (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, 5) || agent.Home.Inventory.HasResource(ResourceType.Wood, 5))))
+            if (agent.Home == null)
             {
-                //TODO: find location to place house
-                Tile tile = HomeManager.Instance.NextHomeTile();
-                if (tile == null)
+                if (BuildingFactory.Instance.TownCenter == null)
                 {
-                    tile = agent.Tile;
+                    agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.Tile);
                 }
-                agent.Home = HomeManager.Instance.BuildHome(tile);
+                else
+                {
+                    agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home);
+                }
+            }
+
+            if (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, 5) || agent.Home.Inventory.HasResource(ResourceType.Wood, 5)))
+            {
+                agent.Inventory.SubtractResource(ResourceType.Ore, 5);
+                agent.Inventory.SubtractResource(ResourceType.Wood, 5);
+
+                agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home);
+
                 b.shouldTerminate = true;
             }
 
