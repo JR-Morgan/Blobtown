@@ -32,7 +32,7 @@ public partial class Tile : MonoBehaviour
     [SerializeField, HideInInspector]
     private GameObject resource;
 
-
+    [DisplayProperty]
     public TileType TileType { get => _tileType;
         set
         {
@@ -57,12 +57,16 @@ public partial class Tile : MonoBehaviour
 
     private void OnValidate()
     {
-        Initialise(_tileType);
+        //Initialise(_tileType);
     }
 
     private void Initialise(TileType tileType)
     {
-        if (resource != null) Destroy(resource);
+        if (resource != null)
+        {
+            if(Application.isEditor) UnityEditor.EditorApplication.delayCall += () => { if (resource != null) DestroyImmediate(resource); };
+            else Destroy(resource);
+        }
 
         if (TileManager.IsSingletonInitialised)
         {

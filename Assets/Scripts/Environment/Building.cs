@@ -5,6 +5,7 @@ using UnityEngine;
 [SelectionBase, DisallowMultipleComponent]
 public class Building : MonoBehaviour
 {
+    [DisplayProperty]
     public BuildingType BuildingType { get; set; }
 
     [SerializeField]
@@ -23,6 +24,8 @@ public class Building : MonoBehaviour
 
     [SerializeField]
     private bool _isTownCenter;
+
+    [DisplayProperty]
     public bool IsTownCenter { get => _isTownCenter; set => _isTownCenter = value; }
 
 

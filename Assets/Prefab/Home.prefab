@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5307956717974604405}
   - component: {fileID: -5842793090203454464}
+  - component: {fileID: 2248241042639798438}
+  - component: {fileID: 2631389864436811876}
   m_Layer: 0
   m_Name: Home
   m_TagString: Untagged
@@ -50,6 +52,31 @@ MonoBehaviour:
     _contents:
       list: []
   _isTownCenter: 0
+--- !u!114 &2248241042639798438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819544498574332111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a325de53fdb994b469ccb20e6782406e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &2631389864436811876
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4819544498574332111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0.5, y: 1, z: 0.5}
 --- !u!1001 &2330635338762259807
 PrefabInstance:
   m_ObjectHideFlags: 0
