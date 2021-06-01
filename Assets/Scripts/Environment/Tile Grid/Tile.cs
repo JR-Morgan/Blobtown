@@ -64,8 +64,12 @@ public partial class Tile : MonoBehaviour
     {
         if (resource != null)
         {
+#if UNITY_EDITOR
             if(Application.isEditor) UnityEditor.EditorApplication.delayCall += () => { if (resource != null) DestroyImmediate(resource); };
-            else Destroy(resource);
+            else 
+                #endif
+                Destroy(resource);
+            
         }
 
         if (TileManager.IsSingletonInitialised)
