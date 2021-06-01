@@ -110,7 +110,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
 
         if(candidates.Count() < minNumberOfCandidates && itteration < maxItterations)
         {
-            Debug.Log(itteration + "Trying again with radius " + radius + radiusIncreaseIfFailed);
+            //Debug.Log(itteration + "Trying again with radius " + (radius + radiusIncreaseIfFailed));
             candidates = FindCandidates(center, buildingType, radius + radiusIncreaseIfFailed, minNumberOfCandidates, radiusIncreaseIfFailed, itteration + 1, maxItterations);
         }
         return candidates;
