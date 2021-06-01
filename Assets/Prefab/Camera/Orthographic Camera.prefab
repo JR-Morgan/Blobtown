@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5566394587901316831}
   - component: {fileID: 5566394587901316824}
-  - component: {fileID: 5566394587901316825}
   - component: {fileID: 5566394587901316830}
   - component: {fileID: 5566394587901316828}
   - component: {fileID: 5566394587901316829}
+  - component: {fileID: -5953439889215364196}
   m_Layer: 0
   m_Name: Orthographic Camera
   m_TagString: MainCamera
@@ -78,14 +78,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5566394587901316825
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5566394587901316826}
-  m_Enabled: 1
 --- !u!114 &5566394587901316830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +91,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4779554158458137504, guid: 21a1d2cba4ac00a45adbb34098e5ff3d, type: 3}
-  homeManager: {fileID: 0}
   agentManager: {fileID: 0}
   tabGroup: {fileID: 0}
 --- !u!114 &5566394587901316828
@@ -131,3 +122,17 @@ MonoBehaviour:
   zoomLerpSpeed: 10
   minZoom: 0.1
   maxZoom: 32
+--- !u!114 &-5953439889215364196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566394587901316826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
