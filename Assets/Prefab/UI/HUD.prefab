@@ -343,10 +343,10 @@ RectTransform:
   m_Father: {fileID: 465916065717533249}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 604.146, y: -50}
-  m_SizeDelta: {x: 1208.292, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &465916064192902764
 CanvasRenderer:
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 465916064576468507}
   - component: {fileID: 465916064576468506}
   - component: {fileID: 465916064576468709}
-  - component: {fileID: 7131009855801187431}
+  - component: {fileID: 7082763557469757580}
   m_Layer: 5
   m_Name: PanelLeft
   m_TagString: Untagged
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &7131009855801187431
+--- !u!114 &7082763557469757580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -716,8 +716,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataPanel: {fileID: 465916065260886383}
-  titleTextPrefab: {fileID: 8910765490499138520, guid: bfa0b5552d499e04fbc49ffe2c8cd93d, type: 3}
-  bodyTextPrefab: {fileID: 8910765490499138520, guid: 1101c96fc26e67644b7213633b91aeb9, type: 3}
+  titleTextPrefab: {fileID: 2013435832687066380, guid: 80b50a128a489c548a82ef81d278aef1, type: 3}
+  bodyTextPrefab: {fileID: 2013435832687066380, guid: f8da0fc9659ca704a8550d3c3f2dd382, type: 3}
+  selectedPropertyParent: {fileID: 465916065260886383}
 --- !u!1 &465916064715282322
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,9 +915,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7131009855801187431}
-        m_TargetAssemblyTypeName: UIpanel, Assembly-CSharp
-        m_MethodName: OpenPanel
+      - m_Target: {fileID: 7082763557469757580}
+        m_TargetAssemblyTypeName: UIPanel, Assembly-CSharp
+        m_MethodName: TogglePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1656,10 +1657,10 @@ RectTransform:
   m_Father: {fileID: 465916065650182676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 604.146, y: -156.09175}
-  m_SizeDelta: {x: 1108.292, y: 212.1835}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &465916065304112732
 CanvasRenderer:
@@ -1887,10 +1888,10 @@ RectTransform:
   m_Father: {fileID: 465916065717533249}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 604.146, y: -392.1835}
-  m_SizeDelta: {x: 1208.292, y: 574.367}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &465916065650182672
 CanvasRenderer:
@@ -2208,10 +2209,10 @@ RectTransform:
   m_Father: {fileID: 465916065650182676}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 604.146, y: -418.27527}
-  m_SizeDelta: {x: 1108.292, y: 212.1835}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &465916065817816157
 CanvasRenderer:
