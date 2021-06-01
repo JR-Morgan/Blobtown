@@ -66,9 +66,17 @@ public class CameraControllerPerspective : MonoBehaviour
 
         targetTransform.Translate(cameraMoveSpeedModifier * Time.deltaTime * move, relativeTo:Space.World);
 
-        if (_camera.transform.position.x > 0 && _camera.transform.position.x < zoomMax)
+        if(_camera.transform.localPosition.x < 0)
         {
-            _camera.transform.Translate(Vector3.forward * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * scrollSpeed);
+            if (_camera.transform.localPosition.x >= -zoomMax)
+            {
+                _camera.transform.Translate(Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime * Vector3.forward);
+            }
         }
+        else
+        {
+            _camera.transform.localPosition += Vector3.left / 100f;
+        }
+        
     }
 }
