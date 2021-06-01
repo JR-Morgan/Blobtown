@@ -9,7 +9,6 @@ public class InputManager : MonoBehaviour
     private GameObject agentPrefab;
 
     public AgentManager agentManager;
-    public TabGroup tabGroup;
     private BuildingFactory buildingFactory;
 
     private void Start()
