@@ -19,12 +19,17 @@ public class CameraControllerPerspective : MonoBehaviour
     [SerializeField]
     private float rotateSpeed = 20;
 
-    [SerializeField, Range(0, 90)]
-    private float angleMax = 0f;
+    [SerializeField, Range(-90, 0)]
+    private float angleMax = -10f;
 
     [SerializeField, Range(-90, 0)]
-    private float angleMin = -90f;
+    private float angleMin = -85f;
 
+    [SerializeField]
+    private float scrollSpeed = 10;
+
+    [SerializeField]
+    private float zoomMax = 200;
 
     // Start is called before the first frame update
     void Start()
@@ -61,5 +66,9 @@ public class CameraControllerPerspective : MonoBehaviour
 
         targetTransform.Translate(cameraMoveSpeedModifier * Time.deltaTime * move, relativeTo:Space.World);
 
+        if (_camera.transform.position.x > 0 && _camera.transform.position.x < zoomMax)
+        {
+            _camera.transform.Translate(Vector3.forward * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * scrollSpeed);
+        }
     }
 }

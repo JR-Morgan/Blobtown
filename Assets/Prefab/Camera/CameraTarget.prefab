@@ -112,11 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 7988803602706500088}
-  cameraMoveSpeedModifier: 0.2
+  cameraMoveSpeedModifier: 20
   smoothFactor: 0.5
   rotateSpeed: 20
-  angleMax: 0
-  angleMin: -90
+  angleMax: -10
+  angleMin: -85
+  scrollSpeed: 100
+  zoomMax: 200
 --- !u!1 &7988803602706500039
 GameObject:
   m_ObjectHideFlags: 0
