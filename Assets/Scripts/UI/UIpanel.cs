@@ -10,8 +10,6 @@ using UnityEngine;
 [AddComponentMenu("Simulation/UI/UI Panel")]
 public class UIPanel : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject dataPanel;
 
     [SerializeField]
     private GameObject titleTextPrefab;
@@ -31,6 +29,7 @@ public class UIPanel : MonoBehaviour
             SetOpen(true);
             GenerateProperties(s);
         });
+        SetOpen(false);
     }
 
     public void TogglePanel() => SetOpen(!this.gameObject.activeSelf);
@@ -53,7 +52,9 @@ public class UIPanel : MonoBehaviour
             {
                 if(property.Name == "Name")
                 {
-                    elements.Add(CreateNewTitleElement(property, c));
+                    var e = CreateNewTitleElement(property, c);
+                    elements.Add(e);
+                    e.transform.SetAsFirstSibling();
                 }
                 else
                 {
