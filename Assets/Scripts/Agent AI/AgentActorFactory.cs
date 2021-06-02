@@ -107,7 +107,7 @@ public static class AgentActorFactory
                 }
                 else
                 {
-                    homeTile = b.NeighbourTiles.Find(t => t.Building == agent.Home);
+                    homeTile = agent.AdjacentTiles.Find(t => t.Building == agent.Home);
                 }
 
 
@@ -154,7 +154,7 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            List<Tile> adjTiles = b.NeighbourTiles;
+            var adjTiles = agent.AdjacentTiles;
             agent.Goal = adjTiles[Random.Range(0, adjTiles.Count - 1)];
             b.shouldTerminate = true;
             
@@ -168,8 +168,7 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            List<Tile> adjTiles = b.NeighbourTiles;
-            foreach (Tile t in adjTiles)
+            foreach (Tile t in agent.AdjacentTiles)
             {
                 if (t.TileType == TileType.Ore)
                 {
@@ -193,8 +192,7 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            List<Tile> adjTiles = b.NeighbourTiles;
-            foreach (Tile t in adjTiles)
+            foreach (Tile t in agent.AdjacentTiles)
             {
                 if (t.TileType == TileType.Forest)
                 {
@@ -271,10 +269,4 @@ public static class AgentActorFactory
 public class BehaviourState
 {
     public bool shouldTerminate = false;
-    public List<Tile> NeighbourTiles { get; set; }
-
-    public BehaviourState(List<Tile> neighbourTiles)
-    {
-        NeighbourTiles = neighbourTiles;
-    }
 }

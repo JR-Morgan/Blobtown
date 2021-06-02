@@ -59,10 +59,17 @@ public class BuildingFactory : Singleton<BuildingFactory>
         Building building = buildingGo.GetComponent<Building>();
         building.Position = position;
 
-        foreach (Tile tile in TileGrid.Instance.TilesInRect(position, building.Size))
+        foreach (Tile buildingTile in TileGrid.Instance.TilesInRect(position, building.Size))
         {
-            tile.Building = building;
+            buildingTile.Building = building;
+
+            foreach (Tile radiusTile in TileGrid.Instance.TilesInCircle(buildingTile, buildingData.discoveredRadius))
+            {
+                radiusTile.Discovered = true;
+            }
         }
+
+
 
         switch (buildingType)
         {

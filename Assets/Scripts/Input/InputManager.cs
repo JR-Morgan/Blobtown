@@ -27,8 +27,11 @@ public class InputManager : Singleton<InputManager>
                 {
                     if (hit.collider.TryGetComponent(out Selectable s))
                     {
-                        Debug.Log($"Selecting {s.name}");
-                        OnSelectableChange.Invoke(s);
+                        if (!(s.TryGetComponent(out Tile tile) && !tile.Discovered))
+                        {
+                            Debug.Log($"Selecting {s.name}");
+                            OnSelectableChange.Invoke(s);
+                        }
                     }
                 }
             }

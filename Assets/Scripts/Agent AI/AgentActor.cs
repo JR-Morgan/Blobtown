@@ -12,9 +12,9 @@ public class AgentActor
         this.behaviours = behaviours;
     }
 
-    public void Act(Tile agentTile)
+    public void Act()
     {
-        var state = new BehaviourState(agentTile.GetAdjacentTiles());
+        var state = new BehaviourState();
         for (int i = 0; i <  behaviours.Count; i++)
         {
             if (behaviours[i].Invoke(state).shouldTerminate) break;

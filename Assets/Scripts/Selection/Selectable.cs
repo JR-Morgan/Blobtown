@@ -14,26 +14,6 @@ public class Selectable : MonoBehaviour
     
 }
 
-
-
-
-public struct PropertyBinding
-{
-    public object Value {
-        get => getter();
-        set => setter(Value);
-    }
-
-    private readonly Action<object> setter;
-    private readonly Func<object> getter;
-
-    public PropertyBinding(Action<object> setter, Func<object> getter)
-    {
-        this.setter = setter;
-        this.getter = getter;
-    }
-}
-
 [AttributeUsage(AttributeTargets.Property, Inherited = false)]
 public class DisplayPropertyAttribute : Attribute
 { }

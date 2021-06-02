@@ -47,6 +47,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     public Building Home { get; set; }
 
     public Tile Tile { get; private set; }
+    public List<Tile> AdjacentTiles { get; private set; }
     #endregion
 
     #region Inventory
@@ -78,6 +79,9 @@ public class AgentAI : MonoBehaviour, IPathFollower
     private void Update()
     {
         Tile = Tile.Grid.TileAtWorldPosition(transform.position);
+        AdjacentTiles = Tile.GetAdjacentTiles();
+
+        foreach (Tile t in AdjacentTiles) t.Discovered = true;
 
         if (HasGoal)
         {
@@ -87,7 +91,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
         }
         else
         {
-            agentActor.Act(Tile);
+            agentActor.Act();
         }
 
 

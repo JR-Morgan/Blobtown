@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Town Center
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 4819544498574332111, guid: cd779fd155f1e9a4081e8e59849e0cff, type: 3}
+  discoveredRadius: 12

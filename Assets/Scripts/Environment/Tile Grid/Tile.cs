@@ -17,6 +17,29 @@ public partial class Tile : MonoBehaviour
     public List<Tile> GetAdjacentTiles() => Grid.GetAdjacentTiles(this);
     #endregion
 
+    #region Discovered
+    [SerializeField]
+    private bool _discovered;
+
+    [DisplayProperty]
+    public bool Discovered { get => _discovered;
+        set {
+            if(_discovered != value)
+            {
+                _discovered = value;
+                DiscoveredChangeHandler();
+            }
+        }
+    }
+
+    private void DiscoveredChangeHandler()
+    {
+        foreach(Renderer renderer in GetComponentsInChildren<Renderer>())
+        {
+            renderer.enabled = _discovered;
+        }
+    }
+    #endregion
 
     [SerializeField]
     private TileType _tileType;
@@ -57,6 +80,7 @@ public partial class Tile : MonoBehaviour
 
     private void OnValidate()
     {
+        DiscoveredChangeHandler();
         //Initialise(_tileType);
     }
 
@@ -67,7 +91,7 @@ public partial class Tile : MonoBehaviour
 #if UNITY_EDITOR
             if(Application.isEditor) UnityEditor.EditorApplication.delayCall += () => { if (resource != null) DestroyImmediate(resource); };
             else 
-                #endif
+#endif
                 Destroy(resource);
             
         }
@@ -81,6 +105,7 @@ public partial class Tile : MonoBehaviour
                 resource = Instantiate(TileData.resourcePrefab, transform);
             }
         }
+        DiscoveredChangeHandler();
     }
 
 }

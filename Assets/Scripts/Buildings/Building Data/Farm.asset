@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Farm
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 4819544498574332111, guid: ba4cbb86aa9b9ee4b92454865beada6e, type: 3}
+  discoveredRadius: 5
