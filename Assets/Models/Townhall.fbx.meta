@@ -3,7 +3,42 @@ guid: 56b728afb5426344dad475484cb43a12
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clock
+    second: {fileID: 2100000, guid: 144ad2cfc0849bb48b13eddc681efe75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ClockInner
+    second: {fileID: 2100000, guid: 2b559d70be36eff4686bf906a024927f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TownHallWalls
+    second: {fileID: 2100000, guid: 0a4ace856f97bca4aad6aaafefde0d16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Windowsill
+    second: {fileID: 2100000, guid: 5203dd0966699b54ea0219dcadf22e66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodenBeam
+    second: {fileID: 2100000, guid: bd36b51cecad88b4cb909bdc75c65d25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roof
+    second: {fileID: 2100000, guid: 0de2768f2b69f74438f588af670723d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: cde4c28aa8bccfd49bc117f1644c08db, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
