@@ -60,18 +60,16 @@ public partial class Tile : MonoBehaviour
         set
         {
             _tileType = value;
+#if UNITY_EDITOR
+            if (Application.isPlaying) Initialise(_tileType);
+#else
             Initialise(_tileType);
+#endif
         }
     }
     public Building Building { get; set; }
     public bool HasBuilding => Building != null;
 
-    Renderer _renderer;
-
-    private void Awake()
-    {
-         this.RequireComponentInChildren(out _renderer);
-    }
 
     private void Start()
     {
@@ -80,7 +78,7 @@ public partial class Tile : MonoBehaviour
 
     private void OnValidate()
     {
-        DiscoveredChangeHandler();
+        //DiscoveredChangeHandler();
         //Initialise(_tileType);
     }
 
@@ -88,12 +86,7 @@ public partial class Tile : MonoBehaviour
     {
         if (resource != null)
         {
-#if UNITY_EDITOR
-            if(Application.isEditor) UnityEditor.EditorApplication.delayCall += () => { if (resource != null) DestroyImmediate(resource); };
-            else 
-#endif
-                Destroy(resource);
-            
+            Destroy(resource);
         }
 
         if (TileManager.IsSingletonInitialised)
@@ -102,9 +95,10 @@ public partial class Tile : MonoBehaviour
 
             if (TileData != null && TileData.resourcePrefab != null)
             {
-                resource = Instantiate(TileData.resourcePrefab, transform);
+                resource = Instantiate(TileData.resourcePrefab, transform.position, Quaternion.Euler(0,Random.Range(0,360),0), transform);;
             }
         }
+
         DiscoveredChangeHandler();
     }
 
