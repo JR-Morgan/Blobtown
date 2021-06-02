@@ -39,13 +39,29 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
-            //DestinationCheck(agent),
             MineTarget(agent),
-            ChopTarget(agent),
-            BuildHome(agent),
             GoHome(agent),
+            //MoveToResource(agent, ResourceType.Ore),
             MoveRandomly(agent),
-            
+        };
+    }
+
+    private static AgentBehaviour[] WoodcutterAgent(AgentAI agent)
+    {
+        return new AgentBehaviour[]
+        {
+            ChopTarget(agent),
+            GoHome(agent),
+            //MoveToResource(agent, ResourceType.Wood),
+            MoveRandomly(agent),
+        };
+    }
+
+    private static AgentBehaviour[] Scout(AgentAI agent)
+    {
+        return new AgentBehaviour[]
+        {
+            MoveRandomly(agent),
         };
     }
 
@@ -56,21 +72,6 @@ public static class AgentActorFactory
     #endregion
 
     #region Behaviours
-
-    //private static AgentBehaviour DestinationCheck(AgentAI agent)
-    //{
-    //    return Action;
-
-    //    BehaviourState Action(BehaviourState b)
-    //    {
-    //        if (agent.HasDestination)
-    //        {
-    //            b.shouldTerminate = true;
-    //        }
-    //        return b;
-    //    }
-    //}
-
 
     private static AgentBehaviour Wait(AgentAI agent)
     {
@@ -223,7 +224,16 @@ public static class AgentActorFactory
         }
     }
 
+    private static AgentBehaviour MoveToResource(AgentAI agent, ResourceType resource)
+    {
+        return Action;
 
+        BehaviourState Action(BehaviourState b)
+        {
+            //nearest resource
+            return b;
+        }
+    }
 
     #endregion
 
