@@ -36,6 +36,8 @@ public class CameraControllerPerspective : MonoBehaviour
     {
         _camera = Camera.main;
         _camera.transform.LookAt(targetTransform);
+
+        targetTransform.Rotate(0, 0, -10, relativeTo: Space.Self);
     }
 
     // Update is called once per frame
