@@ -15,6 +15,9 @@ public class UIPanel : MonoBehaviour
     private GameObject titleTextPrefab;
     [SerializeField]
     private GameObject bodyTextPrefab;
+    [SerializeField]
+    private GameObject dropDownPrefab;
+
 
     [SerializeField]
     private GameObject selectedPropertyParent;
@@ -60,6 +63,10 @@ public class UIPanel : MonoBehaviour
                     elements.Add(e);
                     e.transform.SetAsFirstSibling();
                 }
+                if(property.PropertyType.IsEnum)
+                {
+                    elements.Add(CreateDropdownElement(property, c));
+                }
                 else
                 {
                     elements.Add(CreateNewBodyElement(property, c));
@@ -70,16 +77,67 @@ public class UIPanel : MonoBehaviour
     }
 
     #region Generic UI propertys
-    private GameObject CreateNewBodyElement(PropertyInfo property, object datasource)
+    private GameObject CreateNewBodyElement(PropertyInfo property, object dataSource)
     {
         GameObject go = Instantiate(bodyTextPrefab, selectedPropertyParent.transform);
-        return SetupElement(go, property, datasource);
+        return SetupElement(go, property, dataSource);
     }
 
-    private GameObject CreateNewTitleElement(PropertyInfo property, object datasource)
+    private GameObject CreateNewTitleElement(PropertyInfo property, object dataSource)
     {
         GameObject go = Instantiate(titleTextPrefab, selectedPropertyParent.transform);
-        return SetupElement(go, property, datasource);
+        return SetupElement(go, property, dataSource);
+    }
+
+    private GameObject CreateDropdownElement(PropertyInfo property, object dataSource)
+    {
+        if (property.CanWrite)
+        {
+            GameObject go = Instantiate(dropDownPrefab, selectedPropertyParent.transform);
+            if (go.TryGetComponentInChildren(out TMP_Dropdown dropDown))
+            {
+                AddCallback(dropDown, (Enum)property.GetValue(dataSource));
+                //_ = (property.GetValue(dataSource)) switch
+                //{
+                //    TileType v => AddCallback(dropDown, v),
+                //    ResourceType v => AddCallback(dropDown, v),
+                //    BuildingType v => AddCallback(dropDown, v),
+                //    AgentType v => AddCallback(dropDown, v),
+                //    _ => throw new NotImplementedException(""),
+                //};
+            }
+            return go;
+        }
+        else
+        {
+            return CreateNewBodyElement(property, dataSource);
+        }
+
+        Enum AddCallback<T>(TMP_Dropdown dropDown, T value) where T : Enum
+        {
+            int i = 0;
+            int s = 0;
+            var options = new List<TMP_Dropdown.OptionData>();
+            foreach (string option in Enum.GetNames(value.GetType()))
+            {
+                options.Add(new TMP_Dropdown.OptionData(option));
+
+                if(option == value.ToString())
+                {
+                    s = i;
+                }
+                i++;
+            }
+            dropDown.AddOptions(options);
+            dropDown.value = s;
+
+            dropDown.onValueChanged.AddListener(e => {
+                object v = Enum.Parse(value.GetType(), options[e].text);
+                property.SetValue(dataSource, v);
+                });
+
+            return value;
+        }
     }
 
 
@@ -96,9 +154,7 @@ public class UIPanel : MonoBehaviour
             }
 
 
-            object viewModel = dataSource; //Box
-
-            _ = (property.GetValue(viewModel)) switch
+            _ = (property.GetValue(dataSource)) switch
             {
                 bool v => AddCallbackString(element, v, bool.TryParse, true),
                 int v => AddCallbackString(element, v, int.TryParse),
