@@ -58,6 +58,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     private void Awake()
     {
         Inventory = new Inventory();
+        this.name = AgentNames.GetRandomName();
         //navAgent = GetComponent<NavMeshAgent>();
     }
 
