@@ -32,7 +32,9 @@ public static class PathFollowHelper
             }
             else
             {
-                pathFollower.Path = Pathfinder.Find(((Component)pathFollower).transform.position, pathFollower.Goal, true);
+                pathFollower.Path = Pathfinder.Find(((Component)pathFollower).transform.position, pathFollower.Goal, false);
+
+                pathFollower.Path ??= Pathfinder.Find(((Component)pathFollower).transform.position, pathFollower.Goal, true);
             }
         }
         return Vector3.zero;

@@ -8,8 +8,8 @@ using UnityEngine;
 /// </summary>
 public static class Pathfinder
 {
-    private const bool DEFAULT_IGNORE_BUILDINGS = false;
-    public static List<Tile> Find(Vector3 start, Vector3 goal, bool ignoreBuildings = DEFAULT_IGNORE_BUILDINGS)
+    private const bool DEFAULT_IGNORE = false;
+    public static List<Tile> Find(Vector3 start, Vector3 goal, bool ignoreBuildings = DEFAULT_IGNORE)
     {
         if (!TileGrid.IsSingletonInitialised) return null;
 
@@ -20,17 +20,17 @@ public static class Pathfinder
         return Find(startT, goalT, ignoreBuildings);
     }
 
-    public static List<Tile> Find(Vector3 start, Tile goal, bool ignoreBuildings = DEFAULT_IGNORE_BUILDINGS)
+    public static List<Tile> Find(Vector3 start, Tile goal, bool ignoreUndiscovered = DEFAULT_IGNORE)
     {
         if (!TileGrid.IsSingletonInitialised) return null;
 
         TileGrid t = TileGrid.Instance;
         Tile startT = t.TileAtWorldPosition(start);
 
-        return Find(startT, goal, ignoreBuildings);
+        return Find(startT, goal, ignoreUndiscovered);
     }
 
-    public static List<Tile> Find(Tile start, Tile goal, bool ignoreBuildings = DEFAULT_IGNORE_BUILDINGS)
+    public static List<Tile> Find(Tile start, Tile goal, bool ignoreBuildings = DEFAULT_IGNORE)
     {
         Dictionary<Tile, TileCost> openDictionary = new Dictionary<Tile, TileCost>() { { start, new TileCost(0, CalculateDistance(start, goal)) } }; ;
         Dictionary<Tile, TileCost> closedDictionary = new Dictionary<Tile, TileCost>(); ;
@@ -102,11 +102,11 @@ public static class Pathfinder
         return null;
     }
 
-    private static Dictionary<Tile, TileCost> GetAdjacentTiles(Tile current, Tile goal, TileCost currentTotalCost, bool ignoreBuildings)
+    private static Dictionary<Tile, TileCost> GetAdjacentTiles(Tile current, Tile goal, TileCost currentTotalCost, bool ignoreUnwalkable)
     {
         Dictionary<Tile, TileCost> tileList = new Dictionary<Tile, TileCost>();
 
-        foreach (Tile t in current.GetAdjacentTiles().Where(t => !t.HasBuilding || ignoreBuildings))
+        foreach (Tile t in current.GetAdjacentTiles().Where(t => t.Discovered || ignoreUnwalkable))
         {
             float costValue = currentTotalCost.FromStart + CalculateDistance(current, t);
             TileCost cost = new TileCost(costValue, CalculateDistance(t, goal))
