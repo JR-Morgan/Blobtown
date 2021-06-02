@@ -35,9 +35,9 @@ public class InputManager : Singleton<InputManager>
 
             if (Input.GetMouseButtonDown(1))
             {
-                if (!EventSystem.current.IsPointerOverGameObject())
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 512f))
                 {
-                    Tile tile = TileGrid.Instance.TileAtWorldPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    Tile tile = TileGrid.Instance.TileAtWorldPosition(hit.collider.transform.position);
                     if (tile != null)
                     {
                         agentFactory.PlaceAgent(tile);
