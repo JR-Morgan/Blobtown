@@ -46,7 +46,7 @@ public class CameraControllerPerspective : MonoBehaviour
         if(rotateDegrees != 0)
         {
             var angle = Vector3.Angle(Vector3.up, targetTransform.up);
-            if (Vector3.Cross(Vector3.up, transform.up).z < 0) angle = -angle;
+            angle = -angle;
             var newAngle = Mathf.Clamp(angle + rotateDegrees, angleMin, angleMax);
             rotateDegrees = newAngle - angle;
         }
