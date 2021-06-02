@@ -25,13 +25,13 @@ public static class AgentActorFactory
 
 
     #region Agent Types
-    private static AgentBehaviour[] BasicAgent(AgentAI agent)
+
+    private static AgentBehaviour[] JoblessAgent(AgentAI agent)
     {
         return new AgentBehaviour[]
         {
-
-            GoHome(agent),
-            Wait(agent)
+            //GetJobFromMyTownHall
+            //BuildTownHall
         };
     }
 
@@ -39,8 +39,8 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            DropOffResources(agent),
             MineTarget(agent),
-            GoHome(agent),
             //MoveToResource(agent, ResourceType.Ore),
             MoveRandomly(agent),
         };
@@ -50,8 +50,8 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            DropOffResources(agent),
             ChopTarget(agent),
-            GoHome(agent),
             //MoveToResource(agent, ResourceType.Wood),
             MoveRandomly(agent),
         };
@@ -61,7 +61,24 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            DropOffScout(agent),
+            //SurveyTiles()
+            //MoveToAdjTile()
             MoveRandomly(agent),
+        };
+    }
+
+    private static AgentBehaviour[] Builder(AgentAI agent)
+    {
+        return new AgentBehaviour[]
+        {
+
+            BuilderComplete(agent),
+            //BuildHome
+            //TestBuildingPlot
+            //StartBuilding
+            //MoveToBuildingPlot
+            
         };
     }
 
@@ -73,27 +90,14 @@ public static class AgentActorFactory
 
     #region Behaviours
 
-    private static AgentBehaviour Wait(AgentAI agent)
-    {
-        return Action;
-
-        BehaviourState Action(BehaviourState b)
-        {
-            b.shouldTerminate = true;
-            return b;
-        }
-        
-       
-    }
-
-    private static AgentBehaviour GoHome(AgentAI agent)
+    private static AgentBehaviour DropOffResources(AgentAI agent) //Drop off resources at town Centre and get new job
     {
         return Action;
 
         BehaviourState Action(BehaviourState b)
         {
 
-            if(!agent.Inventory.IsEmpty)
+            if(!agent.Inventory.IsEmpty) //change to allow builders and scouts to return home
             {
                 Tile homeTile = null;
 
@@ -125,16 +129,32 @@ public static class AgentActorFactory
         }
     }
 
+    private static AgentBehaviour DropOffScout(AgentAI agent)
+    {
+        return Action;
+        BehaviourState Action(BehaviourState b)
+        {
+            return b;
+        }
+    }
+
+    private static AgentBehaviour BuilderComplete(AgentAI agent)
+    {
+        return Action;
+        BehaviourState Action(BehaviourState b)
+        {
+            return b;
+        }
+    }
+
+
     private static AgentBehaviour MoveRandomly(AgentAI agent)
     {
         return Action;
 
         BehaviourState Action(BehaviourState b)
         {
-            
-            //currently moves randomly
             List<Tile> adjTiles = b.NeighbourTiles;
-            //agent.SetDestination(adjTiles[Random.Range(0, adjTiles.Count - 1)].transform.position);
             agent.Goal = adjTiles[Random.Range(0, adjTiles.Count - 1)];
             b.shouldTerminate = true;
             
@@ -142,7 +162,7 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour MineTarget(AgentAI agent)
+    private static AgentBehaviour MineTarget(AgentAI agent) //agent works on the nearest resource slowly increasing the progress
     {
         return Action;
 
@@ -167,7 +187,7 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour ChopTarget(AgentAI agent)
+    private static AgentBehaviour ChopTarget(AgentAI agent) //agent works on the nearest resource slowly increasing the progress
     {
         return Action;
 
@@ -192,7 +212,27 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour BuildHome(AgentAI agent)
+    private static AgentBehaviour TestBuildingSpot(AgentAI agent) //when at the correct plot, check it for suitability
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            return b;
+        }
+    }
+
+    private static AgentBehaviour StartBuildingHome(AgentAI agent) //when at the correct plot and it has been checked. Place the home plot
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            return b;
+        }
+    }
+
+    private static AgentBehaviour BuildHome(AgentAI agent) //Continue the home building, increasing it's progress bar
     {
         return Action;
 
@@ -224,7 +264,7 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour MoveToResource(AgentAI agent, ResourceType resource)
+    private static AgentBehaviour MoveToResource(AgentAI agent, ResourceType resource) //go to the resource indicated by the town centre
     {
         return Action;
 
