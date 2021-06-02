@@ -84,6 +84,7 @@ public partial class Tile : MonoBehaviour
 
     private void Initialise(TileType tileType)
     {
+        
         if (resource != null)
         {
             Destroy(resource);
@@ -95,7 +96,8 @@ public partial class Tile : MonoBehaviour
 
             if (TileData != null && TileData.resourcePrefab != null)
             {
-                resource = Instantiate(TileData.resourcePrefab, transform.position, Quaternion.Euler(0,Random.Range(0,360),0), transform);;
+                var r = new System.Random(this.GetHashCode());
+                resource = Instantiate(TileData.resourcePrefab, transform.position, Quaternion.Euler(0, (float)r.NextDouble() * 360f,0), transform);;
             }
         }
 
