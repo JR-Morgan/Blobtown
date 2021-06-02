@@ -63,7 +63,7 @@ public class UIPanel : MonoBehaviour
                     elements.Add(e);
                     e.transform.SetAsFirstSibling();
                 }
-                if(property.PropertyType.IsEnum)
+                else if(property.PropertyType.IsEnum)
                 {
                     elements.Add(CreateDropdownElement(property, c));
                 }
@@ -91,7 +91,7 @@ public class UIPanel : MonoBehaviour
 
     private GameObject CreateDropdownElement(PropertyInfo property, object dataSource)
     {
-        if (property.CanWrite)
+        if (property.CanWrite && property.GetSetMethod(true).IsPublic)
         {
             GameObject go = Instantiate(dropDownPrefab, selectedPropertyParent.transform);
             if (go.TryGetComponentInChildren(out TMP_Dropdown dropDown))

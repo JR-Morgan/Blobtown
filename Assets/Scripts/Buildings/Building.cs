@@ -6,7 +6,7 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     [DisplayProperty]
-    public BuildingType BuildingType { get; set; }
+    public BuildingType BuildingType { get; internal set; }
 
     [SerializeField]
     private Tile _position;
