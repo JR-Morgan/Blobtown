@@ -35,8 +35,16 @@ public class AgentAI : MonoBehaviour, IPathFollower
     private AgentActor agentActor;
     //private NavMeshAgent navAgent;
 
+
+    #region References to scene objects
+    [SerializeField]
+    private TownCenter _townCenter;
+    public TownCenter TownCenter { get => _townCenter; set => _townCenter = value; }
+
     public Building Home { get; set; }
+
     public Tile Tile { get; private set; }
+    #endregion
 
     #region Inventory
     [SerializeField]

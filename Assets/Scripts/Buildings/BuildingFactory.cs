@@ -14,18 +14,40 @@ public class BuildingFactory : Singleton<BuildingFactory>
 
     public Dictionary<BuildingType, List<Building>> Buildings { get; private set; }
 
-    public Building TownCenter { get; private set; }
-
 
     protected override void Awake()
     {
         base.Awake();
         Buildings = new Dictionary<BuildingType, List<Building>>();
+
+        foreach (BuildingType r in (BuildingType[])Enum.GetValues(typeof(ResourceType)))
+        {
+            Buildings.Add(r, new List<Building>());
+        }
     }
 
 
-    public Building CreateBuilding(BuildingType buildingType) => CreateBuilding(buildingType, FindAGoodSpotForBuilding(buildingType));
-    public Building CreateBuilding(BuildingType buildingType, Tile position)
+    public Building NearestBuildingOfType(Vector3 worldPosition, BuildingType type)
+    {
+        Building closest = null;
+        float distance = float.PositiveInfinity;
+
+        foreach(Building b in Buildings[type])
+        {
+            float d = Vector3.Distance(worldPosition, b.transform.position);
+            if (d < distance)
+            {
+                closest = b;
+                distance = d;
+            }
+        }
+        return closest;
+    }
+
+    public TownCenter CreateTownCenter(Tile position) => CreateBuilding(BuildingType.TownCenter, position, null).TownCenter;
+
+    public Building CreateBuilding(BuildingType buildingType, TownCenter townCenter) => CreateBuilding(buildingType, FindAGoodSpotForBuilding(buildingType, townCenter), townCenter);
+    public Building CreateBuilding(BuildingType buildingType, Tile position, TownCenter townCenter)
     {
         if (position == null) return null;
 
@@ -35,30 +57,34 @@ public class BuildingFactory : Singleton<BuildingFactory>
         GameObject buildingGo = Instantiate(buildingData.buildingPrefab, position.transform.position, Quaternion.identity, this.transform);
         
         Building building = buildingGo.GetComponent<Building>();
+        building.Position = position;
+
         foreach (Tile tile in TileGrid.Instance.TilesInRect(position, building.Size))
         {
             tile.Building = building;
         }
 
-
-        if (!Buildings.ContainsKey(buildingType))
+        switch (buildingType)
         {
-            Buildings.Add(buildingType, new List<Building> { building });
+            case BuildingType.Home:
+                Home home = building.gameObject.AddComponent<Home>();
+                break;
+            case BuildingType.TownCenter:
+                TownCenter tc = building.gameObject.AddComponent<TownCenter>();
+                townCenter = tc;
+                break;
+            case BuildingType.Farm:
 
-            //Special condition for town halls
-            if (buildingType == BuildingType.Home)
-            {
-                TownCenter = building;
-                building.IsTownCenter = true;
-            }
-        }
-        else
-        {
-            Buildings[buildingType].Add(building);
+                break;
+            default:
+                throw new NotImplementedException();
         }
 
-        
-        return buildingGo.GetComponent<Building>();
+        building.TownCenter = townCenter;
+
+        Buildings[buildingType].Add(building);
+
+        return building;
     }
 
     private BuildingData ToBuildingData(BuildingType buildingType)
@@ -80,12 +106,13 @@ public class BuildingFactory : Singleton<BuildingFactory>
         return buildingSpace.All(t => !t.HasBuilding);
     }
 
-    public Tile FindAGoodSpotForBuilding(BuildingType buildingType)
+
+    public Tile FindAGoodSpotForBuilding(BuildingType buildingType, TownCenter townCenter)
     {
-        Debug.Assert(TownCenter != null, $"Town Center was null!. {typeof(BuildingFactory)} needs a Town Center to find a good spot for a {buildingType}", this);
+        Debug.Assert(townCenter != null, $"Town Center was null!. {typeof(BuildingFactory)} needs a Town Center to find a good spot for a {buildingType}", this);
 
         Func<Tile, float> costFunction = BuildingRules.Instance.GetFunctionForBuildingType(buildingType);
-        IEnumerable<Tile> candidates = FindCandidates(TownCenter.Position, buildingType, 10f);
+        IEnumerable<Tile> candidates = FindCandidates(townCenter.Building.Position, buildingType, 10f);
 
         Tile bestCandidate = null;
         float bestCost = float.NegativeInfinity;
@@ -125,5 +152,6 @@ public class BuildingFactory : Singleton<BuildingFactory>
 public enum BuildingType
 {
     Home,
+    TownCenter,
     Farm,
 }

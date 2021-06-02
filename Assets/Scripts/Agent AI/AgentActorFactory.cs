@@ -238,24 +238,13 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            if (agent.Home == null)
-            {
-                if (BuildingFactory.Instance.TownCenter == null)
-                {
-                    agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.Tile);
-                }
-                else
-                {
-                    agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home);
-                }
-            }
 
             if (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, 5) || agent.Home.Inventory.HasResource(ResourceType.Wood, 5)))
             {
                 agent.Inventory.SubtractResource(ResourceType.Ore, 5);
                 agent.Inventory.SubtractResource(ResourceType.Wood, 5);
 
-                agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home);
+                agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
 
                 b.shouldTerminate = true;
             }
