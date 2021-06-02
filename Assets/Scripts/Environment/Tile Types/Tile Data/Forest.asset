@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c64df407f040c439a61d7e5608853b, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
-  resourcePrefab: {fileID: 386762644001272980, guid: c0c86b068c6d45c4a9b0dd3664bac3ba, type: 3}
-  type: 0
+  resourcePrefabs:
+  - {fileID: 9058026338754330268, guid: 64fd54e385d1a1744a6e5fb92ce29377, type: 3}
+  - {fileID: 9058026338754330268, guid: 05fe3dedbdfb8c3479e3405522fb58fe, type: 3}
+  - {fileID: 9058026338754330268, guid: 0c2ff726731e4364d9eb56ed5c931d7a, type: 3}
+  resourceType: 0
   amount: 1

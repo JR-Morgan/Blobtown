@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c64df407f040c439a61d7e5608853b, type: 3}
   m_Name: Ore Node
   m_EditorClassIdentifier: 
-  resourcePrefab: {fileID: 7357338153012206058, guid: aceab0410e766b545a639f2aed85c2d8, type: 3}
+  resourcePrefabs:
+  - {fileID: 6115231718269822951, guid: cfeed9f978c3b2f43b8206d1896f8afd, type: 3}
+  - {fileID: 6115231718269822951, guid: 5143aefb92314394db94f448a4a1221e, type: 3}
   resourceType: 1
   amount: 1

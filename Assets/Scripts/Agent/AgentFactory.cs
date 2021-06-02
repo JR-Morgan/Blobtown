@@ -11,6 +11,8 @@ public class AgentFactory : Singleton<AgentFactory>
 
     public void PlaceAgent(Tile tile)
     {
+        tile.Discovered = true;
+
         GameObject go = Instantiate(agentPrefab, tile.transform.position, Quaternion.identity, this.transform);
 
         AgentAI agent = go.GetComponent<AgentAI>();
