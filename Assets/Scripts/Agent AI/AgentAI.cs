@@ -32,6 +32,9 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     #endregion
 
+    [SerializeField]
+    private float rotationSpeed = 1f;
+
     private AgentActor agentActor;
     //private NavMeshAgent navAgent;
 
@@ -77,12 +80,16 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
         if (HasGoal)
         {
-            transform.position += PathFollowHelper.CalculateDesiredVelocity(this);
+            Vector3 velocity = PathFollowHelper.CalculateDesiredVelocity(this);
+            transform.position += velocity;
+            if(velocity.sqrMagnitude > 0) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed * Time.deltaTime);
         }
         else
         {
             agentActor.Act(Tile);
         }
+
+
     }
 
 

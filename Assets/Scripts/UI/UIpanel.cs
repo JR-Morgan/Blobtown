@@ -19,6 +19,9 @@ public class UIPanel : MonoBehaviour
     [SerializeField]
     private GameObject selectedPropertyParent;
 
+    [SerializeField]
+    private List<GameObject> objectsToHide;
+
     private List<GameObject> elements;
 
     private void Start()
@@ -35,6 +38,7 @@ public class UIPanel : MonoBehaviour
     public void TogglePanel() => SetOpen(!this.gameObject.activeSelf);
     public void SetOpen(bool isOpen)
     {
+        foreach (GameObject go in objectsToHide) go.SetActive(isOpen);
         this.gameObject.SetActive(isOpen);
     }
 
