@@ -8,19 +8,23 @@ public delegate BehaviourState AgentBehaviour(BehaviourState state);
 public static class AgentActorFactory 
 {
     
-    public static AgentActor CreateActor(AgentAI agent)
+    public static AgentActor CreateActor(AgentAI agent, AgentType agentType = default)
     {
-        return new AgentActor(CreateBehaviours(agent));
+        return new AgentActor(CreateBehaviours(agent, agentType));
     }
 
-    public static List<AgentBehaviour> CreateBehaviours(AgentAI agent)
+    public static AgentBehaviour[] CreateBehaviours(AgentAI agent, AgentType agentType)
     {
-        var behaviours = new List<AgentBehaviour>();
-
-        //add behaviours depending on agent type?
-        behaviours.AddRange(MinerAgent(agent));
-
-        return behaviours;
+        return agentType switch
+        {
+            AgentType.Jobless => JoblessAgent(agent),
+            AgentType.Miner => MinerAgent(agent),
+            AgentType.WoodCutter => WoodcutterAgent(agent),
+            AgentType.Scout => Scout(agent),
+            //AgentType.Farmer => Farmer(agent),
+            AgentType.Builder => Builder(agent),
+            _ => throw new System.NotImplementedException($"No behaviour exists for {agentType}"),
+        };
     }
 
 
@@ -279,4 +283,14 @@ public static class AgentActorFactory
 public class BehaviourState
 {
     public bool shouldTerminate = false;
+}
+
+public enum AgentType
+{
+    Jobless,
+    Miner,
+    WoodCutter,
+    Scout,
+    Farmer,
+    Builder,
 }

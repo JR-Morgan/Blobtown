@@ -58,6 +58,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
         
         Building building = buildingGo.GetComponent<Building>();
         building.Position = position;
+        building.BuildingType = buildingType;
 
         foreach (Tile buildingTile in TileGrid.Instance.TilesInRect(position, building.Size))
         {

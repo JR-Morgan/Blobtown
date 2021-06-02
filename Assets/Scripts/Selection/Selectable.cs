@@ -16,4 +16,5 @@ public class Selectable : MonoBehaviour
 
 [AttributeUsage(AttributeTargets.Property, Inherited = false)]
 public class DisplayPropertyAttribute : Attribute
-{ }
+{
+}

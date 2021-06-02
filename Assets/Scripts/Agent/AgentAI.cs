@@ -21,13 +21,13 @@ public class AgentAI : MonoBehaviour, IPathFollower
     [SerializeField]
     private float _speed;
     public float Speed { get => _speed; set =>_speed = value; }
+    public bool HasGoal => Goal != null;
 
     List<Tile> IPathFollower.Path { get; set; }
 
     void IPathFollower.GoalCompleteHandler(Tile completedGoal)
     {
         Goal = null;
-        //inventory.Contents.Clear(); //TODO for now, just clear their inventory
     }
 
     #endregion
@@ -35,8 +35,6 @@ public class AgentAI : MonoBehaviour, IPathFollower
     [SerializeField]
     private float rotationSpeed = 1f;
 
-    private AgentActor agentActor;
-    //private NavMeshAgent navAgent;
 
 
     #region References to scene objects
@@ -56,6 +54,24 @@ public class AgentAI : MonoBehaviour, IPathFollower
     public Inventory Inventory { get => _inventory; private set => _inventory = value; }
     #endregion
 
+    #region Agent Actor
+
+    private AgentActor agentActor;
+
+
+    [SerializeField]
+    private AgentType _agentType;
+
+    [DisplayProperty]
+    public AgentType AgentType { get => _agentType;
+        set
+        {
+            _agentType = value;
+            agentActor = AgentActorFactory.CreateActor(this, _agentType);
+        }
+    }
+    #endregion
+
     private void Awake()
     {
         Inventory = new Inventory();
@@ -73,7 +89,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     private void Initialise()
     {
-        agentActor = AgentActorFactory.CreateActor(this);
+        agentActor = AgentActorFactory.CreateActor(this, AgentType);
     }
 
     private void Update()
@@ -97,9 +113,6 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     }
 
-
-
-
     public void MoveAgent(Tile tile)
     {
         Vector3 currentTilePos = transform.position;
@@ -108,6 +121,5 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
 
 
-    public bool HasGoal => Goal != null;
 
 }
