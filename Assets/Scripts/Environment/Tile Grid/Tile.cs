@@ -94,10 +94,11 @@ public partial class Tile : MonoBehaviour
         {
             _tileData = TileManager.Instance.GetResourceData(tileType);
 
-            if (TileData != null && TileData.resourcePrefab != null)
+            if (TileData != null && TileData.resourcePrefabs != null)
             {
                 var r = new System.Random(this.GetHashCode());
-                resource = Instantiate(TileData.resourcePrefab, transform.position, Quaternion.Euler(0, (float)r.NextDouble() * 360f,0), transform);;
+                GameObject prefab = TileData.resourcePrefabs[r.Next(TileData.resourcePrefabs.Count)];
+                resource = Instantiate(prefab, transform.position, Quaternion.Euler(0, (float)r.NextDouble() * 360f, 0), transform); ;
             }
         }
 
