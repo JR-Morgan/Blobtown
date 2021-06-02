@@ -53,7 +53,7 @@ public class CameraControllerPerspective : MonoBehaviour
 
         targetTransform.Rotate(0, 0, rotateDegrees, relativeTo:Space.Self);
 
-        rotateDegrees = rotateSpeed * Input.GetAxis("RotateHorizontal") * Time.deltaTime;
+        rotateDegrees = rotateSpeed * -Input.GetAxis("RotateHorizontal") * Time.deltaTime;
         targetTransform.Rotate(0, rotateDegrees, 0, relativeTo: Space.World);
 
 
