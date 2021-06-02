@@ -82,6 +82,16 @@ public static class AgentActorFactory
         };
     }
 
+    private static AgentBehaviour[] Farmer(AgentAI agent)
+    {
+        return new AgentBehaviour[]
+        {
+            DropOffResources(agent),
+            //WorkTheFarm
+            //MoveToFarm
+        };
+    }
+
     #endregion
 
     #region Helper Methods
@@ -97,30 +107,30 @@ public static class AgentActorFactory
         BehaviourState Action(BehaviourState b)
         {
 
-            if(!agent.Inventory.IsEmpty) //change to allow builders and scouts to return home
+            if(!agent.Inventory.IsEmpty)
             {
-                Tile homeTile = null;
+                Tile townCenter = null;
 
-                if (agent.Tile.Building == agent.Home)
+                if (agent.Tile.Building == agent.Home.TownCenter)
                 {
-                    homeTile = agent.Tile;
+                    townCenter = agent.Tile;
                 }
                 else
                 {
-                    homeTile = agent.AdjacentTiles.Find(t => t.Building == agent.Home);
+                    townCenter = agent.AdjacentTiles.Find(t => t.Building == agent.Home.TownCenter);
                 }
 
 
-                if (homeTile != null)
+                if (townCenter != null)
                 {
-                    agent.Home.Inventory.AddResources(agent.Inventory.Contents);
+                    agent.TownCenter.Building.Inventory.AddResources(agent.Inventory.Contents);
                     agent.Inventory.Clear();
-                }
+                } 
                 else
                 {
                     b.shouldTerminate = true;
 
-                    agent.Goal = TileGrid.Instance.TileAtWorldPosition(agent.Home.transform.position);
+                    agent.Goal = TileGrid.Instance.TileAtWorldPosition(agent.TownCenter.transform.position);
                 }
 
             }
