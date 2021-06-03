@@ -100,8 +100,8 @@ MonoBehaviour:
   cameraMoveSpeedModifier: 20
   smoothFactor: 0.5
   rotateSpeed: 35
-  angleMax: -10
-  angleMin: -85
+  angleMax: 85
+  angleMin: 10
   scrollSpeed: 100
 --- !u!1 &7988803602706500039
 GameObject:
