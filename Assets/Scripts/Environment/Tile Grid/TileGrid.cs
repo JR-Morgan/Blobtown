@@ -140,8 +140,8 @@ public class TileGrid : Singleton<TileGrid>
     public IEnumerable<Tile> TilesInCircle(Tile t, float radius) => TilesInIndeces(IndeciesInCircle(t, radius));
     public IEnumerable<Tile> TilesInCircle(Vector2Int center, int radius) => TilesInIndeces(IndeciesInCircle(center, radius));
 
-    public List<Vector2Int> IndeciesInCircle(Tile t, float radius) => IndeciesInCircle(t.GridIndex, radius);
-    public List<Vector2Int> IndeciesInCircle(Vector2Int center, float radius)
+    public IEnumerable<Vector2Int> IndeciesInCircle(Tile t, float radius) => IndeciesInCircle(t.GridIndex, radius);
+    public IEnumerable<Vector2Int> IndeciesInCircle(Vector2Int center, float radius)
     {
         List<Vector2Int> tmpList = new List<Vector2Int>();
         List<Vector2Int> list = new List<Vector2Int>();
@@ -168,7 +168,7 @@ public class TileGrid : Singleton<TileGrid>
         }
 
 
-        return list;
+        return list.Distinct();
     }
     #endregion
 

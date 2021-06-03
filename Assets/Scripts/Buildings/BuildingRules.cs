@@ -18,13 +18,16 @@ public class BuildingRules : Singleton<BuildingRules>
     }
     #region Farm
     [SerializeField, Header("Farm")]
-    float isResource = -20f, neighbourTownCenterFarm = 15f, neighbourHomeFarm = -2f, neighbourFarmFarm = 3f, radiusSmallFarm = 5f, radiusLargeFarm = 15f;
+    float isResource = -20f, neighbourTownCenterFarm = -5f, neighbourHomeFarm = -2f, neighbourFarmFarm = 3f, radiusSmallFarm = 2f, radiusLargeFarm = 5f, isDiscoveredFarm = 999;
 
     private Func<Tile, float> Farm()
     {
         return Sum(
             FunctionOfTile(isResource, IsOfTypes(TileType.Ore, TileType.Forest)),
-            ForDirectNeighbours(FunctionOfBuilding(neighbourFarmFarm, IsOfTypes(BuildingType.Farm))),
+            FunctionOfTile(isDiscoveredFarm, IsDiscovered()),
+            ForDirectNeighbours(Sum(
+                FunctionOfBuilding(neighbourFarmFarm, IsOfTypes(BuildingType.Farm)),
+                FunctionOfTile(isResource, IsOfTypes(TileType.Ore, TileType.Forest)))),
 
             ForTilesInRadius(radiusSmallFarm, FunctionOfBuilding(neighbourHomeFarm, IsOfTypes(BuildingType.Home))),
             ForTilesInRadius(radiusLargeFarm, FunctionOfBuilding(neighbourTownCenterFarm, IsOfTypes(BuildingType.TownCenter)))
@@ -128,6 +131,7 @@ public class BuildingRules : Singleton<BuildingRules>
     }
 
     #region Function of Building
+   
     private static Func<Tile, float> FunctionOfBuilding(float ruleImportance, Func<Building, bool> function)
     {
         return Rule;
@@ -153,16 +157,6 @@ public class BuildingRules : Singleton<BuildingRules>
         }
     }
 
-    private static Func<Building, bool> IsDiscovered()
-    {
-        return Function;
-
-        bool Function(Building b)
-        {
-            return b.Position.Discovered;
-        }
-    }
-
     private static Func<Building, bool> IsTownCenter()
     {
         return Function;
@@ -175,6 +169,16 @@ public class BuildingRules : Singleton<BuildingRules>
     #endregion
 
     #region Function of a Tile
+
+    private static Func<Tile, bool> IsDiscovered()
+    {
+        return Function;
+
+        bool Function(Tile t)
+        {
+            return t.Discovered;
+        }
+    }
 
     private static Func<Tile, float> FunctionOfTile(float ruleImportance, Func<Tile, bool> function)
     {
