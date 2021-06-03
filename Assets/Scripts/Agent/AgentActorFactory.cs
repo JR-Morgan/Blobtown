@@ -17,11 +17,10 @@ public static class AgentActorFactory
     {
         return agentType switch
         {
-            AgentType.Jobless => JoblessAgent(agent),
-            AgentType.Miner => MinerAgent(agent),
-            AgentType.WoodCutter => WoodcutterAgent(agent),
-            AgentType.Scout => Scout(agent),
             AgentType.Farmer => Farmer(agent),
+            AgentType.Miner => ResourceGathererAgent(agent, ResourceType.Ore, 3f),
+            AgentType.WoodCutter => ResourceGathererAgent(agent, ResourceType.Wood, 3f),
+            AgentType.Scout => Scout(agent),
             //AgentType.Builder => Builder(agent),
             _ => throw new System.NotImplementedException($"No behaviour exists for {agentType}"),
         };
@@ -39,24 +38,14 @@ public static class AgentActorFactory
         };
     }
 
-    private static AgentBehaviour[] MinerAgent(AgentAI agent)
-    {
-        return new AgentBehaviour[]
-        {
-            DropOffResources(agent),
-            MineTarget(agent),
-            //MoveToResource(agent, ResourceType.Ore),
-            MoveRandomly(agent),
-        };
-    }
 
-    private static AgentBehaviour[] WoodcutterAgent(AgentAI agent)
+    private static AgentBehaviour[] ResourceGathererAgent(AgentAI agent, ResourceType resourceType, float progressRequired)
     {
         return new AgentBehaviour[]
         {
             DropOffResources(agent),
-            ChopTarget(agent),
-            //MoveToResource(agent, ResourceType.Wood),
+            HarvestResource(agent, resourceType, progressRequired),
+            MoveToResource(agent, resourceType),
             MoveRandomly(agent),
         };
     }
@@ -65,7 +54,7 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
-            DropOffScout(agent),
+            //DropOffScout(agent),
             //SurveyTiles()
             //MoveToAdjTile()
             MoveRandomly(agent),
@@ -91,7 +80,7 @@ public static class AgentActorFactory
         return new AgentBehaviour[]
         {
             DropOffResources(agent),
-            //TakeResourceFromBuilding(agent, BuildingType.Farm),
+            TakeResourceFromBuilding(agent, BuildingType.Farm, ResourceType.Food, 1),
             MoveToBuidlingType(agent, BuildingType.Farm),
             MoveRandomly(agent),
         };
@@ -115,6 +104,27 @@ public static class AgentActorFactory
             if(targetBuildings.Count > 0)
             {
                 agent.Goal = targetBuildings[Random.Range(0, targetBuildings.Count - 1)].Position;
+                b.shouldTerminate = true;
+            }
+            return b;
+        }
+    }
+
+    private static AgentBehaviour TakeResourceFromBuilding(AgentAI agent, BuildingType buildingType, ResourceType resource, int amount)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            if (agent.Tile.HasBuilding && agent.Tile.Building.BuildingType == buildingType)
+            {
+                Building building = agent.Tile.Building;
+                if (building.Inventory.SubtractResource(resource, amount))
+                {
+                    agent.Inventory.AddResource(resource, amount);
+                }
+                b.shouldTerminate = true;
+
             }
             return b;
         }
@@ -131,15 +141,14 @@ public static class AgentActorFactory
             {
                 Tile townCenter = null;
 
-                if (agent.Tile.Building == agent.Home.TownCenter)
+                if (agent.Tile.Building == agent.TownCenter.Building)
                 {
                     townCenter = agent.Tile;
                 }
                 else
                 {
-                    townCenter = agent.AdjacentTiles.Find(t => t.Building == agent.Home.TownCenter);
+                    townCenter = agent.AdjacentTiles.Find(t => t.Building == agent.TownCenter.Building);
                 }
-
 
                 if (townCenter != null)
                 {
@@ -150,7 +159,7 @@ public static class AgentActorFactory
                 {
                     b.shouldTerminate = true;
 
-                    agent.Goal = TileGrid.Instance.TileAtWorldPosition(agent.TownCenter.transform.position);
+                    agent.Goal = agent.TownCenter.Building.Position;
                 }
 
             }
@@ -159,14 +168,6 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour DropOffScout(AgentAI agent)
-    {
-        return Action;
-        BehaviourState Action(BehaviourState b)
-        {
-            return b;
-        }
-    }
 
     private static AgentBehaviour BuilderComplete(AgentAI agent)
     {
@@ -216,25 +217,24 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour ChopTarget(AgentAI agent) //agent works on the nearest resource slowly increasing the progress
+    private static AgentBehaviour HarvestResource(AgentAI agent, ResourceType resourceType, float progressRequired)
     {
         return Action;
 
         BehaviourState Action(BehaviourState b)
         {
-            foreach (Tile t in agent.AdjacentTiles)
+            agent.Progress += Time.deltaTime;
+            if (agent.Progress >= progressRequired)
             {
-                if (t.TileType == TileType.Forest)
+                if (agent.Tile.HasResource && agent.Tile.TileData.resourceType == resourceType)
                 {
-                    agent.Inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
+                    agent.Inventory.AddResource(agent.Tile.TileData.resourceType, agent.Tile.TileData.amount);
 
-                    t.TileType = TileType.Default;
+                    agent.Tile.TileType = TileType.Default;
 
                     b.shouldTerminate = true;
-                    break;
                 }
             }
-
 
             return b;
         }
@@ -281,13 +281,25 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour MoveToResource(AgentAI agent, ResourceType resource) //go to the resource indicated by the town centre
+    private static AgentBehaviour MoveToResource(AgentAI agent, ResourceType resourceType) //go to the resource indicated by the town centre
     {
         return Action;
 
         BehaviourState Action(BehaviourState b)
         {
-            //nearest resource
+            if (!(agent.Tile.HasResource && agent.Tile.TileData.resourceType == resourceType))
+            {
+                var resources = agent.TownCenter.KnownResources[resourceType];
+                if (resources.Count > 0)
+                {
+                    agent.Goal = resources[Random.Range(0, resources.Count)];
+                    b.shouldTerminate = true;
+                }
+            }
+            else
+            {
+                b.shouldTerminate = true;
+            }
             return b;
         }
     }
@@ -303,10 +315,9 @@ public class BehaviourState
 
 public enum AgentType
 {
-    Jobless,
+    Farmer,
     Miner,
     WoodCutter,
     Scout,
-    Farmer,
     Builder,
 }
