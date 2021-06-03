@@ -103,6 +103,8 @@ MonoBehaviour:
   angleMax: 85
   angleMin: 10
   scrollSpeed: 100
+  zoomMin: 5
+  zoomMax: 50
 --- !u!1 &7988803602706500039
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,15 +29,17 @@ public class CameraControllerPerspective : MonoBehaviour
     private float scrollSpeed = 10;
 
 
+    [SerializeField]
+    private float zoomMin;
 
-    private float zoomMin = -10;
-
-
-    private float zoomMax = -50;
+    [SerializeField]
+    private float zoomMax;
 
     // Start is called before the first frame update
     void Start()
     {
+        zoomMin = -zoomMin;
+        zoomMax = -zoomMax;
         _camera = Camera.main;
         //_camera.transform.LookAt(targetTransform);
 
