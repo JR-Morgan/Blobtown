@@ -223,7 +223,13 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
+            if(agent.Progress == 0)
+            {
+                agent.ProgressCanvas.gameObject.SetActive(true);
+            }
             agent.Progress += Time.deltaTime;
+            agent.ProgressBar.fillAmount = agent.Progress / progressRequired;
+
             if (agent.Progress >= progressRequired)
             {
                 if (agent.Tile.HasResource && agent.Tile.TileData.resourceType == resourceType)
