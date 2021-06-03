@@ -2,12 +2,13 @@ using System;
 using UnityEngine.Audio;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
 
     public Sound[] audioClips;
 
-    void Awake()
+
+    protected override void Awake()
     {
         foreach (Sound clip in audioClips)
         {
@@ -24,42 +25,30 @@ public class AudioManager : MonoBehaviour
         if (!s.source.isPlaying)
         {
             s.source.Play();
-        }
+            s.source.loop = loop;
 
-        s.source.loop = loop;
+            s.source.volume = 0f;
 
-        s.source.volume = 0f;
-
-        StartCoroutine(FadeAudioSource.StartFade(s.source, 10f, volume));
-
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Play("Layer1", true, 1);
+            StartCoroutine(FadeAudioSource.StartFade(s.source, 4f, volume));
 
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Play("Layer2", true, 1);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Play("Layer3", true, 1);
-
-        }
-
     }
 
     void Start()
     {
-        Play("Layer1", true, 0);
+        Play("Layer1", true, 1);
         Play("Layer2", true, 0);
         Play("Layer3", true, 0);
     }
+
+    void PlayLayer2()
+    {
+        Play("layer2", true, 1);
+    }
+
+    void PlayLayer3()
+    {
+        Play("layer3", true, 1);
+    }
+
 }
