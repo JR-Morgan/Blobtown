@@ -23,7 +23,7 @@ public partial class Tile : MonoBehaviour
 
     [DisplayProperty]
     public bool Discovered { get => _discovered;
-        set {
+        internal set {
             if(_discovered != value)
             {
                 _discovered = value;

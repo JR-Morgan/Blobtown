@@ -94,8 +94,14 @@ public class UIPanel : MonoBehaviour
         if (property.CanWrite && property.GetSetMethod(true).IsPublic)
         {
             GameObject go = Instantiate(dropDownPrefab, selectedPropertyParent.transform);
+            if (go.TryGetComponentInChildren(out TMP_Text label))
+            {
+                label.text = FormatLabelString(property.Name);
+            }
+
             if (go.TryGetComponentInChildren(out TMP_Dropdown dropDown))
             {
+
                 AddCallback(dropDown, (Enum)property.GetValue(dataSource));
                 //_ = (property.GetValue(dataSource)) switch
                 //{
@@ -178,7 +184,7 @@ public class UIPanel : MonoBehaviour
 
         E AddCallback<E, T>(E element, T value, Convert<string, T> toV, Convert<T, string> toTarget, bool readOnly = false) where E : TMP_InputField
         {
-            element.readOnly = readOnly && element.readOnly;
+            element.readOnly = readOnly || element.readOnly;
             element.onValueChanged.AddListener(e =>
             {
 #pragma warning disable CS0642 // Possible mistaken empty statement

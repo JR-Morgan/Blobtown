@@ -55,7 +55,9 @@ public class BuildingFactory : Singleton<BuildingFactory>
         BuildingData buildingData = ToBuildingData(buildingType);
 
         GameObject buildingGo = Instantiate(buildingData.buildingPrefab, position.transform.position, Quaternion.identity, this.transform);
-        
+
+        buildingGo.name = $"{buildingData.buildingPrefab.name} {Buildings[buildingType].Count}";
+
         Building building = buildingGo.GetComponent<Building>();
         building.Position = position;
         building.BuildingType = buildingType;
