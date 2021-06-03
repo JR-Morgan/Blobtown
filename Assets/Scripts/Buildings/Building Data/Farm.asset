@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5c2b2005668134dbd41a7f9f04c626, type: 3}
   m_Name: Farm
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 4819544498574332111, guid: ba4cbb86aa9b9ee4b92454865beada6e, type: 3}
+  buildingPrefab: {fileID: 2722489486661438108, guid: 08c7b6022266e2e4db3cde375f9df630, type: 3}
   discoveredRadius: 5
