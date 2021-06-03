@@ -131,6 +131,7 @@ public class TileGrid : Singleton<TileGrid>
         return indecies;
     }
 
+
     public IEnumerable<Tile> TilesInIndeces(IEnumerable<Vector2Int> indecies)
     {
         return indecies.Where(i => IsInBounds(i)).Select(i => this[i.x, i.y]);
@@ -145,7 +146,7 @@ public class TileGrid : Singleton<TileGrid>
         List<Vector2Int> tmpList = new List<Vector2Int>();
         List<Vector2Int> list = new List<Vector2Int>();
         double rSquared = radius * radius; // using sqared reduces execution time (no square root needed)
-        for (int x = 1; x <= radius; x++)
+        for (int x = 0; x <= radius; x++)
             for (int y = 0; y <= radius; y++)
             {
                 Vector2Int v = new Vector2Int(x, y);
