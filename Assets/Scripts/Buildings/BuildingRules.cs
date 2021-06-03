@@ -153,6 +153,16 @@ public class BuildingRules : Singleton<BuildingRules>
         }
     }
 
+    private static Func<Building, bool> IsDiscovered()
+    {
+        return Function;
+
+        bool Function(Building b)
+        {
+            return b.Position.Discovered;
+        }
+    }
+
     private static Func<Building, bool> IsTownCenter()
     {
         return Function;

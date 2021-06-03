@@ -21,8 +21,8 @@ public static class AgentActorFactory
             AgentType.Miner => MinerAgent(agent),
             AgentType.WoodCutter => WoodcutterAgent(agent),
             AgentType.Scout => Scout(agent),
-            //AgentType.Farmer => Farmer(agent),
-            AgentType.Builder => Builder(agent),
+            AgentType.Farmer => Farmer(agent),
+            //AgentType.Builder => Builder(agent),
             _ => throw new System.NotImplementedException($"No behaviour exists for {agentType}"),
         };
     }
@@ -72,27 +72,28 @@ public static class AgentActorFactory
         };
     }
 
-    private static AgentBehaviour[] Builder(AgentAI agent)
-    {
-        return new AgentBehaviour[]
-        {
-
-            BuilderComplete(agent),
-            //BuildHome
-            //TestBuildingPlot
-            //StartBuilding
-            //MoveToBuildingPlot
-            
-        };
-    }
+    //private static AgentBehaviour[] Builder(AgentAI agent)
+    //{
+    //    return new AgentBehaviour[]
+    //    {
+    //
+    //        BuilderComplete(agent),
+    //        //BuildHome
+    //        //TestBuildingPlot
+    //        //StartBuilding
+    //        //MoveToBuildingPlot
+    //        
+    //    };
+    //}
 
     private static AgentBehaviour[] Farmer(AgentAI agent)
     {
         return new AgentBehaviour[]
         {
             DropOffResources(agent),
-            //WorkTheFarm
-            //MoveToFarm
+            //TakeResourceFromBuilding(agent, BuildingType.Farm),
+            MoveToBuidlingType(agent, BuildingType.Farm),
+            MoveRandomly(agent),
         };
     }
 
@@ -103,6 +104,21 @@ public static class AgentActorFactory
     #endregion
 
     #region Behaviours
+
+    private static AgentBehaviour MoveToBuidlingType(AgentAI agent, BuildingType buildingType)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            List<Building> targetBuildings = BuildingFactory.Instance.Buildings[buildingType];
+            if(targetBuildings.Count > 0)
+            {
+                agent.Goal = targetBuildings[Random.Range(0, targetBuildings.Count - 1)].Position;
+            }
+            return b;
+        }
+    }
 
     private static AgentBehaviour DropOffResources(AgentAI agent) //Drop off resources at town Centre and get new job
     {

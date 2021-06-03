@@ -8,6 +8,9 @@ public class WorldSetUp : Singleton<WorldSetUp>
     [SerializeField]
     private int numOfAgents;
 
+    [SerializeField]
+    private SerializableDictionary<BuildingType, int> buildingsToAdd;
+
     public GameObject cameraTarget;
 
     public TownCenter initialTownCenter;
@@ -15,11 +18,19 @@ public class WorldSetUp : Singleton<WorldSetUp>
     void Start()
     {
         Tile tile = TileGrid.Instance.Tiles[(int)TileGrid.Instance.Width / 2, (int)TileGrid.Instance.Height / 2];
-        
-        
-        
 
-        initialTownCenter = BuildingFactory.Instance.CreateTownCenter(tile);
+        { //Buildings
+            var factory = BuildingFactory.Instance;
+            initialTownCenter = factory.CreateTownCenter(tile);
+
+            foreach (var kvp in buildingsToAdd)
+            {
+                for (int i = 0; i < kvp.Value; i++)
+                    factory.CreateBuilding(kvp.Key, initialTownCenter);
+            }
+        }
+
+
 
         for (int i = 0; i < numOfAgents; i++)
         {
@@ -28,7 +39,6 @@ public class WorldSetUp : Singleton<WorldSetUp>
 
         foreach (Tile buildingTile in TileGrid.Instance.TilesInRect(tile, initialTownCenter.Building.Size))
         {
-
             IEnumerable<Tile> tilesAroundTownCentre = TileGrid.Instance.TilesInCircle(buildingTile, 8);
 
             foreach (Tile tileAroundTownCentre in tilesAroundTownCentre)
