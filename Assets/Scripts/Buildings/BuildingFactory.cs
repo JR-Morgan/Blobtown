@@ -20,7 +20,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
         base.Awake();
         Buildings = new Dictionary<BuildingType, List<Building>>();
 
-        foreach (BuildingType r in (BuildingType[])Enum.GetValues(typeof(ResourceType)))
+        foreach (BuildingType r in (BuildingType[])Enum.GetValues(typeof(BuildingType)))
         {
             Buildings.Add(r, new List<Building>());
         }

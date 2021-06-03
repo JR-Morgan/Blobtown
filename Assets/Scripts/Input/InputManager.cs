@@ -8,14 +8,15 @@ public class InputManager : Singleton<InputManager>
 {
     private AgentFactory agentFactory;
     private BuildingFactory buildingFactory;
+    private WorldSetUp worldSetUp;
 
     public UnityEvent<Selectable> OnSelectableChange;
 
-    public WorldSetUp worldSetUp;
     private void Start()
     {
         buildingFactory = BuildingFactory.Instance;
         agentFactory = AgentFactory.Instance;
+        worldSetUp = WorldSetUp.Instance;
     }
 
     void Update()
