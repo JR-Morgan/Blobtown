@@ -19,41 +19,47 @@ public class CameraControllerPerspective : MonoBehaviour
     [SerializeField]
     private float rotateSpeed = 20;
 
-    [SerializeField, Range(-90, 0)]
-    private float angleMax = -10f;
+    [SerializeField, Range(90, 0)]
+    private float angleMax = 85f;
 
-    [SerializeField, Range(-90, 0)]
-    private float angleMin = -85f;
+    [SerializeField, Range(90, 0)]
+    private float angleMin = 0f;
 
     [SerializeField]
     private float scrollSpeed = 10;
 
-    [SerializeField]
-    private float zoomMax = 200;
+
+
+    private float zoomMin = -10;
+
+
+    private float zoomMax = -50;
 
     // Start is called before the first frame update
     void Start()
     {
         _camera = Camera.main;
-        _camera.transform.LookAt(targetTransform);
+        //_camera.transform.LookAt(targetTransform);
 
-        targetTransform.Rotate(0, 0, -10, relativeTo: Space.Self);
+        targetTransform.Rotate(10, 0, 0, relativeTo: Space.Self);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        float rotateDegrees = rotateSpeed * -Input.GetAxis("RotateVertical") * Time.deltaTime;
+        float rotateDegrees = rotateSpeed * Input.GetAxis("RotateVertical") * Time.deltaTime;
         if(rotateDegrees != 0)
         {
             var angle = Vector3.Angle(Vector3.up, targetTransform.up);
-            angle = -angle;
+            //angle = -angle;
             var newAngle = Mathf.Clamp(angle + rotateDegrees, angleMin, angleMax);
             rotateDegrees = newAngle - angle;
         }
 
-        targetTransform.Rotate(0, 0, rotateDegrees, relativeTo:Space.Self);
+        targetTransform.Rotate(rotateDegrees, 0, 0, relativeTo:Space.Self);
+
+
 
         rotateDegrees = rotateSpeed * -Input.GetAxis("RotateHorizontal") * Time.deltaTime;
         targetTransform.Rotate(0, rotateDegrees, 0, relativeTo: Space.World);
@@ -68,17 +74,42 @@ public class CameraControllerPerspective : MonoBehaviour
 
         targetTransform.Translate(cameraMoveSpeedModifier * Time.deltaTime * move, relativeTo:Space.World);
 
-        if(_camera.transform.localPosition.x < 0)
+
+
+        if(Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            if (_camera.transform.localPosition.x >= -zoomMax)
+
+            float zoom = Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime;
+            float futureX = _camera.transform.localPosition.z + zoom;
+
+
+            if (futureX > zoomMin)
             {
-                _camera.transform.Translate(Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime * Vector3.forward);
+                _camera.transform.localPosition = new Vector3(_camera.transform.localPosition.x, _camera.transform.localPosition.y, zoomMin);
+            }
+            else if (futureX < zoomMax)
+            {
+                _camera.transform.localPosition = new Vector3(_camera.transform.localPosition.x, _camera.transform.localPosition.y, zoomMax);
+            }
+            else
+            {
+                _camera.transform.localPosition = _camera.transform.localPosition = new Vector3(_camera.transform.localPosition.x, _camera.transform.localPosition.y, futureX);
             }
         }
-        else
-        {
-            _camera.transform.localPosition += Vector3.left / 100f;
-        }
+
+
+
+        //if (_camera.transform.localPosition.x < -zoomMin)
+        //{
+        //    if (_camera.transform.localPosition.x >= -zoomMax)
+        //    {
+        //        _camera.transform.Translate(-Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime * _camera.transform.right);
+        //    }
+        //}
+        //else
+        //{
+        //    _camera.transform.localPosition += Vector3.left / 100f;
+        //}
         
     }
 }
