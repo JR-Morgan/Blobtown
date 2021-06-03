@@ -167,7 +167,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Each of your blobs has a job.
+  m_text: "Each of your blobs has a job. Right now they're all farmers because these
+    aren't very ambitious blobs :( \nThe rules say they're not allowed to do anything
+    else. But they can't build new houses without wood and stone."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
