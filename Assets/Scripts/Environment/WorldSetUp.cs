@@ -44,6 +44,7 @@ public class WorldSetUp : Singleton<WorldSetUp>
             foreach (Tile tileAroundTownCentre in tilesAroundTownCentre)
             {
                 tileAroundTownCentre.TileType = default;
+                tileAroundTownCentre.Discovered = true;
             }
         }
 

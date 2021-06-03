@@ -34,6 +34,15 @@ public partial class Tile : MonoBehaviour
 
     private void DiscoveredChangeHandler()
     {
+        if (_discovered && resource != null)
+        {
+            if(WorldSetUp.Instance.initialTownCenter != null && TileData != null)
+            {
+                WorldSetUp.Instance.initialTownCenter.KnownResources[TileData.resourceType].Add(this);
+            }
+        }
+            
+
         foreach(Renderer renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.enabled = _discovered;
@@ -54,6 +63,7 @@ public partial class Tile : MonoBehaviour
 
     [SerializeField, HideInInspector]
     private GameObject resource;
+    public bool HasResource => resource != null;
 
     [DisplayProperty]
     public TileType TileType { get => _tileType;

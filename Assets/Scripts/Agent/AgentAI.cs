@@ -36,6 +36,8 @@ public class AgentAI : MonoBehaviour, IPathFollower
     private float rotationSpeed = 1f;
 
 
+    public float Progress { get; set; }
+
 
     #region References to scene objects
     [SerializeField]
@@ -94,7 +96,12 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     private void Update()
     {
-        Tile = Tile.Grid.TileAtWorldPosition(transform.position);
+        Tile newTile = Tile.Grid.TileAtWorldPosition(transform.position);
+        if (newTile != Tile)
+        {
+            Tile = newTile;
+            Progress = 0f;
+        }
         AdjacentTiles = Tile.GetAdjacentTiles();
 
         foreach (Tile t in AdjacentTiles) t.Discovered = true;
