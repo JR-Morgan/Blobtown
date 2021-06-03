@@ -54,7 +54,7 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
-            DropOffScout(agent),
+            //DropOffScout(agent),
             //SurveyTiles()
             //MoveToAdjTile()
             MoveRandomly(agent),
@@ -168,14 +168,6 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour DropOffScout(AgentAI agent)
-    {
-        return Action;
-        BehaviourState Action(BehaviourState b)
-        {
-            return b;
-        }
-    }
 
     private static AgentBehaviour BuilderComplete(AgentAI agent)
     {
