@@ -120,7 +120,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
         Debug.Assert(townCenter != null, $"Town Center was null!. {typeof(BuildingFactory)} needs a Town Center to find a good spot for a {buildingType}", this);
 
         Func<Tile, float> costFunction = BuildingRules.Instance.GetFunctionForBuildingType(buildingType);
-        IEnumerable<Tile> candidates = FindCandidates(townCenter.Building.Position, buildingType, 4f);
+        IEnumerable<Tile> candidates = FindCandidates(townCenter.Building.Position, buildingType, 15f);
 
         Tile bestCandidate = null;
         float bestCost = float.NegativeInfinity;
