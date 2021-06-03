@@ -12,19 +12,23 @@ public class BuildingRules : Singleton<BuildingRules>
         return buildingType switch
         {
             BuildingType.Home => Home(),
-            BuildingType.Farm => Test(),
+            BuildingType.Farm => Farm(),
             _ => Home()
         };
     }
     #region Farm
     [SerializeField, Header("Farm")]
-    float isOre;
-    [SerializeField]
-    float isForest;
-    private Func<Tile, float> Test()
+    float isResource = -20f, neighbourTownCenterFarm = 15f, neighbourHomeFarm = -2f, neighbourFarmFarm = 3f, radiusSmallFarm = 5f, radiusLargeFarm = 15f;
+
+    private Func<Tile, float> Farm()
     {
-        return Sum(FunctionOfTile(isOre, IsOfTypes(TileType.Ore)),
-            FunctionOfTile(isForest, IsOfTypes(TileType.Forest)));
+        return Sum(
+            FunctionOfTile(isResource, IsOfTypes(TileType.Ore, TileType.Forest)),
+            ForDirectNeighbours(FunctionOfBuilding(neighbourFarmFarm, IsOfTypes(BuildingType.Farm))),
+
+            ForTilesInRadius(radiusSmallFarm, FunctionOfBuilding(neighbourHomeFarm, IsOfTypes(BuildingType.Home))),
+            ForTilesInRadius(radiusLargeFarm, FunctionOfBuilding(neighbourTownCenterFarm, IsOfTypes(BuildingType.TownCenter)))
+            );
     }
     #endregion
 
@@ -33,7 +37,7 @@ public class BuildingRules : Singleton<BuildingRules>
     [SerializeField, Header("Home")]
     float neighbourResource = -10f;
     [SerializeField]
-    float isDefaultTile = 2f, neighbourTownCenter = 5f, neighbourHome = -1f, radius = 3f;
+    float isDefaultTile = 2f, neighbourTownCenter = 5f, neighbourHome = -2f, radius = 3f;
 
     private Func<Tile, float> Home()
     {
