@@ -82,7 +82,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
                 townCenter = tc;
                 break;
             case BuildingType.Farm:
-
+                Farm farm = building.gameObject.AddComponent<Farm>();
                 break;
             default:
                 throw new NotImplementedException();

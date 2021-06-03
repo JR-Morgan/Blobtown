@@ -10,6 +10,8 @@ public class WorldSetUp : MonoBehaviour
 
     public GameObject cameraTarget;
 
+    public TownCenter initialTownCenter;
+
     void Start()
     {
         Tile tile = TileGrid.Instance.Tiles[(int)TileGrid.Instance.Width / 2, (int)TileGrid.Instance.Height / 2];
@@ -17,14 +19,14 @@ public class WorldSetUp : MonoBehaviour
         
         
 
-        TownCenter townCenter = BuildingFactory.Instance.CreateTownCenter(tile);
+        initialTownCenter = BuildingFactory.Instance.CreateTownCenter(tile);
 
         for (int i = 0; i < numOfAgents; i++)
         {
-            AgentFactory.Instance.PlaceAgent(townCenter.Building.GetAdjacentTiles()[i]);
+            AgentFactory.Instance.PlaceAgent(initialTownCenter.Building.GetAdjacentTiles()[i]);
         }
 
-        foreach (Tile buildingTile in TileGrid.Instance.TilesInRect(tile, townCenter.Building.Size))
+        foreach (Tile buildingTile in TileGrid.Instance.TilesInRect(tile, initialTownCenter.Building.Size))
         {
 
             IEnumerable<Tile> tilesAroundTownCentre = TileGrid.Instance.TilesInCircle(buildingTile, 8);

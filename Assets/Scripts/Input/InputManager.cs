@@ -11,6 +11,7 @@ public class InputManager : Singleton<InputManager>
 
     public UnityEvent<Selectable> OnSelectableChange;
 
+    public WorldSetUp worldSetUp;
     private void Start()
     {
         buildingFactory = BuildingFactory.Instance;
@@ -43,7 +44,8 @@ public class InputManager : Singleton<InputManager>
                     Tile tile = TileGrid.Instance.TileAtWorldPosition(hit.collider.transform.position);
                     if (tile != null)
                     {
-                        agentFactory.PlaceAgent(tile);
+                        //agentFactory.PlaceAgent(tile);
+                        buildingFactory.CreateBuilding(BuildingType.Farm, tile, worldSetUp.initialTownCenter);
                     }
                 }
             }
