@@ -48,7 +48,7 @@ public class CameraControllerPerspective : MonoBehaviour
     void Update()
     {
 
-        float rotateDegrees = rotateSpeed * -Input.GetAxis("RotateVertical") * Time.deltaTime;
+        float rotateDegrees = rotateSpeed * Input.GetAxis("RotateVertical") * Time.deltaTime;
         if(rotateDegrees != 0)
         {
             var angle = Vector3.Angle(Vector3.up, targetTransform.up);
