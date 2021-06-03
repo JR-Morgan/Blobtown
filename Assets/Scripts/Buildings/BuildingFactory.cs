@@ -120,7 +120,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
         Debug.Assert(townCenter != null, $"Town Center was null!. {typeof(BuildingFactory)} needs a Town Center to find a good spot for a {buildingType}", this);
 
         Func<Tile, float> costFunction = BuildingRules.Instance.GetFunctionForBuildingType(buildingType);
-        IEnumerable<Tile> candidates = FindCandidates(townCenter.Building.Position, buildingType, 10f);
+        IEnumerable<Tile> candidates = FindCandidates(townCenter.Building.Position, buildingType, 4f);
 
         Tile bestCandidate = null;
         float bestCost = float.NegativeInfinity;
@@ -139,7 +139,7 @@ public class BuildingFactory : Singleton<BuildingFactory>
         return bestCandidate;
     }
 
-    private IEnumerable<Tile> FindCandidates(Tile center, BuildingType buildingType, float radius, int minNumberOfCandidates = 10, int radiusIncreaseIfFailed = 3, int itteration = 0, int maxItterations = 4)
+    private IEnumerable<Tile> FindCandidates(Tile center, BuildingType buildingType, float radius, int minNumberOfCandidates = 10, int radiusIncreaseIfFailed = 3, int itteration = 0, int maxItterations = 20)
     {
         IEnumerable<Tile> candidates = center.Grid.TilesInCircle(center, radius).Where(t => IsBuildingSpaceFree(t, buildingType));
 

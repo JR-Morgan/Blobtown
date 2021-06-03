@@ -31,7 +31,7 @@ public class BuildingRules : Singleton<BuildingRules>
     #region Home
 
     [SerializeField, Header("Home")]
-    float neighbourResource = -1f;
+    float neighbourResource = -10f;
     [SerializeField]
     float isDefaultTile = 2f, neighbourTownCenter = 5f, neighbourHome = -1f, radius = 3f;
 
