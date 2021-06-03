@@ -91,7 +91,7 @@ public static class AgentActorFactory
         return new AgentBehaviour[]
         {
             DropOffResources(agent),
-            //TakeResourceFromBuilding(agent, BuildingType.Farm),
+            TakeResourceFromBuilding(agent, BuildingType.Farm, ResourceType.Food, 1),
             MoveToBuidlingType(agent, BuildingType.Farm),
             MoveRandomly(agent),
         };
@@ -115,6 +115,27 @@ public static class AgentActorFactory
             if(targetBuildings.Count > 0)
             {
                 agent.Goal = targetBuildings[Random.Range(0, targetBuildings.Count - 1)].Position;
+                b.shouldTerminate = true;
+            }
+            return b;
+        }
+    }
+
+    private static AgentBehaviour TakeResourceFromBuilding(AgentAI agent, BuildingType buildingType, ResourceType resource, int amount)
+    {
+        return Action;
+
+        BehaviourState Action(BehaviourState b)
+        {
+            if (agent.Tile.HasBuilding && agent.Tile.Building.BuildingType == buildingType)
+            {
+                Building building = agent.Tile.Building;
+                if (building.Inventory.SubtractResource(resource, amount))
+                {
+                    agent.Inventory.AddResource(resource, amount);
+                }
+                b.shouldTerminate = true;
+
             }
             return b;
         }
@@ -131,15 +152,14 @@ public static class AgentActorFactory
             {
                 Tile townCenter = null;
 
-                if (agent.Tile.Building == agent.Home.TownCenter)
+                if (agent.Tile.Building == agent.TownCenter.Building)
                 {
                     townCenter = agent.Tile;
                 }
                 else
                 {
-                    townCenter = agent.AdjacentTiles.Find(t => t.Building == agent.Home.TownCenter);
+                    townCenter = agent.AdjacentTiles.Find(t => t.Building == agent.TownCenter.Building);
                 }
-
 
                 if (townCenter != null)
                 {
@@ -150,7 +170,7 @@ public static class AgentActorFactory
                 {
                     b.shouldTerminate = true;
 
-                    agent.Goal = TileGrid.Instance.TileAtWorldPosition(agent.TownCenter.transform.position);
+                    agent.Goal = agent.TownCenter.Building.Position;
                 }
 
             }

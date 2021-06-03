@@ -9,7 +9,16 @@ public class Inventory
     private SerializableDictionary<ResourceType, int> _contents;
     public SerializableDictionary<ResourceType, int> Contents { get => _contents; private set => _contents = value; }
 
-    public bool IsEmpty => Contents.Count == 0;
+    public bool IsEmpty {
+        get
+        {
+            foreach(var v in Contents.Values)
+            {
+                if (v > 0) return false;
+            }
+            return true;
+        }
+    }
 
     /// <summary>
     /// Attempts to add <paramref name="amount"/> of specified <paramref name="resourceType"/> to the <see cref="Inventory"/><br/>
@@ -23,7 +32,7 @@ public class Inventory
         int currentAmount = Contents.ContainsKey(resourceType)? Contents[resourceType] : 0;
 
         int desiredAmount = currentAmount + amount;
-        if (desiredAmount > 0)
+        if (desiredAmount >= 0)
         {
             if (Contents.ContainsKey(resourceType))
             {
@@ -34,10 +43,10 @@ public class Inventory
                 Contents.Add(resourceType, amount);
             }
         }
-        else if(desiredAmount == 0)
-        {
-            Contents.Remove(resourceType);
-        }
+        //else if(desiredAmount == 0)
+        //{
+        //    Contents.Remove(resourceType);
+        //}
         else
         {
             return false;
@@ -91,5 +100,6 @@ public class Inventory
 public enum ResourceType
 {
     Wood,
-    Ore
+    Ore,
+    Food,
 }
