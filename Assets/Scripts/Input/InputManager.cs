@@ -38,18 +38,18 @@ public class InputManager : Singleton<InputManager>
                 }
             }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 512f))
-                {
-                    Tile tile = TileGrid.Instance.TileAtWorldPosition(hit.collider.transform.position);
-                    if (tile != null)
-                    {
-                        //agentFactory.PlaceAgent(tile);
-                        buildingFactory.CreateBuilding(BuildingType.Farm, tile, worldSetUp.initialTownCenter);
-                    }
-                }
-            }
+            //if (Input.GetMouseButtonDown(1))
+            //{
+            //    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 512f))
+            //    {
+            //        Tile tile = TileGrid.Instance.TileAtWorldPosition(hit.collider.transform.position);
+            //        if (tile != null)
+            //        {
+            //            //agentFactory.PlaceAgent(tile);
+            //            buildingFactory.CreateBuilding(BuildingType.Farm, tile, worldSetUp.initialTownCenter);
+            //        }
+            //    }
+            //}
 
         }
 
