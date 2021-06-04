@@ -44,6 +44,7 @@ public class UIInputManager : MonoBehaviour
     public void PauseToggle()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
+        Time.timeScale = pauseMenu.activeSelf ? 0 : 1;
     }
 
     public void QuitGame()
