@@ -19,14 +19,7 @@ public class UIInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
 
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                tabGroup.ResetSelectedTab();
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
