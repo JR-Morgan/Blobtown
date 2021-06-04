@@ -10,6 +10,8 @@ public class InputManager : Singleton<InputManager>
     private BuildingFactory buildingFactory;
     private WorldSetUp worldSetUp;
 
+    public Selectable Selected { get; private set; }
+
     public UnityEvent<Selectable> OnSelectableChange;
 
     private void Start()
@@ -32,6 +34,7 @@ public class InputManager : Singleton<InputManager>
                         if (!(s.TryGetComponent(out Tile tile) && !tile.Discovered))
                         {
                             Debug.Log($"Selecting {s.name}");
+                            Selected = s;
                             OnSelectableChange.Invoke(s);
                         }
                     }

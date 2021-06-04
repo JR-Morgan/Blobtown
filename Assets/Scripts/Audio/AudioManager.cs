@@ -10,6 +10,7 @@ public class AudioManager : Singleton<AudioManager>
 
     protected override void Awake()
     {
+        base.Awake();
         foreach (Sound clip in audioClips)
         {
             clip.source = gameObject.AddComponent<AudioSource>();
@@ -28,10 +29,9 @@ public class AudioManager : Singleton<AudioManager>
             s.source.loop = loop;
 
             s.source.volume = 0f;
-
-            StartCoroutine(FadeAudioSource.StartFade(s.source, 4f, volume));
-
         }
+        StartCoroutine(FadeAudioSource.StartFade(s.source, 4f, volume));
+        
     }
 
     void Start()
@@ -43,12 +43,12 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayLayer2()
     {
-        Play("layer2", true, 1);
+        Play("Layer2", true, 1);
     }
 
     public void PlayLayer3()
     {
-        Play("layer3", true, 1);
+        Play("Layer3", true, 1);
     }
 
 }

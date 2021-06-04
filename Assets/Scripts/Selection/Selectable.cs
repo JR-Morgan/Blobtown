@@ -10,7 +10,9 @@ public class Selectable : MonoBehaviour
     [DisplayProperty]
     public string Name { get => gameObject.name; set => gameObject.name = value; }
 
-    public bool Interactable = false;
+    [SerializeField]
+    private bool _isInteractable;
+    public bool IsInteractable { get => _isInteractable; set => _isInteractable = value; }
     
 }
 

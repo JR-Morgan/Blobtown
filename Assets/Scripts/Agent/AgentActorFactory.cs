@@ -263,6 +263,8 @@ public static class AgentActorFactory
                 BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
                 AgentFactory.Instance.PlaceAgent(agent.TownCenter.Building.Position);
 
+                AudioManager.Instance.PlayLayer3();
+
                 b.shouldTerminate = true;
             }
 

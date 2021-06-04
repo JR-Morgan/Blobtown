@@ -30,12 +30,41 @@ public class UIPanelController : MonoBehaviour
     private void Start()
     {
         elements = new List<GameObject>();
-        InputManager.Instance.OnSelectableChange.AddListener(s =>
-        {
-            SetOpen(true);
-            GenerateProperties(s);
-        });
+        InputManager.Instance.OnSelectableChange.AddListener(SelectableChangeHandler);
         SetOpen(false);
+    }
+
+    private void SelectableChangeHandler(Selectable s)
+    {
+        SetOpen(true);
+        GenerateProperties(s);
+        SetInteractable(s.IsInteractable);
+    }
+
+    public void BreakRulesButtonHandler()
+    {
+        Selectable s = InputManager.Instance.Selected;
+        if (s != null)
+        {
+            s.IsInteractable = true;
+            SelectableChangeHandler(s);
+        }
+    }
+
+    private void SetInteractable(bool isInteractable)
+    {
+        foreach(GameObject go in elements)
+        {
+            if (go.TryGetComponentInChildren(out TMP_Dropdown dropdown))
+            {
+                dropdown.interactable = isInteractable;
+            }
+
+            if (go.TryGetComponentInChildren(out TMP_InputField input))
+            {
+                input.interactable = isInteractable && !input.readOnly;
+            }
+        }
     }
 
     public void TogglePanel() => SetOpen(!this.gameObject.activeSelf);
@@ -44,6 +73,7 @@ public class UIPanelController : MonoBehaviour
         foreach (Behaviour go in objectsToHide) go.enabled = isOpen;
         this.gameObject.SetActive(isOpen);
     }
+
 
     private void GenerateProperties(Selectable s)
     {
