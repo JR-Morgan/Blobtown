@@ -244,25 +244,6 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour TestBuildingSpot(AgentAI agent) //when at the correct plot, check it for suitability
-    {
-        return Action;
-
-        BehaviourState Action(BehaviourState b)
-        {
-            return b;
-        }
-    }
-
-    private static AgentBehaviour StartBuildingHome(AgentAI agent) //when at the correct plot and it has been checked. Place the home plot
-    {
-        return Action;
-
-        BehaviourState Action(BehaviourState b)
-        {
-            return b;
-        }
-    }
 
     private static AgentBehaviour Build(AgentAI agent)
     {
@@ -270,22 +251,20 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            const int ORE_AMOUNT = 5;
-            const int WOOD_AMOUNT = 5;
+            const int ORE_AMOUNT = 3;
+            const int WOOD_AMOUNT = 3;
             Building tc = agent.TownCenter.Building;
-            if (tc.Inventory.HasResource(ResourceType.Ore, ORE_AMOUNT) || tc.Inventory.HasResource(ResourceType.Wood, WOOD_AMOUNT))
+            if (tc.Inventory.HasResource(ResourceType.Ore, ORE_AMOUNT) && tc.Inventory.HasResource(ResourceType.Wood, WOOD_AMOUNT))
             {
-                if(tc.Inventory.SubtractResource(ResourceType.Ore, ORE_AMOUNT)
-                    && tc.Inventory.SubtractResource(ResourceType.Wood, WOOD_AMOUNT))
-                {
-                    //agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
-                    Building newHome = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
-                    BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
-                    AgentFactory.Instance.PlaceAgent(newHome.Position);
+                tc.Inventory.SubtractResource(ResourceType.Ore, ORE_AMOUNT);
+                tc.Inventory.SubtractResource(ResourceType.Wood, WOOD_AMOUNT);
 
-                    b.shouldTerminate = true;
-                }
+                //agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                Building newHome = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
+                AgentFactory.Instance.PlaceAgent(newHome.Position);
 
+                b.shouldTerminate = true;
             }
 
             return b;
@@ -298,7 +277,7 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            if (!(agent.Tile.HasResource && agent.Tile.TileData.resourceType == resourceType))
+            if (!(agent.Tile.TileData != null && agent.Tile.TileData.resourceType == resourceType))
             {
                 var resources = agent.TownCenter.KnownResources[resourceType];
                 if (resources.Count > 0)

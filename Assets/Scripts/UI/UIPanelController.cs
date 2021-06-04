@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
-[AddComponentMenu("Simulation/UI/UI Panel")]
-public class UIPanel : MonoBehaviour
+[AddComponentMenu("Simulation/UI/UI Panel Controller")]
+public class UIPanelController : MonoBehaviour
 {
 
     [SerializeField]
@@ -175,7 +175,7 @@ public class UIPanel : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"{typeof(UIPanel)} could not find {typeof(TMP_InputField)} {typeof(Component)} in {nameof(bodyTextPrefab)}");
+            Debug.LogError($"{typeof(UIPanelController)} could not find {typeof(TMP_InputField)} {typeof(Component)} in {nameof(bodyTextPrefab)}");
         }
 
         return elementGO;
