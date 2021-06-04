@@ -18,6 +18,9 @@ public class UIPanelController : MonoBehaviour
     [SerializeField]
     private GameObject dropDownPrefab;
 
+    [SerializeField]
+    private int foodCostToBreakRules = 5;
+
 
     [SerializeField]
     private GameObject selectedPropertyParent;
@@ -46,8 +49,11 @@ public class UIPanelController : MonoBehaviour
         Selectable s = InputManager.Instance.Selected;
         if (s != null)
         {
-            s.IsInteractable = true;
-            SelectableChangeHandler(s);
+            if(WorldSetUp.Instance.initialTownCenter.Building.Inventory.SubtractResource(ResourceType.Food, foodCostToBreakRules))
+            {
+                s.IsInteractable = true;
+                SelectableChangeHandler(s);
+            }
         }
     }
 
