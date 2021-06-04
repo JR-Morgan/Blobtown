@@ -9,9 +9,6 @@ public class TownCenter : MonoBehaviour
     public Building Building { get; private set; }
 
 
-    [DisplayProperty]
-    public string Resources => Building.Inventory.ToString();
-
     [SerializeField]
     private SerializableDictionary<ResourceType, List<Tile>> _knownResources;
     public SerializableDictionary<ResourceType, List<Tile>> KnownResources { get => _knownResources; private set => _knownResources = value; }
