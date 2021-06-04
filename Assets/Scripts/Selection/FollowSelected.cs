@@ -18,6 +18,7 @@ public class FollowSelected : MonoBehaviour
 
         this.transform.localPosition = position;
         this.transform.localRotation = rotation;
+
     }
 
 }
