@@ -65,7 +65,10 @@ public class UIPanelController : MonoBehaviour
                 }
                 else if(property.PropertyType.IsEnum)
                 {
-                    elements.Add(CreateDropdownElement(property, c));
+                    GameObject dropDownParent = CreateDropdownElement(property, c);
+                    //TMP_Dropdown dropDown = dropDownParent.GetComponentInChildren<TMP_Dropdown>();
+                    //dropDown.interactable = false;
+                    elements.Add(dropDownParent);
                 }
                 else
                 {
@@ -101,7 +104,7 @@ public class UIPanelController : MonoBehaviour
 
             if (go.TryGetComponentInChildren(out TMP_Dropdown dropDown))
             {
-
+                //dropDown.interactable = false;
                 AddCallback(dropDown, (Enum)property.GetValue(dataSource));
                 //_ = (property.GetValue(dataSource)) switch
                 //{
