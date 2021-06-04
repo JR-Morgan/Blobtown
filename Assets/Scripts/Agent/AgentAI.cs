@@ -50,6 +50,9 @@ public class AgentAI : MonoBehaviour, IPathFollower
 
     private Transform cameraTransform;
 
+    [SerializeField]
+    private Renderer meshRenderer;
+
 
     #region References to scene objects
     [SerializeField]
@@ -81,9 +84,19 @@ public class AgentAI : MonoBehaviour, IPathFollower
         set
         {
             _agentType = value;
+            meshRenderer.material.SetColor("_Color", FindColor(_agentType));
             agentActor = AgentActorFactory.CreateActor(this, _agentType);
         }
     }
+
+    private Color FindColor(AgentType agentType) => agentType switch
+    {
+        AgentType.Miner => new Color(208, 96, 189) /255,
+        AgentType.WoodCutter => new Color(238, 182, 87) / 255,
+        AgentType.Scout => new Color(128, 246, 246) / 255,
+        _ => new Color(24, 90, 15) / 255,
+    };
+
     #endregion
 
     private void Awake()

@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4874126678125670354, guid: bd2bd3ce3abb5fe40be6ada1c4bf4342, type: 3}
+  - {fileID: 2100000, guid: 5ca14962a5f1a4848b25f2bab6803097, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -217,7 +217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: bd2bd3ce3abb5fe40be6ada1c4bf4342, type: 3}
+  - {fileID: 2100000, guid: 51ba30b58f21bbd4d9f384b094704188, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -291,6 +291,7 @@ MonoBehaviour:
   rotationSpeed: 1
   progressBar: {fileID: 292149950085220649}
   progressCanvas: {fileID: 5374173890222277650}
+  meshRenderer: {fileID: 1817631746681861003}
   _townCenter: {fileID: 0}
   _inventory:
     _contents:
@@ -591,7 +592,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: bd2bd3ce3abb5fe40be6ada1c4bf4342, type: 3}
+  - {fileID: 2100000, guid: 839520a27eb028e42a210647e9241d50, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
