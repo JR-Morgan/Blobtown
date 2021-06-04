@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -66,6 +67,8 @@ public class AgentAI : MonoBehaviour, IPathFollower
     #endregion
 
     #region Inventory
+
+
     [SerializeField]
     private Inventory _inventory;
     public Inventory Inventory { get => _inventory; private set => _inventory = value; }
@@ -147,7 +150,6 @@ public class AgentAI : MonoBehaviour, IPathFollower
         {
             agentActor.Act();
         }
-
 
     }
 

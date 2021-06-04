@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [Serializable]
 public class Inventory
 {
     [SerializeField]
-    private SerializableDictionary<ResourceType, int> _contents;
-    public SerializableDictionary<ResourceType, int> Contents { get => _contents; private set => _contents = value; }
+    private Dictionary<ResourceType, int> _contents;
+    public Dictionary<ResourceType, int> Contents { get => _contents; private set => _contents = value; }
 
     public bool IsEmpty {
         get
@@ -86,15 +87,26 @@ public class Inventory
         return Contents.ContainsKey(resourceType) && Contents[resourceType] >= amount;
     }
 
-    public Inventory(SerializableDictionary<ResourceType, int> contents)
+    public Inventory(Dictionary<ResourceType, int> contents)
     {
         this.Contents = contents;
     }
 
-    public Inventory() : this(new SerializableDictionary<ResourceType, int>())
+    public Inventory() : this(new Dictionary<ResourceType, int>())
     { }
 
     public int this[ResourceType r] => Contents[r];
+
+    public override string ToString()
+    {
+        StringBuilder s = new StringBuilder(" ");
+        foreach (var kvp in this.Contents)
+        {
+            s.AppendLine($"{kvp.Key} : {kvp.Value}");
+        }
+        return s.ToString();
+    }
+
 }
 
 public enum ResourceType

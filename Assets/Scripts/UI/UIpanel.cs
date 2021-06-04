@@ -193,7 +193,7 @@ public class UIPanel : MonoBehaviour
                 else value = default;
 #pragma warning restore CS0642
 
-                property.SetValue(dataSource, value);
+                //if(property.CanWrite) property.SetValue(dataSource, value);
                 SetValue(element, value, toTarget);
 
             });

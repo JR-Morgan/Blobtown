@@ -272,18 +272,20 @@ public static class AgentActorFactory
         {
             const int ORE_AMOUNT = 5;
             const int WOOD_AMOUNT = 5;
-
-            if (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, ORE_AMOUNT) || agent.Home.Inventory.HasResource(ResourceType.Wood, WOOD_AMOUNT)))
+            Building tc = agent.TownCenter.Building;
+            if (tc.Inventory.HasResource(ResourceType.Ore, ORE_AMOUNT) || tc.Inventory.HasResource(ResourceType.Wood, WOOD_AMOUNT))
             {
-                agent.Inventory.SubtractResource(ResourceType.Ore, ORE_AMOUNT);
-                agent.Inventory.SubtractResource(ResourceType.Wood, WOOD_AMOUNT);
+                if(tc.Inventory.SubtractResource(ResourceType.Ore, ORE_AMOUNT)
+                    && tc.Inventory.SubtractResource(ResourceType.Wood, WOOD_AMOUNT))
+                {
+                    //agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                    Building newHome = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                    BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
+                    AgentFactory.Instance.PlaceAgent(newHome.Position);
 
-                //agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
-                Building newHome = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
-                BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
-                AgentFactory.Instance.PlaceAgent(newHome.Position);
+                    b.shouldTerminate = true;
+                }
 
-                b.shouldTerminate = true;
             }
 
             return b;
