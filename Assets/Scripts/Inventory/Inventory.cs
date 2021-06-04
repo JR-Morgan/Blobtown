@@ -37,11 +37,11 @@ public class Inventory
         {
             if (Contents.ContainsKey(resourceType))
             {
-                Contents[resourceType] = amount;
+                Contents[resourceType] = desiredAmount;
             }
             else
             {
-                Contents.Add(resourceType, amount);
+                Contents.Add(resourceType, desiredAmount);
             }
         }
         //else if(desiredAmount == 0)
@@ -99,12 +99,12 @@ public class Inventory
 
     public override string ToString()
     {
-        StringBuilder s = new StringBuilder(" ");
+        StringBuilder s = new StringBuilder();
         foreach (var kvp in this.Contents)
         {
             s.AppendLine($"{kvp.Key} : {kvp.Value}");
         }
-        return s.ToString();
+        return string.IsNullOrWhiteSpace(s.ToString())? "Empty" : s.ToString();
     }
 
 }

@@ -251,8 +251,8 @@ public static class AgentActorFactory
 
         BehaviourState Action(BehaviourState b)
         {
-            const int ORE_AMOUNT = 3;
-            const int WOOD_AMOUNT = 3;
+            const int ORE_AMOUNT = 2;
+            const int WOOD_AMOUNT = 2;
             Building tc = agent.TownCenter.Building;
             if (tc.Inventory.HasResource(ResourceType.Ore, ORE_AMOUNT) && tc.Inventory.HasResource(ResourceType.Wood, WOOD_AMOUNT))
             {
@@ -260,9 +260,8 @@ public static class AgentActorFactory
                 tc.Inventory.SubtractResource(ResourceType.Wood, WOOD_AMOUNT);
 
                 //agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
-                Building newHome = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
                 BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
-                AgentFactory.Instance.PlaceAgent(newHome.Position);
+                AgentFactory.Instance.PlaceAgent(agent.TownCenter.Building.Position);
 
                 b.shouldTerminate = true;
             }
