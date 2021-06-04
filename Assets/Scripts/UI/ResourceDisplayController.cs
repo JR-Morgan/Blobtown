@@ -9,6 +9,8 @@ public class ResourceDisplayController : MonoBehaviour
     private void Start()
     {
         this.RequireComponentInChildren(out text);
+        text.readOnly = true;
+        text.interactable = false;
     }
 
     void Update()
