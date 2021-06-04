@@ -8,6 +8,7 @@ public class UIInputManager : MonoBehaviour
 
     public TabGroup tabGroup;
     public GameObject pauseMenu;
+    public GameObject creditsScreen;
     public UIPanelController leftPanel;
 
     // Start is called before the first frame update
@@ -23,6 +24,10 @@ public class UIInputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if(pauseMenu.activeSelf && creditsScreen.activeSelf)
+            {
+                creditsScreen.SetActive(false);
+            }
             if (!leftPanel.gameObject.activeInHierarchy)
             {
                 PauseToggle();
