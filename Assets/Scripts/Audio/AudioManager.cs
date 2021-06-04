@@ -41,12 +41,12 @@ public class AudioManager : Singleton<AudioManager>
         Play("Layer3", true, 0);
     }
 
-    void PlayLayer2()
+    public void PlayLayer2()
     {
         Play("layer2", true, 1);
     }
 
-    void PlayLayer3()
+    public void PlayLayer3()
     {
         Play("layer3", true, 1);
     }
