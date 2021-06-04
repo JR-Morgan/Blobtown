@@ -83,6 +83,7 @@ public class AgentAI : MonoBehaviour, IPathFollower
     public AgentType AgentType { get => _agentType;
         set
         {
+            this.Goal = null;
             _agentType = value;
             meshRenderer.material.SetColor("_Color", FindColor(_agentType));
             agentActor = AgentActorFactory.CreateActor(this, _agentType);

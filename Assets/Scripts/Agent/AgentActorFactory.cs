@@ -43,6 +43,7 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            Build(agent),
             DropOffResources(agent),
             HarvestResource(agent, resourceType, progressRequired),
             MoveToResource(agent, resourceType),
@@ -54,9 +55,10 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            Build(agent),
             //DropOffScout(agent),
-            //SurveyTiles()
-            //MoveToAdjTile()
+            SurveyTiles(agent, 7f),
+            MoveToRandomTileInRadius(agent, 10f),
             MoveRandomly(agent),
         };
     }
@@ -79,6 +81,7 @@ public static class AgentActorFactory
     {
         return new AgentBehaviour[]
         {
+            Build(agent),
             DropOffResources(agent),
             TakeResourceFromBuilding(agent, BuildingType.Farm, ResourceType.Food, 1),
             MoveToBuidlingType(agent, BuildingType.Farm),
@@ -168,12 +171,31 @@ public static class AgentActorFactory
         }
     }
 
-
-    private static AgentBehaviour BuilderComplete(AgentAI agent)
+    private static AgentBehaviour MoveToRandomTileInRadius(AgentAI agent, float radius)
     {
         return Action;
         BehaviourState Action(BehaviourState b)
         {
+            List<Tile> candidateGoals = agent.Tile.Grid.TilesInCircle(agent.Tile, radius).Where(t => t.Discovered).ToList();
+            if(candidateGoals.Count > 0)
+            {
+                agent.Goal = candidateGoals[Random.Range(0, candidateGoals.Count)];
+                b.shouldTerminate = true;
+            }
+            return b;
+        }
+    }
+
+
+    private static AgentBehaviour SurveyTiles(AgentAI agent, float radius)
+    {
+        return Action;
+        BehaviourState Action(BehaviourState b)
+        {
+            foreach (Tile t in agent.Tile.Grid.TilesInCircle(agent.Tile, radius))
+            {
+                t.Discovered = true;
+            }
             return b;
         }
     }
@@ -189,30 +211,6 @@ public static class AgentActorFactory
             agent.Goal = adjTiles[Random.Range(0, adjTiles.Count - 1)];
             b.shouldTerminate = true;
             
-            return b;
-        }
-    }
-
-    private static AgentBehaviour MineTarget(AgentAI agent) //agent works on the nearest resource slowly increasing the progress
-    {
-        return Action;
-
-        BehaviourState Action(BehaviourState b)
-        {
-            foreach (Tile t in agent.AdjacentTiles)
-            {
-                if (t.TileType == TileType.Ore)
-                {
-                    agent.Inventory.AddResource(t.TileData.resourceType, t.TileData.amount);
-
-                    t.TileType = TileType.Default;
-
-                    b.shouldTerminate = true;
-                    break;
-                }
-            }
-
-
             return b;
         }
     }
@@ -266,19 +264,24 @@ public static class AgentActorFactory
         }
     }
 
-    private static AgentBehaviour BuildHome(AgentAI agent) //Continue the home building, increasing it's progress bar
+    private static AgentBehaviour Build(AgentAI agent)
     {
         return Action;
 
         BehaviourState Action(BehaviourState b)
         {
+            const int ORE_AMOUNT = 5;
+            const int WOOD_AMOUNT = 5;
 
-            if (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, 5) || agent.Home.Inventory.HasResource(ResourceType.Wood, 5)))
+            if (agent.Home != null && (agent.Home.Inventory.HasResource(ResourceType.Ore, ORE_AMOUNT) || agent.Home.Inventory.HasResource(ResourceType.Wood, WOOD_AMOUNT)))
             {
-                agent.Inventory.SubtractResource(ResourceType.Ore, 5);
-                agent.Inventory.SubtractResource(ResourceType.Wood, 5);
+                agent.Inventory.SubtractResource(ResourceType.Ore, ORE_AMOUNT);
+                agent.Inventory.SubtractResource(ResourceType.Wood, WOOD_AMOUNT);
 
-                agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                //agent.Home = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                Building newHome = BuildingFactory.Instance.CreateBuilding(BuildingType.Home, agent.TownCenter);
+                BuildingFactory.Instance.CreateBuilding(BuildingType.Farm, agent.TownCenter);
+                AgentFactory.Instance.PlaceAgent(newHome.Position);
 
                 b.shouldTerminate = true;
             }
@@ -325,5 +328,4 @@ public enum AgentType
     Miner,
     WoodCutter,
     Scout,
-    Builder,
 }
