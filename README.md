@@ -1,5 +1,5 @@
 # Blobtown
-Made for AI and Games Jam 2021 in only a week.
+Made for the [AI and Games Jam 2021](https://itch.io/jam/aiandgames-2021) game jam in a week.
 
 This is a small little simulation of a village growing as the player changes the rules of the town.
 
